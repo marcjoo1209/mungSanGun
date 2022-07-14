@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyj.msg.mapper.ProductSearchLstMapper">
+
+	<select id="getListProductSearchLst"
+		resultType="com.jyj.msg.controller.dto.ProductSearchLstOutDto">
+		SELECT
+		IDX
+		, TARGETCOMMANT
+		, SHOPIDX
+		, TARGETWEBURL
+		, TARGETAMT
+		, GBUPDOWN
+		, GBCARD
+		, ALAMSOLDOUT
+		, ID
+		, PWD
+		, CREATEDTM
+		, AUDITDTM
+		, AUDITID
+		, ALAMYN
+		FROM product_search_lst
+		WHERE 1 = 1
+	</select>
+
+	<insert id="createProductSearchLst">
+		INSERT INTO product_search_lst
+		(
+		IDX
+		, TARGETCOMMANT
+		,
+		SHOPIDX
+		, TARGETWEBURL
+		, TARGETAMT
+		, GBUPDOWN
+		, GBCARD
+		, ALAMSOLDOUT
+		, ID
+		,
+		PWD
+		, CREATEDTM
+		, AUDITDTM
+		, AUDITID
+		, ALAMYN
+		)
+		VALUES
+		(
+		(IFNULL(
+		(SELECT
+		MAX(CAST(psl.IDX AS INTEGER))
+		FROM product_search_lst psl
+		WHERE 1 = 1
+		) ,
+		0
+		) +1)
+		, #{TARGETCOMMANT}
+		, #{SHOPIDX}
+		, #{TARGETWEBURL}
+		, #{TARGETAMT}
+		,
+		#{GBUPDOWN}
+		, #{GBCARD}
+		, #{ALAMSOLDOUT}
+		, #{ID}
+		, #{PWD}
+		, sysdate()
+		,
+		sysdate()
+		, #{AUDITID}
+		, #{ALAMYN}
+		)
+	</insert>
+
+	<update id="modifyProductSearchLst">
+		UPDATE product_search_lst
+		SET
+		TARGETCOMMANT =
+		#{TARGETCOMMANT}
+		, SHOPIDX = #{SHOPIDX}
+		, TARGETWEBURL = #{TARGETWEBURL}
+		, TARGETAMT = #{TARGETAMT}
+		, GBUPDOWN = #{GBUPDOWN}
+		, GBCARD = #{GBCARD}
+		, ALAMSOLDOUT = #{ALAMSOLDOUT}
+		, ID = #{ID}
+		, PWD = #{PWD}
+		, AUDITDTM =
+		sysdate()
+		, AUDITID = #{AUDITID}
+		, ALAMYN = #{ALAMYN}
+		WHERE IDX = #{IDX}
+	</update>
+
+</mapper>

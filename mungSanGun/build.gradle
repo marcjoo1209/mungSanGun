@@ -1,0 +1,68 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.jyj'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// servlet, page view
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'javax.servlet:jstl:1.2'
+	implementation 'org.apache.tiles:tiles-jsp:3.0.4'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	
+	// lombok
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+	
+	// swagger
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	
+	// Use JUnit Jupiter API for testing
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+	testRuntimeOnly 'org.junit.platform:junit-platform-commons:1.7.2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.platform:junit-platform-launcher:1.5.2'
+	
+	// logback, log4j vulnerabillity fix
+	implementation 'ch.qos.logback:logback-classic:1.2.9'
+	implementation 'ch.qos.logback:logback-core:1.2.9'
+	implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+	implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.17.0'
+	
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	
+	// mybatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+	useJUnitPlatform()
+}

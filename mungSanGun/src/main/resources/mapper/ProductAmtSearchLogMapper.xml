@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyj.msg.mapper.ProductAmtSearchLogMapper">
+
+    <select id="getListProductAmtSearchLog" resultType="com.jyj.msg.controller.dto.ProductAmtSearchLogOutDto">
+        SELECT
+        	IDX
+        	, PRODUCTIDX
+        	, ALAMMSG
+        	, AUDITDTM
+        	, AUDITID
+        	, ALAMYN
+        FROM produc_amt_search_log
+        WHERE 1 = 1
+	</select>
+
+    <insert id="createProductAmtSearchLog">
+        INSERT INTO produc_amt_search_log
+        (
+        	IDX
+        	, PRODUCTIDX
+        	, ALAMMSG
+        	, AUDITDTM
+        	, AUDITID
+        	, ALAMYN
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(psl.IDX AS INTEGER))
+        		  FROM produc_amt_search_log psl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{PRODUCTIDX}
+        	, #{ALAMMSG}
+        	, sysdate()
+        	, #{AUDITID}
+        	, #{ALAMYN}
+        )
+	</insert>
+
+    <update id="modifyProductAmtSearchLog">
+        UPDATE produc_amt_search_log
+        SET
+        	PRODUCTIDX		= #{PRODUCTIDX}
+        	, ALAMMSG		= #{ALAMMSG}
+        	, AUDITDTM		= sysdate()
+        	, AUDITID		= #{AUDITID}
+        	, ALAMYN		= #{ALAMYN}
+        WHERE IDX			= #{IDX}
+	</update>
+
+</mapper>

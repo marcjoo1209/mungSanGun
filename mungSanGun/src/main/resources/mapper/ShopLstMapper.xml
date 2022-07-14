@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyj.msg.mapper.ShopLstMapper">
+
+    <select id="getListShopLst" resultType="com.jyj.msg.controller.dto.ShopLstOutDto">
+        SELECT
+        	IDX
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        	, SHOPNM
+        FROM shop_lst
+        WHERE 1 = 1
+	</select>
+
+    <insert id="createShopLst">
+        INSERT INTO shop_lst
+        (
+        	IDX
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        	, SHOPNM
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(sl.IDX AS INTEGER))
+        		  FROM shop_lst sl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, sysdate()
+        	, sysdate()
+        	, #{AUDITID}
+        	, #{SHOPNM}
+        )
+	</insert>
+
+    <update id="modifyShopLst">
+        UPDATE shop_lst
+        SET
+        	AUDITDTM		= sysdate()
+        	, AUDITID		= #{AUDITID}
+        	, SHOPNM		= #{SHOPNM}
+        WHERE IDX			= #{IDX}
+	</update>
+
+</mapper>
