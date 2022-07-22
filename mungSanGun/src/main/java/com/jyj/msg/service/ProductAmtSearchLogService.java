@@ -27,6 +27,10 @@ public class ProductAmtSearchLogService {
   public List<ProductAmtSearchLogOutDto> getListProductAmtSearchLog() {
     return productAmtSearchLogMapper.getListProductAmtSearchLog();
   }
+  
+  public ProductAmtSearchLogOutDto getProductAmtSearchLog(ProductAmtSearchLogInDto inDto) {
+    return productAmtSearchLogMapper.getProductAmtSearchLog(inDto);
+  }
 
   public Integer createProductAmtSearchLog(ProductAmtSearchLogInDto inDto) {
     return productAmtSearchLogMapper.createProductAmtSearchLog(inDto);

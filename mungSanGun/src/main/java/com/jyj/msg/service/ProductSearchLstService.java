@@ -24,8 +24,16 @@ public class ProductSearchLstService {
   @Autowired
   ProductSearchLstMapper productSearchLstMapper;
 
+  public ProductSearchLstOutDto getProductSearchLst(ProductSearchLstInDto inDto) {
+    return productSearchLstMapper.getProductSearchLst(inDto);
+  }
+  
   public List<ProductSearchLstOutDto> getListProductSearchLst() {
     return productSearchLstMapper.getListProductSearchLst();
+  }
+  
+  public List<ProductSearchLstOutDto> getListProductSearchLstLocal(ProductSearchLstInDto inDto) {
+    return productSearchLstMapper.getListProductSearchLstLocal(inDto);
   }
 
   public Integer createProductSearchLst(ProductSearchLstInDto inDto) {
@@ -34,6 +42,10 @@ public class ProductSearchLstService {
 
   public Integer modifyProductSearchLst(ProductSearchLstInDto inDto) {
     return productSearchLstMapper.modifyProductSearchLst(inDto);
+  }
+  
+  public Integer removeProductSearchLst(ProductSearchLstInDto inDto) {
+    return productSearchLstMapper.removeProductSearchLst(inDto);
   }
 
 }

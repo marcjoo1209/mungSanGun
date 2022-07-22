@@ -19,12 +19,21 @@ import com.jyj.msg.controller.dto.ShopLstOutDto;
 @Mapper
 @Repository
 public interface ProductSearchLstMapper {
+  // 대상 조회
+  ProductSearchLstOutDto getProductSearchLst(ProductSearchLstInDto inDto);
+  
   // 리스트 조회
   List<ProductSearchLstOutDto> getListProductSearchLst();
+  
+  // 리스트 조회
+  List<ProductSearchLstOutDto> getListProductSearchLstLocal(ProductSearchLstInDto inDto);
 
   // 리스트 생성
   Integer createProductSearchLst(ProductSearchLstInDto inDto);
 
   // 리스트 수정
   Integer modifyProductSearchLst(ProductSearchLstInDto inDto);
+  
+  // 리스트 삭제
+  Integer removeProductSearchLst(ProductSearchLstInDto inDto);
 }

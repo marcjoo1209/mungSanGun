@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyj.msg.mapper.MngShopProductTmpTblMapper">
+
+    <select id="getListMngShopProductTmpTbl" resultType="com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto">
+        SELECT
+        	DIDX 
+			, DCREATEDTM
+			, DAUDITDTM
+			, DAUDITID
+			, COLUMNA1
+			  , COLUMNA2
+			  , COLUMNA3
+			  , COLUMNA4
+			  , COLUMNA5
+			  , COLUMNA6
+			  , COLUMNA7
+			  , COLUMNA8
+			  , COLUMNA9
+			  , COLUMNB1
+			  , COLUMNB2
+			  , COLUMNB3
+			  , COLUMNB4
+			  , COLUMNB5
+			  , COLUMNB6
+			  , COLUMNB7
+			  , COLUMNB8
+			  , COLUMNB9
+			  , COLUMNC1
+			  , COLUMNC2
+			  , COLUMNC3
+			  , COLUMNC4
+			  , COLUMNC5
+			  , COLUMNC6
+			  , COLUMNC7
+			  , COLUMNC8
+			  , COLUMNC9
+			  , COLUMND1
+			  , COLUMND2
+			  , COLUMND3
+			  , COLUMND4
+			  , COLUMND5
+			  , COLUMND6
+			  , COLUMND7
+			  , COLUMND8
+			  , COLUMND9
+			  , COLUMNE1
+			  , COLUMNE2
+			  , COLUMNE3
+			  , COLUMNE4
+			  , COLUMNE5
+			  , COLUMNE6
+			  , COLUMNE7
+			  , COLUMNE8
+			  , COLUMNE9
+			  , COLUMNF1
+			  , COLUMNF2
+			  , COLUMNF3
+			  , COLUMNF4
+			  , COLUMNF5
+        FROM mng_shop_product_tmp_tbl
+        WHERE 1 		= 1
+          AND DUSEYN 	= 'Y'
+		  <if test="DIDX != null and DIDX != ''" >
+		  AND DIDX 		= #{DIDX}
+		  </if>
+		  <if test="COLUMNA1 != null and COLUMNA1 != ''" >
+		  AND COLUMNA1 	like CONCAT('%',#{COLUMNA1},'%')
+		  </if>
+	</select>
+
+    <select id="getMngShopProductTmpTbl" resultType="com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto">
+        SELECT        	
+        	DIDX 
+			, DCREATEDTM
+			, DAUDITDTM
+			, DAUDITID  
+			, COLUMNA1
+			  , COLUMNA2
+			  , COLUMNA3
+			  , COLUMNA4
+			  , COLUMNA5
+			  , COLUMNA6
+			  , COLUMNA7
+			  , COLUMNA8
+			  , COLUMNA9
+			  , COLUMNB1
+			  , COLUMNB2
+			  , COLUMNB3
+			  , COLUMNB4
+			  , COLUMNB5
+			  , COLUMNB6
+			  , COLUMNB7
+			  , COLUMNB8
+			  , COLUMNB9
+			  , COLUMNC1
+			  , COLUMNC2
+			  , COLUMNC3
+			  , COLUMNC4
+			  , COLUMNC5
+			  , COLUMNC6
+			  , COLUMNC7
+			  , COLUMNC8
+			  , COLUMNC9
+			  , COLUMND1
+			  , COLUMND2
+			  , COLUMND3
+			  , COLUMND4
+			  , COLUMND5
+			  , COLUMND6
+			  , COLUMND7
+			  , COLUMND8
+			  , COLUMND9
+			  , COLUMNE1
+			  , COLUMNE2
+			  , COLUMNE3
+			  , COLUMNE4
+			  , COLUMNE5
+			  , COLUMNE6
+			  , COLUMNE7
+			  , COLUMNE8
+			  , COLUMNE9
+			  , COLUMNF1
+			  , COLUMNF2
+			  , COLUMNF3
+			  , COLUMNF4
+			  , COLUMNF5
+        FROM mng_shop_product_tmp_tbl
+        WHERE 1 	= 1
+          AND DUSEYN = 'Y'
+          AND DIDX 	= #{DIDX}
+	</select>
+
+    <insert id="createMngShopProductTmpTbl">
+        INSERT INTO mng_shop_product_tmp_tbl
+        (
+        	DIDX
+			, DUSEYN
+			, DCREATEDTM
+			, DAUDITDTM
+			, DAUDITID
+			, COLUMNA1
+			  , COLUMNA2
+			  , COLUMNA3
+			  , COLUMNA4
+			  , COLUMNA5
+			  , COLUMNA6
+			  , COLUMNA7
+			  , COLUMNA8
+			  , COLUMNA9
+			  , COLUMNB1
+			  , COLUMNB2
+			  , COLUMNB3
+			  , COLUMNB4
+			  , COLUMNB5
+			  , COLUMNB6
+			  , COLUMNB7
+			  , COLUMNB8
+			  , COLUMNB9
+			  , COLUMNC1
+			  , COLUMNC2
+			  , COLUMNC3
+			  , COLUMNC4
+			  , COLUMNC5
+			  , COLUMNC6
+			  , COLUMNC7
+			  , COLUMNC8
+			  , COLUMNC9
+			  , COLUMND1
+			  , COLUMND2
+			  , COLUMND3
+			  , COLUMND4
+			  , COLUMND5
+			  , COLUMND6
+			  , COLUMND7
+			  , COLUMND8
+			  , COLUMND9
+			  , COLUMNE1
+			  , COLUMNE2
+			  , COLUMNE3
+			  , COLUMNE4
+			  , COLUMNE5
+			  , COLUMNE6
+			  , COLUMNE7
+			  , COLUMNE8
+			  , COLUMNE9
+			  , COLUMNF1
+			  , COLUMNF2
+			  , COLUMNF3
+			  , COLUMNF4
+			  , COLUMNF5
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(tnul.DIDX AS INTEGER))
+        		  FROM mng_shop_product_tmp_tbl tnul
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+			, 'Y'
+			, CURRENT_TIMESTAMP(6)
+			, CURRENT_TIMESTAMP(6)
+			, #{DAUDITID}
+			  , #{COLUMNA1}
+			  , #{COLUMNA2}
+			  , #{COLUMNA3}
+			  , #{COLUMNA4}
+			  , #{COLUMNA5}
+			  , #{COLUMNA6}
+			  , #{COLUMNA7}
+			  , #{COLUMNA8}
+			  , #{COLUMNA9}
+			  , #{COLUMNB1}
+			  , #{COLUMNB2}
+			  , #{COLUMNB3}
+			  , #{COLUMNB4}
+			  , #{COLUMNB5}
+			  , #{COLUMNB6}
+			  , #{COLUMNB7}
+			  , #{COLUMNB8}
+			  , #{COLUMNB9}
+			  , #{COLUMNC1}
+			  , #{COLUMNC2}
+			  , #{COLUMNC3}
+			  , #{COLUMNC4}
+			  , #{COLUMNC5}
+			  , #{COLUMNC6}
+			  , #{COLUMNC7}
+			  , #{COLUMNC8}
+			  , #{COLUMNC9}
+			  , #{COLUMND1}
+			  , #{COLUMND2}
+			  , #{COLUMND3}
+			  , #{COLUMND4}
+			  , #{COLUMND5}
+			  , #{COLUMND6}
+			  , #{COLUMND7}
+			  , #{COLUMND8}
+			  , #{COLUMND9}
+			  , #{COLUMNE1}
+			  , #{COLUMNE2}
+			  , #{COLUMNE3}
+			  , #{COLUMNE4}
+			  , #{COLUMNE5}
+			  , #{COLUMNE6}
+			  , #{COLUMNE7}
+			  , #{COLUMNE8}
+			  , #{COLUMNE9}
+			  , #{COLUMNF1}
+			  , #{COLUMNF2}
+			  , #{COLUMNF3}
+			  , #{COLUMNF4}
+			  , #{COLUMNF5}
+        )
+	</insert>
+
+    <update id="modifyMngShopProductTmpTbl">
+        UPDATE mng_shop_product_tmp_tbl
+        SET
+        	 COLUMNA1 = #{COLUMNA1}
+			 , COLUMNA2 = #{COLUMNA2}
+			 , COLUMNA3 = #{COLUMNA3}
+			 , COLUMNA4 = #{COLUMNA4}
+			 , COLUMNA5 = #{COLUMNA5}
+			 , COLUMNA6 = #{COLUMNA6}
+			 , COLUMNA7 = #{COLUMNA7}
+			 , COLUMNA8 = #{COLUMNA8}
+			 , COLUMNA9 = #{COLUMNA9}
+			 , COLUMNB1 = #{COLUMNB1}
+			 , COLUMNB2 = #{COLUMNB2}
+			 , COLUMNB3 = #{COLUMNB3}
+			 , COLUMNB4 = #{COLUMNB4}
+			 , COLUMNB5 = #{COLUMNB5}
+			 , COLUMNB6 = #{COLUMNB6}
+			 , COLUMNB7 = #{COLUMNB7}
+			 , COLUMNB8 = #{COLUMNB8}
+			 , COLUMNB9 = #{COLUMNB9}
+			 , COLUMNC1 = #{COLUMNC1}
+			 , COLUMNC2 = #{COLUMNC2}
+			 , COLUMNC3 = #{COLUMNC3}
+			 , COLUMNC4 = #{COLUMNC4}
+			 , COLUMNC5 = #{COLUMNC5}
+			 , COLUMNC6 = #{COLUMNC6}
+			 , COLUMNC7 = #{COLUMNC7}
+			 , COLUMNC8 = #{COLUMNC8}
+			 , COLUMNC9 = #{COLUMNC9}
+			 , COLUMND1 = #{COLUMND1}
+			 , COLUMND2 = #{COLUMND2}
+			 , COLUMND3 = #{COLUMND3}
+			 , COLUMND4 = #{COLUMND4}
+			 , COLUMND5 = #{COLUMND5}
+			 , COLUMND6 = #{COLUMND6}
+			 , COLUMND7 = #{COLUMND7}
+			 , COLUMND8 = #{COLUMND8}
+			 , COLUMND9 = #{COLUMND9}
+			 , COLUMNE1 = #{COLUMNE1}
+			 , COLUMNE2 = #{COLUMNE2}
+			 , COLUMNE3 = #{COLUMNE3}
+			 , COLUMNE4 = #{COLUMNE4}
+			 , COLUMNE5 = #{COLUMNE5}
+			 , COLUMNE6 = #{COLUMNE6}
+			 , COLUMNE7 = #{COLUMNE7}
+			 , COLUMNE8 = #{COLUMNE8}
+			 , COLUMNE9 = #{COLUMNE9}
+			 , COLUMNF1 = #{COLUMNF1}
+			 , COLUMNF2 = #{COLUMNF2}
+			 , COLUMNF3 = #{COLUMNF3}
+			 , COLUMNF4 = #{COLUMNF4}
+			 , COLUMNF5 = #{COLUMNF5}
+			, DAUDITDTM		= CURRENT_TIMESTAMP(6)
+			, DAUDITID		= #{DAUDITID}
+        WHERE DIDX		= #{DIDX}
+	</update>
+
+    <update id="removeMngShopProductTmpTbl">
+        UPDATE mng_shop_product_tmp_tbl
+        SET
+        	DUSEYN		= 'N'
+        WHERE DIDX		= #{DIDX}
+	</update>
+</mapper>

@@ -13,6 +13,13 @@ repositories {
 	mavenCentral()
 }
 
+configurations {
+	all{
+		exclude group:'org.apache.logging.log4j', module:'log4j-slf4j-impl'
+		exclude group:'org.apache.logging.log4j', module:'log4j-core'
+	}
+}
+
 dependencies {
 	
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
@@ -53,6 +60,15 @@ dependencies {
 	// mybatis
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+	
+	// 빌드 자동 적용
+	//compile('org.springframework.boot:spring-boot-devtools')
+	
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	
+	// log4j
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.withType(JavaCompile) {

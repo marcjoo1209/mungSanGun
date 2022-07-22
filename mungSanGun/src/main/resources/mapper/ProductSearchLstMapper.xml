@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jyj.msg.mapper.ProductSearchLstMapper">
 
-	<select id="getListProductSearchLst"
+	<select id="getProductSearchLst"
 		resultType="com.jyj.msg.controller.dto.ProductSearchLstOutDto">
 		SELECT
 		IDX
@@ -21,6 +21,57 @@
 		, ALAMYN
 		FROM product_search_lst
 		WHERE 1 = 1
+		  AND IDX = #{IDX}
+		  AND USEYN = 'Y'
+	</select>
+
+	<select id="getListProductSearchLst"
+		resultType="com.jyj.msg.controller.dto.ProductSearchLstOutDto">
+		SELECT
+		IDX
+		, CONCAT(SUBSTR(TARGETCOMMANT, 1, 20), '...') as TARGETCOMMANT
+		, SHOPIDX
+		, CONCAT(SUBSTR(TARGETWEBURL, 1, 20), '...') as TARGETWEBURL
+		, TARGETAMT
+		, GBUPDOWN
+		, GBCARD
+		, ALAMSOLDOUT
+		, ID
+		, PWD
+		, CREATEDTM
+		, AUDITDTM
+		, AUDITID
+		, ALAMYN
+		FROM product_search_lst
+		WHERE 1 = 1
+		  AND USEYN = 'Y'
+		ORDER BY IDX DESC
+	</select>
+
+	<select id="getListProductSearchLstLocal"
+		resultType="com.jyj.msg.controller.dto.ProductSearchLstOutDto">
+		SELECT
+		IDX
+		, TARGETCOMMANT
+		, SHOPIDX
+		, TARGETWEBURL
+		, TARGETAMT
+		, GBUPDOWN
+		, GBCARD
+		, ALAMSOLDOUT
+		, ID
+		, PWD
+		, CREATEDTM
+		, AUDITDTM
+		, AUDITID
+		, ALAMYN
+		FROM product_search_lst
+		WHERE 1 = 1
+		  AND USEYN = 'Y'
+		  <if test="SHOPIDX != null and SHOPIDX != ''" >
+		  AND SHOPIDX = #{SHOPIDX}
+		  </if>
+		ORDER BY IDX DESC
 	</select>
 
 	<insert id="createProductSearchLst">
@@ -42,6 +93,7 @@
 		, AUDITDTM
 		, AUDITID
 		, ALAMYN
+		, USEYN
 		)
 		VALUES
 		(
@@ -64,18 +116,17 @@
 		, #{ID}
 		, #{PWD}
 		, sysdate()
-		,
-		sysdate()
+		, sysdate()
 		, #{AUDITID}
 		, #{ALAMYN}
+		, 'Y'
 		)
 	</insert>
 
 	<update id="modifyProductSearchLst">
 		UPDATE product_search_lst
 		SET
-		TARGETCOMMANT =
-		#{TARGETCOMMANT}
+		TARGETCOMMANT = #{TARGETCOMMANT}
 		, SHOPIDX = #{SHOPIDX}
 		, TARGETWEBURL = #{TARGETWEBURL}
 		, TARGETAMT = #{TARGETAMT}
@@ -84,10 +135,16 @@
 		, ALAMSOLDOUT = #{ALAMSOLDOUT}
 		, ID = #{ID}
 		, PWD = #{PWD}
-		, AUDITDTM =
-		sysdate()
+		, AUDITDTM = sysdate()
 		, AUDITID = #{AUDITID}
 		, ALAMYN = #{ALAMYN}
+		WHERE IDX = #{IDX}
+	</update>
+
+	<update id="removeProductSearchLst">
+		UPDATE product_search_lst
+		SET
+		USEYN = #{USEYN}
 		WHERE IDX = #{IDX}
 	</update>
 

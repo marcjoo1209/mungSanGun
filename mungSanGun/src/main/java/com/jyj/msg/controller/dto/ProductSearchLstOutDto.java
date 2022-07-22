@@ -5,8 +5,6 @@
  **/
 package com.jyj.msg.controller.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +16,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductSearchLstOutDto {
-  @ApiModelProperty(value = "순서", example = "1", required = true)
-  @NotEmpty(message = "순서를 입력 하세요.")
-  @Size(max = 5, message = "순서 입력 길이를 확인 하세요.")
+  @ApiModelProperty(value = "순서", example = "1")
   private String IDX;
 
   @ApiModelProperty(value = "대상웹페이지별명", example = "1")
-  private String TARGETCOMM;
+  private String TARGETCOMMANT;
   
   @ApiModelProperty(value = "이커머스순서", example = "1")
   private String SHOPIDX;
@@ -62,4 +58,6 @@ public class ProductSearchLstOutDto {
   @ApiModelProperty(value = "알람 여부", example = "1")
   private String ALAMYN;
 
+  @ApiModelProperty(value = "사용 여부", example = "1")
+  private String USEYN;
 }

@@ -6,12 +6,29 @@
         SELECT
         	IDX
         	, PRODUCTIDX
-        	, ALAMMSG
+        	, SHOPIDX
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
         	, AUDITDTM
         	, AUDITID
-        	, ALAMYN
         FROM produc_amt_search_log
         WHERE 1 = 1
+	</select>
+
+    <select id="getProductAmtSearchLog" resultType="com.jyj.msg.controller.dto.ProductAmtSearchLogOutDto">
+        SELECT
+        	IDX
+        	, PRODUCTIDX
+        	, SHOPIDX
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
+        	, AUDITDTM
+        	, AUDITID
+        FROM produc_amt_search_log
+        WHERE 1 = 1
+          AND IDX = #{IDX}
 	</select>
 
     <insert id="createProductAmtSearchLog">
@@ -19,10 +36,12 @@
         (
         	IDX
         	, PRODUCTIDX
-        	, ALAMMSG
+        	, SHOPIDX
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
         	, AUDITDTM
         	, AUDITID
-        	, ALAMYN
         )
         VALUES
         (
@@ -34,10 +53,12 @@
         		) , 0
         	) +1)
         	, #{PRODUCTIDX}
-        	, #{ALAMMSG}
-        	, sysdate()
+        	, #{SHOPIDX}
+        	, IFNULL(#{CARDAMT}, 0)
+        	, IFNULL(#{COUPONAMT}, 0)
+        	, IFNULL(#{NOMALAMT}, 0)
+        	, CURRENT_TIMESTAMP(6)
         	, #{AUDITID}
-        	, #{ALAMYN}
         )
 	</insert>
 
@@ -45,10 +66,12 @@
         UPDATE produc_amt_search_log
         SET
         	PRODUCTIDX		= #{PRODUCTIDX}
-        	, ALAMMSG		= #{ALAMMSG}
-        	, AUDITDTM		= sysdate()
+        	, SHOPIDX		= #{SHOPIDX}
+        	, CARDAMT		= IFNULL(#{CARDAMT}, 0)
+        	, COUPONAMT		= IFNULL(#{COUPONAMT}, 0)
+        	, NOMALAMT		= IFNULL(#{NOMALAMT}, 0)
+        	, AUDITDTM		= CURRENT_TIMESTAMP(6)
         	, AUDITID		= #{AUDITID}
-        	, ALAMYN		= #{ALAMYN}
         WHERE IDX			= #{IDX}
 	</update>
 

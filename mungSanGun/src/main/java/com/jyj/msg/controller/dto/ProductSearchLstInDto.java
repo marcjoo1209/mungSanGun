@@ -24,7 +24,7 @@ public class ProductSearchLstInDto {
   private String IDX;
 
   @ApiModelProperty(value = "대상웹페이지별명", example = "1")
-  private String TARGETCOMM;
+  private String TARGETCOMMANT;
   
   @ApiModelProperty(value = "이커머스순서", example = "1")
   private String SHOPIDX;
@@ -61,5 +61,8 @@ public class ProductSearchLstInDto {
   
   @ApiModelProperty(value = "알람 여부", example = "1")
   private String ALAMYN;
+  
+  @ApiModelProperty(value = "사용 여부", example = "1")
+  private String USEYN;
 
 }

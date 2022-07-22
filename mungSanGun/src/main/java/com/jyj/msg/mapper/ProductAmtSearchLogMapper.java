@@ -22,6 +22,9 @@ import com.jyj.msg.controller.dto.ShopLstOutDto;
 public interface ProductAmtSearchLogMapper {
   // 상품 조회 로그 조회
   List<ProductAmtSearchLogOutDto> getListProductAmtSearchLog();
+  
+  // 상품 조회 로그 조회
+  ProductAmtSearchLogOutDto getProductAmtSearchLog(ProductAmtSearchLogInDto inDto);
 
   // 상품 조회 로그 생성
   Integer createProductAmtSearchLog(ProductAmtSearchLogInDto inDto);
