@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductLstMapper">
+
+    <select id="getListProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTNM
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
+        	, LOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+	</select>
+
+    <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTNM
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
+        	, LOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+		  <if test="SHOPIDX != null and SHOPIDX != ''" >
+		  AND SHOPIDX = #{SHOPIDX}
+		  </if>
+	</select>
+
+    <select id="getProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTNM
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
+        	, LOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+          AND IDX		= #{IDX}
+          AND SHOPIDX	= #{SHOPIDX}
+	</select>
+
+    <insert id="createProductLst">
+        INSERT INTO product_lst
+        (
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTNM
+        	, CARDAMT
+        	, COUPONAMT
+        	, NOMALAMT
+        	, LOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(cl.IDX AS INTEGER))
+        		  FROM product_lst cl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{PRODUCTNM}
+        	, IFNULL(#{CARDAMT}, '0')
+        	, IFNULL(#{COUPONAMT}, '0')
+        	, IFNULL(#{NOMALAMT}, '0')
+        	, IFNULL(#{LOWAMT}, '99999999999999999999')
+        	, #{USEYN}
+        	, #{CREATEDTM}
+        	, #{AUDITID}
+        	, #{AUDITDTM}
+        	, #{AUDITID}
+        	, CURRENT_TIMESTAMP(6)
+        )
+	</insert>
+
+    <update id="modifyProductLst">
+        UPDATE product_lst
+        SET
+        	PRODUCTNM		= #{PRODUCTNM}
+        	, CARDAMT		= IFNULL(#{CARDAMT}, '0')
+        	, COUPONAMT		= IFNULL(#{COUPONAMT}, '0')
+        	, NOMALAMT		= IFNULL(#{NOMALAMT}, '0')
+        	, LOWAMT		= IFNULL(#{LOWAMT}, '99999999999999999999')
+        	, USEYN			= #{USEYN}
+        	, AUDITID		= #{AUDITID}
+        	, AUDITDTM		= CURRENT_TIMESTAMP(6)
+        WHERE IDX			= #{IDX}
+          AND SHOPIDX		= #{SHOPIDX}
+	</update>
+
+</mapper>

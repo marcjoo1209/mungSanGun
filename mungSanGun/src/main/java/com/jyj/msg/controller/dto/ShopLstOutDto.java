@@ -9,19 +9,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import org.apache.ibatis.type.Alias;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Getter
-@Setter
 public class ShopLstOutDto {
   @ApiModelProperty(value = "순서", example = "1", required = true)
-  @NotEmpty(message = "순서를 입력 하세요.")
-  @Size(max = 5, message = "순서 입력 길이를 확인 하세요.")
   private String IDX;
 
   @ApiModelProperty(value = "생성일자", example = "1")
@@ -36,4 +30,45 @@ public class ShopLstOutDto {
   @ApiModelProperty(value = "이커머스 이름", example = "1")
   private String SHOPNM;
 
+  public String getIDX() {
+    return IDX;
+  }
+
+  public void setIDX(String iDX) {
+    IDX = iDX;
+  }
+
+  public String getCREATEDTM() {
+    return CREATEDTM;
+  }
+
+  public void setCREATEDTM(String cREATEDTM) {
+    CREATEDTM = cREATEDTM;
+  }
+
+  public String getAUDITDTM() {
+    return AUDITDTM;
+  }
+
+  public void setAUDITDTM(String aUDITDTM) {
+    AUDITDTM = aUDITDTM;
+  }
+
+  public String getAUDITID() {
+    return AUDITID;
+  }
+
+  public void setAUDITID(String aUDITID) {
+    AUDITID = aUDITID;
+  }
+
+  public String getSHOPNM() {
+    return SHOPNM;
+  }
+
+  public void setSHOPNM(String sHOPNM) {
+    SHOPNM = sHOPNM;
+  }
+
+  
 }

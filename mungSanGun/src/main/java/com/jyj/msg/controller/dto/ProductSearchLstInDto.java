@@ -8,19 +8,13 @@ package com.jyj.msg.controller.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Getter
-@Setter
 public class ProductSearchLstInDto {
   @ApiModelProperty(value = "순서", example = "1", required = true)
-  @NotEmpty(message = "순서를 입력 하세요.")
-  @Size(max = 5, message = "순서 입력 길이를 확인 하세요.")
   private String IDX;
 
   @ApiModelProperty(value = "대상웹페이지별명", example = "1")
@@ -65,4 +59,125 @@ public class ProductSearchLstInDto {
   @ApiModelProperty(value = "사용 여부", example = "1")
   private String USEYN;
 
+  public String getIDX() {
+    return IDX;
+  }
+
+  public void setIDX(String iDX) {
+    IDX = iDX;
+  }
+
+  public String getTARGETCOMMANT() {
+    return TARGETCOMMANT;
+  }
+
+  public void setTARGETCOMMANT(String tARGETCOMMANT) {
+    TARGETCOMMANT = tARGETCOMMANT;
+  }
+
+  public String getSHOPIDX() {
+    return SHOPIDX;
+  }
+
+  public void setSHOPIDX(String sHOPIDX) {
+    SHOPIDX = sHOPIDX;
+  }
+
+  public String getTARGETWEBURL() {
+    return TARGETWEBURL;
+  }
+
+  public void setTARGETWEBURL(String tARGETWEBURL) {
+    TARGETWEBURL = tARGETWEBURL;
+  }
+
+  public String getTARGETAMT() {
+    return TARGETAMT;
+  }
+
+  public void setTARGETAMT(String tARGETAMT) {
+    TARGETAMT = tARGETAMT;
+  }
+
+  public String getGBUPDOWN() {
+    return GBUPDOWN;
+  }
+
+  public void setGBUPDOWN(String gBUPDOWN) {
+    GBUPDOWN = gBUPDOWN;
+  }
+
+  public String getGBCARD() {
+    return GBCARD;
+  }
+
+  public void setGBCARD(String gBCARD) {
+    GBCARD = gBCARD;
+  }
+
+  public String getALAMSOLDOUT() {
+    return ALAMSOLDOUT;
+  }
+
+  public void setALAMSOLDOUT(String aLAMSOLDOUT) {
+    ALAMSOLDOUT = aLAMSOLDOUT;
+  }
+
+  public String getID() {
+    return ID;
+  }
+
+  public void setID(String iD) {
+    ID = iD;
+  }
+
+  public String getPWD() {
+    return PWD;
+  }
+
+  public void setPWD(String pWD) {
+    PWD = pWD;
+  }
+
+  public String getCREATEDTM() {
+    return CREATEDTM;
+  }
+
+  public void setCREATEDTM(String cREATEDTM) {
+    CREATEDTM = cREATEDTM;
+  }
+
+  public String getAUDITDTM() {
+    return AUDITDTM;
+  }
+
+  public void setAUDITDTM(String aUDITDTM) {
+    AUDITDTM = aUDITDTM;
+  }
+
+  public String getAUDITID() {
+    return AUDITID;
+  }
+
+  public void setAUDITID(String aUDITID) {
+    AUDITID = aUDITID;
+  }
+
+  public String getALAMYN() {
+    return ALAMYN;
+  }
+
+  public void setALAMYN(String aLAMYN) {
+    ALAMYN = aLAMYN;
+  }
+
+  public String getUSEYN() {
+    return USEYN;
+  }
+
+  public void setUSEYN(String uSEYN) {
+    USEYN = uSEYN;
+  }
+
+  
 }

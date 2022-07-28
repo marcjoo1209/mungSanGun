@@ -39,9 +39,7 @@
 		<div class="row">
 		  
 		    <div class="col-lg">
-		      <button type="button" class="btn btn-secondary" data-toggle="modal"
-							data-target="#createModal" onclick="clickNewView()"
-							style="font-size: 11px">추가</button>
+			 <button type="button" class="btn btn-secondary" onclick="createButton_onclikc()" style="font-size: 11px">추가</button>
 		    </div>
 		    <div class="col-md">
 		    </div>
@@ -57,119 +55,95 @@
 		    </div>
 		  </div>
 
+		<div class="page-header">
+			<h2></h2>
+		</div>
+
 				<table class="table table-bordered table-responsive-sm"
 					id="itemTable" style="font-size: 11px">
 					<thead>
 						<tr>
 							<th>순서</th>
-							<th>COL1 </th>
-							<th>COL2 </th>
-							<th>COL3 </th>
-							<th>COL4 </th>
-							<th>COL5 </th>
-							<th>COL6 </th>
-							<th>COL7 </th>
-							<th>COL8 </th>
-							<th>COL9 </th>
-							<th>COL10</th>
-							<th>COL11</th>
-							<th>COL12</th>
-							<th>COL13</th>
-							<th>COL14</th>
-							<th>COL15</th>
-							<th>COL16</th>
-							<th>COL17</th>
-							<th>COL18</th>
-							<th>COL19</th>
-							<th>COL20</th>
-							<th>COL21</th>
-							<th>COL22</th>
-							<th>COL23</th>
-							<th>COL24</th>
-							<th>COL25</th>
-							<th>COL26</th>
-							<th>COL27</th>
-							<th>COL28</th>
-							<th>COL29</th>
-							<th>COL30</th>
-							<th>COL31</th>
-							<th>COL32</th>
-							<th>COL33</th>
-							<th>COL34</th>
-							<th>COL35</th>
-							<th>COL36</th>
-							<th>COL37</th>
-							<th>COL38</th>
-							<th>COL39</th>
-							<th>COL40</th>
-							<th>COL41</th>
-							<th>COL42</th>
-							<th>COL43</th>
-							<th>COL44</th>
-							<th>COL45</th>
-							<th>COL46</th>
-							<th>COL47</th>
-							<th>COL48</th>
-							<th>COL49</th>
-							<th>COL50</th>
+							<th>상품명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료 </th>
+							<th>정산가 </th>
+							<th>롯데온 </th>
+							<th>마진 </th>
+							<th>최저가 </th>
+							<th>참고링크 </th>
+							<th>쿠팡</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>참고링크</th>
+							<th>지마켓</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<th>옥션</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<th>티몬</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<th>인터파크</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<th>SSG</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<th>수정</th>
 							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${outDto}" var="list" varStatus="status">
-							<tr data-toggle="modal" data-target="#modifyModal"
-								onclick="clickOrderItemView(${list.DIDX})">
-								<td>${list.DIDX }</td>
-								  <td>${list.COLUMNA1}</td>
-								  <td>${list.COLUMNA2}</td>
-								  <td>${list.COLUMNA3}</td>
-								  <td>${list.COLUMNA4}</td>
-								  <td>${list.COLUMNA5}</td>
-								  <td>${list.COLUMNA6}</td>
-								  <td>${list.COLUMNA7}</td>
-								  <td>${list.COLUMNA8}</td>
-								  <td>${list.COLUMNA9}</td>
-								  <td>${list.COLUMNB1}</td>
-								  <td>${list.COLUMNB2}</td>
-								  <td>${list.COLUMNB3}</td>
-								  <td>${list.COLUMNB4}</td>
-								  <td>${list.COLUMNB5}</td>
-								  <td>${list.COLUMNB6}</td>
-								  <td>${list.COLUMNB7}</td>
-								  <td>${list.COLUMNB8}</td>
-								  <td>${list.COLUMNB9}</td>
-								  <td>${list.COLUMNC1}</td>
-								  <td>${list.COLUMNC2}</td>
-								  <td>${list.COLUMNC3}</td>
-								  <td>${list.COLUMNC4}</td>
-								  <td>${list.COLUMNC5}</td>
-								  <td>${list.COLUMNC6}</td>
-								  <td>${list.COLUMNC7}</td>
-								  <td>${list.COLUMNC8}</td>
-								  <td>${list.COLUMNC9}</td>
-								  <td>${list.COLUMND1}</td>
-								  <td>${list.COLUMND2}</td>
-								  <td>${list.COLUMND3}</td>
-								  <td>${list.COLUMND4}</td>
-								  <td>${list.COLUMND5}</td>
-								  <td>${list.COLUMND6}</td>
-								  <td>${list.COLUMND7}</td>
-								  <td>${list.COLUMND8}</td>
-								  <td>${list.COLUMND9}</td>
-								  <td>${list.COLUMNE1}</td>
-								  <td>${list.COLUMNE2}</td>
-								  <td>${list.COLUMNE3}</td>
-								  <td>${list.COLUMNE4}</td>
-								  <td>${list.COLUMNE5}</td>
-								  <td>${list.COLUMNE6}</td>
-								  <td>${list.COLUMNE7}</td>
-								  <td>${list.COLUMNE8}</td>
-								  <td>${list.COLUMNE9}</td>
-								  <td>${list.COLUMNF1}</td>
-								  <td>${list.COLUMNF2}</td>
-								  <td>${list.COLUMNF3}</td>
-								  <td>${list.COLUMNF4}</td>
-								  <td>${list.COLUMNF5}</td>
+							<fmt:parseNumber value="${list.COLUMNA2 }" pattern="" var="num1"/>
+							<fmt:parseNumber value="${list.COLUMNA2 }" pattern="" var="num2"/>
+							<fmt:parseNumber value="${list.COLUMNA2 }" pattern="" var="num3"/>
+							<tr>
+								  <td>${list.DIDX }</td>
+								  <td><input id = 'COLUMNA1${list.DIDX}' type='text' 	value='${list.COLUMNA1}'/></td>
+								  <td><input id = 'COLUMNA2${list.DIDX}' type='number' 	value='${list.COLUMNA2}'/></td>
+								  <td><input id = 'COLUMNA3${list.DIDX}' type='number' 	value='${list.COLUMNA3}'/></td>
+								  <td><input id = 'COLUMNA4${list.DIDX}' type='number' 	value='${list.COLUMNA4}'/></td>
+								  <td><input id = 'COLUMNA5${list.DIDX}' type='number' 	value='${(list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)}'/></td>
+								  <td><input id = 'COLUMNA6${list.DIDX}' type='text' 	value='${list.COLUMNA6}'/></td>
+								  <td><input id = 'COLUMNA7${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNA6}'/></td>
+								  <td><input id = 'COLUMNA8${list.DIDX}' type='number' 	value='${list.COLUMNA8}'/></td>
+								  <td><input id = 'COLUMNA9${list.DIDX}' type='text' 	value='${list.COLUMNA9}'/></td>
+								  <td><input id = 'COLUMNB1${list.DIDX}' type='text' 	value='${list.COLUMNB1}'/></td>
+								  <td><input id = 'COLUMNB2${list.DIDX}' type='number' 	value='${list.COLUMNB2}'/></td>
+								  <td><input id = 'COLUMNB3${list.DIDX}' type='number' 	value='${list.COLUMNB3}'/></td>
+								  <td><input id = 'COLUMNB4${list.DIDX}' type='text' 	value='${list.COLUMNB4}'/></td>
+								  <td><input id = 'COLUMNB5${list.DIDX}' type='text' 	value='${list.COLUMNB5}'/></td>
+								  <td><input id = 'COLUMNB6${list.DIDX}' type='number' 	value='${list.COLUMNB6}'/></td>
+								  <td><input id = 'COLUMNB7${list.DIDX}' type='number' 	value='${list.COLUMNB7}'/></td>
+								  <td><input id = 'COLUMNB8${list.DIDX}' type='text' 	value='${list.COLUMNB8}'/></td>
+								  <td><input id = 'COLUMNB9${list.DIDX}' type='text' 	value='${list.COLUMNB9}'/></td>
+								  <td><input id = 'COLUMNC1${list.DIDX}' type='number' 	value='${list.COLUMNC1}'/></td>
+								  <td><input id = 'COLUMNC2${list.DIDX}' type='number' 	value='${list.COLUMNC2}'/></td>
+								  <td><input id = 'COLUMNC3${list.DIDX}' type='text' 	value='${list.COLUMNC3}'/></td>
+								  <td><input id = 'COLUMNC4${list.DIDX}' type='text' 	value='${list.COLUMNC4}'/></td>
+								  <td><input id = 'COLUMNC5${list.DIDX}' type='number' 	value='${list.COLUMNC5}'/></td>
+								  <td><input id = 'COLUMNC6${list.DIDX}' type='number' 	value='${list.COLUMNC6}'/></td>
+								  <td><input id = 'COLUMNC7${list.DIDX}' type='text' 	value='${list.COLUMNC7}'/></td>
+								  <td><input id = 'COLUMNC8${list.DIDX}' type='text' 	value='${list.COLUMNC8}'/></td>
+								  <td><input id = 'COLUMNC9${list.DIDX}' type='number' 	value='${list.COLUMNC9}'/></td>
+								  <td><input id = 'COLUMND1${list.DIDX}' type='number' 	value='${list.COLUMND1}'/></td>
+								  <td><input id = 'COLUMND2${list.DIDX}' type='text' 	value='${list.COLUMND2}'/></td>
+								  <td><input id = 'COLUMND3${list.DIDX}' type='text' 	value='${list.COLUMND3}'/></td>
+								  <td><input id = 'COLUMND4${list.DIDX}' type='number' 	value='${list.COLUMND4}'/></td>
+								  <td><input id = 'COLUMND5${list.DIDX}' type='number' 	value='${list.COLUMND5}'/></td>
+								  <td><input id = 'COLUMND6${list.DIDX}' type='text' 	value='${list.COLUMND6}'/></td>
+								<td>
+									<button type="button" class="btn btn-primary" id="modifyButton" onclick="modifyButton_onclikc(${list.DIDX})" style="font-size: 10px">수정</button>
+								</td>
 								<td>
 									<button type="button" class="btn btn-primary" id="removeButton" onclick="removeButton_onclikc(${list.DIDX})" style="font-size: 10px">삭제</button>
 								</td>
@@ -180,76 +154,47 @@
 
 	<!-- /.container -->
 
-	<!-- modify Modal -->
-	<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">상품 상세</div>
-				<div class="modal-body" id="modalBody"
-					style="max-width: 100%; width: auto !important; display: inline-block;">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" onclick='modifyButton_onclikcData()'>저장</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- create Modal -->
-	<div class="modal fade" id="createModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">상품 신규 생성</div>
-				<div class="modal-body" id="createmodalBody"
-					style="max-width: 100%; width: auto !important; display: inline-block;">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" onclick='createButton_onclikcData()'>저장</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<form id="modifyProductSearchLst" method="post"
-		action="/modifyProductSearchLst">
-		<input type='hidden' id="IDX" name="IDX" value=''> <input
-			type='hidden' id="TARGETCOMMANT" name="TARGETCOMMANT" value=''> <input
-			type='hidden' id="SHOPIDX" name="SHOPIDX" value=''> <input
-			type='hidden' id="TARGETWEBURL" name="TARGETWEBURL" value=''> <input
-			type='hidden' id="TARGETAMT" name="TARGETAMT" value=''> <input
-			type='hidden' id="GBUPDOWN" name="GBUPDOWN" value=''> <input
-			type='hidden' id="GBCARD" name="GBCARD" value=''> <input
-			type='hidden' id="ALAMSOLDOUT" name="ALAMSOLDOUT" value=''> <input
-			type='hidden' id="ID" name="ID" value=''> <input
-			type='hidden' id="PWD" name="PWD" value=''> <input
-			type='hidden' id="ALAMYN" name="ALAMYN" value=''>  <input
-			type='hidden' id="AUDITID" name="AUDITID" value=''> 
+	<form id="modifyAdminPage" method="post" action="/modifyAdminPage">
+		<input type='hidden' id="DIDX" 		name="DIDX" value=''>
+		<input type='hidden' id="COLUMNA1" 	name="COLUMNA1" value=''>
+		<input type='hidden' id="COLUMNA2" 	name="COLUMNA2" value=''>
+		<input type='hidden' id="COLUMNA3" 	name="COLUMNA3" value=''>
+		<input type='hidden' id="COLUMNA4" 	name="COLUMNA4" value=''>
+		<input type='hidden' id="COLUMNA5" 	name="COLUMNA5" value=''>
+		<input type='hidden' id="COLUMNA6" 	name="COLUMNA6" value=''>
+		<input type='hidden' id="COLUMNA7" 	name="COLUMNA7" value=''>
+		<input type='hidden' id="COLUMNA8" 	name="COLUMNA8" value=''>
+		<input type='hidden' id="COLUMNA9" 	name="COLUMNA9" value=''>
+		<input type='hidden' id="COLUMNB1" 	name="COLUMNB1" value=''>
+		<input type='hidden' id="COLUMNB2" 	name="COLUMNB2" value=''>
+		<input type='hidden' id="COLUMNB3" 	name="COLUMNB3" value=''>
+		<input type='hidden' id="COLUMNB4" 	name="COLUMNB4" value=''>
+		<input type='hidden' id="COLUMNB5" 	name="COLUMNB5" value=''>
+		<input type='hidden' id="COLUMNB6" 	name="COLUMNB6" value=''>
+		<input type='hidden' id="COLUMNB7" 	name="COLUMNB7" value=''>
+		<input type='hidden' id="COLUMNB8" 	name="COLUMNB8" value=''>
+		<input type='hidden' id="COLUMNB9" 	name="COLUMNB9" value=''>
+		<input type='hidden' id="COLUMNC1" 	name="COLUMNC1" value=''>
+		<input type='hidden' id="COLUMNC2" 	name="COLUMNC2" value=''>
+		<input type='hidden' id="COLUMNC3" 	name="COLUMNC3" value=''>
+		<input type='hidden' id="COLUMNC4" 	name="COLUMNC4" value=''>
+		<input type='hidden' id="COLUMNC5" 	name="COLUMNC5" value=''>
+		<input type='hidden' id="COLUMNC6" 	name="COLUMNC6" value=''>
+		<input type='hidden' id="COLUMNC7" 	name="COLUMNC7" value=''>
+		<input type='hidden' id="COLUMNC8" 	name="COLUMNC8" value=''>
+		<input type='hidden' id="COLUMNC9" 	name="COLUMNC9" value=''>
+		<input type='hidden' id="COLUMND1" 	name="COLUMND1" value=''>
+		<input type='hidden' id="COLUMND2" 	name="COLUMND2" value=''>
+		<input type='hidden' id="COLUMND3" 	name="COLUMND3" value=''>
+		<input type='hidden' id="COLUMND4" 	name="COLUMND4" value=''>
+		<input type='hidden' id="COLUMND5" 	name="COLUMND5" value=''>
+		<input type='hidden' id="COLUMND6" 	name="COLUMND6" value=''>
+		<input type='hidden' id="GBCD" 		name="GBCD" value=''>
 	</form>
 
-	<form id="createProductSearchLst" method="post"
-		action="/createProductSearchLst">
-		<input type='hidden' id="IDX1" name="IDX1" value=''> <input
-			type='hidden' id="TARGETCOMMANT1" name="TARGETCOMMANT1" value=''> <input
-			type='hidden' id="SHOPIDX1" name="SHOPIDX1" value=''> <input
-			type='hidden' id="TARGETWEBURL1" name="TARGETWEBURL1" value=''> <input
-			type='hidden' id="TARGETAMT1" name="TARGETAMT1" value=''> <input
-			type='hidden' id="GBUPDOWN1" name="GBUPDOWN1" value=''> <input
-			type='hidden' id="GBCARD1" name="GBCARD1" value=''> <input
-			type='hidden' id="ALAMSOLDOUT1" name="ALAMSOLDOUT1" value=''> <input
-			type='hidden' id="ID1" name="ID1" value=''> <input
-			type='hidden' id="PWD1" name="PWD1" value=''> <input
-			type='hidden' id="ALAMYN1" name="ALAMYN1" value=''>  <input
-			type='hidden' id="AUDITID" name="AUDITID" value=''> 
-	</form>
-
-	<form id="removeProductSearchLst" method="post"
-		action="/removeProductSearchLst">
-		<input type='hidden' id="IDX2" name="IDX2" value=''> <input
-			type='hidden' id="USEYN2" name="USEYN2" value=''> 
+	<form id="removeAdminPage" method="post"
+		action="/removeAdminPage">
+		<input type='hidden' id="DIDX1" name="DIDX1" value=''>
 	</form>
 
 	<form id="SearchLst" method="post"
@@ -282,288 +227,246 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.7/holder.min.js"></script>
 
 	<script>
-	
-  	function clickOrderItemView(idx){
-  		debugger;
-		let data = {"didx" : idx};
-	  	let htmlTxt = "";
-		$.ajax({
-			type		: 'POST',
-			dataType 	: 'json',
-			url			: "/get-mng-shop-product-tmp-tbl", 
-			data 		: JSON.stringify(data),
-			contentType:'application/json',
-			// beforeSend: function (request){request.setRequestHeader('AJAX', 'true');},
-			dataType: "json",
-			success : function(data){
-				console.log(data);
-				/*
-				var data = JSON.stringify(obj);
-				var json = JSON.parse(data);*/
-			  	// 모달 텍스트 출력
-  				let $modalBody  = $("#modalBody");
-				
-				// 정렬
-				console.log(JSON.stringify(data));
-				const ordered = {};
-				Object.keys(data).sort().forEach(function(key) {
-				  ordered[key] = data[key];
-				});
-
-				console.log(JSON.stringify(ordered));
-
-			  	for (var key in ordered) {
-			  	  console.log("key " + key + " has value " + data[key]);
-			  	  
-
-		  			htmlTxt = htmlTxt + "<div class='form-group'>"
-			  			+    "<label for='"+key+"' class='col-form-label'>"+key+":</label>"
-			  			+	"<input type='text' class='form-control' id='"+key+"' value="+data[key]+">"
-				        + "</div>"
-		 	   			;
-			  	}
-			  	
-			  	/*
-		  		data.forEach(function (index, item){
-		  			console.log(data)
-		  			
-		  			htmlTxt =+ "<div class='form-group'>"
-			  			+    "<label for='createColumn"+i+"' class='col-form-label'>"+i+":</label>"
-			  			+	"<input type='text' class='form-control' id='createColumn"+i+"' value="+rowData+">"
-				        + "</div>"
-		 	   			;
-				    i++;
-		  		}
-			    */
-	 	   			
-		 	   	$modalBody.html(htmlTxt);
-
-			},
-			 error:function(request,status,error){				    
-				    return;
-			}
-		}) ;
-  	}
-  	
-  	function clickNewView(){
-  		debugger;
-		let $modalBody  = $("#createmodalBody");
-	  	let htmlTxt = 
-	  		/*
-	  		"<div class='form-group'>"
-	        +    "<label for='create-name0' class='col-form-label'>순서:</label>"
-	        +	"<input type='text' class='form-control' id='create-name0' >"
-	        + "</div>"
-
-	  		+*/ 
-	  		"<div class='form-group'>"
-	        +    "<label for='create-name1' class='col-form-label'>대상웹페이지별명:</label>"
-	        +	"<input type='text' class='form-control' id='create-name1' >"
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name2' class='col-form-label'>이커머스:</label>"
-	        //+	"<input type='text' class='form-control' id='create-name2' >"
-	        
-	        + "<select class='form-control' id='create-name2'>"
-	        + "  	<option value=''>--- 이커머스선택 ---</option>"
-	        + "			  	<c:forEach items ='${shopOutDto }' var ='list' varStatus='status'>"
-	        + "		<option value='${list.IDX}'>${list.SHOPNM}</option>"	
-	        + "			  	</c:forEach>"
-	        + "</select>"
-	        
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name3' class='col-form-label'>대상웹페이지주소:</label>"
-	        +	"<input type='text' class='form-control' id='create-name3' >"
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name4' class='col-form-label'>기준 금액:</label>"
-	        +	"<input type='text' class='form-control' id='create-name4' >"
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name5' class='col-form-label'>0:기준가이상, 1:기준가이하 구분:</label>"
-	        //+	"<input type='text' class='form-control' id='create-name5' >"
-	        
-	        + "<select class='form-control' id='create-name5'>"
-	        + "  	<option value=''>--- 기준 선택 ---</option>"
-	        + "			  	<c:forEach items ='${codeOutDto }' var ='list' varStatus='status'>"
-	        + " 				<c:if test='${list.CODEID eq \"GBUPDOWN\"}'>"
-	        + "		<option value='${list.CODEVAL1}'>${list.CODEVAL2}</option>"	
-	        + "					</c:if>"
-	        + "			  	</c:forEach>"
-	        + "</select>"
-	        
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name6' class='col-form-label'>0:쿠폰, 1:카드 구분:</label>"
-	        //+	"<input type='text' class='form-control' id='create-name6' >"
-	        
-	        + "<select class='form-control' id='create-name6'>"
-	        + "  	<option value=''>--- 쿠폰, 카드 선택 ---</option>"
-	        + "			  	<c:forEach items ='${codeOutDto }' var ='list' varStatus='status'>"
-	        + " 				<c:if test='${list.CODEID eq \"GBCARD\"}'>"
-	        + "		<option value='${list.CODEVAL1}'>${list.CODEVAL2}</option>"	
-	        + "					</c:if>"
-	        + "			  	</c:forEach>"
-	        + "</select>"
-	        
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name7' class='col-form-label'>품절시 알람 요청 Y:알람요청:,N:알람미요청:</label>"
-	        //+	"<input type='text' class='form-control' id='create-name7' >"
-	        
-	        + "<select class='form-control' id='create-name7'>"
-	        + "  	<option value=''>--- 품절시 알람 선택 ---</option>"
-	        + "		<option value='Y'>Y</option>"
-	        + "		<option value='N'>N</option>"		
-	        + "</select>"
-	        
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name8' class='col-form-label'>로그인id:</label>"
-	        +	"<input type='text' class='form-control' id='create-name8' >"
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name9' class='col-form-label'>로그인pwd:</label>"
-	        +	"<input type='text' class='form-control' id='create-name9' >"
-	        + "</div>"
-/*
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name10' class='col-form-label'>생성일자:</label>"
-	        +	"<input type='text' class='form-control' id='create-name10' >"
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name11' class='col-form-label'>수정일자:</label>"
-	        +	"<input type='text' class='form-control' id='create-name11' >"
-	        + "</div>"
-	   			+ "<tr>"
-*/
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name12' class='col-form-label'>알람 여부:</label>"
-	        //+	"<input type='text' class='form-control' id='create-name12' >"
-	        	        
-	        + "<select class='form-control' id='create-name12'>"
-	        + "  	<option value=''>--- 알람 선택 ---</option>"
-	        + "		<option value='Y'>Y</option>"
-	        + "		<option value='N'>N</option>"		
-	        + "</select>"
-	        	        
-	        + "</div>"
-
-	  		+ "<div class='form-group'>"
-	        +    "<label for='create-name13' class='col-form-label'>수정 사용자:</label>"
-	        +	"<input type='text' class='form-control' id='create-name13' >"
-	        + "</div>"
-	   			;
-	   			
- 	   	$modalBody.html(htmlTxt);
-  	}
   	
   	// 삭제 호출
 	function removeButton_onclikc(idx){
   		debugger;
   		
 		// form 변수 초기화
-		var $form = $("#removeProductSearchLst");
+		var $form = $("#removeAdminPage");
 		
 		// 수정 값체크
 		// form 값 초기화
-		$("#IDX2").val(idx);
-		$("#USEYN2").val("N");
+		$("#DIDX1").val(idx);
 		
 		// 변경 호출
 		$form.submit()
 	}
   	
   	// 수정 입력 호출
-	function modifyButton_onclikcData(){
-  		debugger;
-  		
-		// form 변수 초기화
-		var $form = $("#modifyProductSearchLst");
-		
-		// 수정 값체크
-		var $recipient0 = $("#recipient-name0").val();
-		var $recipient1 = $("#recipient-name1").val();
-		var $recipient2 = $("#recipient-name2").val();
-		var $recipient3 = $("#recipient-name3").val();
-		var $recipient4 = $("#recipient-name4").val();
-		var $recipient5 = $("#recipient-name5").val();
-		var $recipient6 = $("#recipient-name6").val();
-		var $recipient7 = $("#recipient-name7").val();
-		var $recipient8 = $("#recipient-name8").val();
-		var $recipient9 = $("#recipient-name9").val();
-		var $recipient10 = $("#recipient-name10").val();
-		var $recipient11 = $("#recipient-name11").val();
-		var $recipient12 = $("#recipient-name12").val();
-		var $recipient13 = $("#recipient-name13").val();
-		
-		// form 값 초기화
-		$("#IDX").val($recipient0);
-		$("#TARGETCOMMANT").val($recipient1);
-		$("#SHOPIDX").val($recipient2);
-		$("#TARGETWEBURL").val($recipient3);
-		$("#TARGETAMT").val($recipient4);
-		$("#GBUPDOWN").val($recipient5);
-		$("#GBCARD").val($recipient6);
-		$("#ALAMSOLDOUT").val($recipient7);
-		$("#ID").val($recipient8);
-		$("#PWD").val($recipient9);
-		$("#ALAMYN").val($recipient12);
-		$("#AUDITID").val($recipient13);
-		
-		// 변경 호출
-		$form.submit()
+	function modifyButton_onclikc(inkeyNum){
+  	    if (!confirm("아이템을 수정 하시겠습니까?\n확인(예) 또는 취소(아니오)를 선택해주세요.")) {
+   	       return false;
+   	    } else {
+			// form 변수 초기화
+			var $form = $("#modifyAdminPage");
+			
+			// 수정 값체크
+			var $didx 		= inkeyNum;
+			var $create0 	= $("#COLUMNA1"+inkeyNum).val();
+			var $create1 	= $("#COLUMNA2"+inkeyNum).val();
+			var $create2 	= $("#COLUMNA3"+inkeyNum).val();
+			var $create3 	= $("#COLUMNA4"+inkeyNum).val();
+			var $create4 	= $("#COLUMNA5"+inkeyNum).val();
+			var $create5 	= $("#COLUMNA6"+inkeyNum).val();
+			var $create6 	= $("#COLUMNA7"+inkeyNum).val();
+			var $create7 	= $("#COLUMNA8"+inkeyNum).val();
+			var $create8 	= $("#COLUMNA9"+inkeyNum).val();
+			var $create9 	= $("#COLUMNB1"+inkeyNum).val();
+			var $create10 	= $("#COLUMNB2"+inkeyNum).val();
+			var $create11 	= $("#COLUMNB3"+inkeyNum).val();
+			var $create12 	= $("#COLUMNB4"+inkeyNum).val();
+			var $create13 	= $("#COLUMNB5"+inkeyNum).val();
+			var $create14 	= $("#COLUMNB6"+inkeyNum).val();
+			var $create15 	= $("#COLUMNB7"+inkeyNum).val();
+			var $create16 	= $("#COLUMNB8"+inkeyNum).val();
+			var $create17 	= $("#COLUMNB9"+inkeyNum).val();
+			var $create18 	= $("#COLUMNC1"+inkeyNum).val();
+			var $create19 	= $("#COLUMNC2"+inkeyNum).val();
+			var $create20 	= $("#COLUMNC3"+inkeyNum).val();
+			var $create21 	= $("#COLUMNC4"+inkeyNum).val();
+			var $create22 	= $("#COLUMNC5"+inkeyNum).val();
+			var $create23 	= $("#COLUMNC6"+inkeyNum).val();
+			var $create24 	= $("#COLUMNC7"+inkeyNum).val();
+			var $create25 	= $("#COLUMNC8"+inkeyNum).val();
+			var $create26 	= $("#COLUMNC9"+inkeyNum).val();
+			var $create27 	= $("#COLUMND1"+inkeyNum).val();
+			var $create28 	= $("#COLUMND2"+inkeyNum).val();
+			var $create29 	= $("#COLUMND3"+inkeyNum).val();
+			var $create30 	= $("#COLUMND4"+inkeyNum).val();
+			var $create31 	= $("#COLUMND5"+inkeyNum).val();
+			var $create32 	= $("#COLUMND6"+inkeyNum).val();
+			
+			// form 값 초기화
+			$("#DIDX").val($didx );
+			$("#COLUMNA1").val($create0 );
+			$("#COLUMNA2").val($create1 );
+			$("#COLUMNA3").val($create2 );
+			$("#COLUMNA4").val($create3 );
+			$("#COLUMNA5").val($create4 );
+			$("#COLUMNA6").val($create5 );
+			$("#COLUMNA7").val($create6 );
+			$("#COLUMNA8").val($create7 );
+			$("#COLUMNA9").val($create8 );
+			$("#COLUMNB1").val($create9 );
+			$("#COLUMNB2").val($create10);
+			$("#COLUMNB3").val($create11);
+			$("#COLUMNB4").val($create12);
+			$("#COLUMNB5").val($create13);
+			$("#COLUMNB6").val($create14);
+			$("#COLUMNB7").val($create15);
+			$("#COLUMNB8").val($create16);
+			$("#COLUMNB9").val($create17);
+			$("#COLUMNC1").val($create18);
+			$("#COLUMNC2").val($create19);
+			$("#COLUMNC3").val($create20);
+			$("#COLUMNC4").val($create21);
+			$("#COLUMNC5").val($create22);
+			$("#COLUMNC6").val($create23);
+			$("#COLUMNC7").val($create24);
+			$("#COLUMNC8").val($create25);
+			$("#COLUMNC9").val($create26);
+			$("#COLUMND1").val($create27);
+			$("#COLUMND2").val($create28);
+			$("#COLUMND3").val($create29);
+			$("#COLUMND4").val($create30);
+			$("#COLUMND5").val($create31);
+			$("#COLUMND6").val($create32);
+			$("#GBCD").val("U");
+			
+			// url 호출
+			$form.submit();
+   	    }
 	}
-  	
+
+	// 조회 건수
+  	let totCnt = 0;
+  	totCnt = ${list2cnt};
+
+	function createButton_onclikc(){
+		totCnt = totCnt + 1;
+		var tmpTExt = 	
+			"<tr>																																				 "
+			+ "	  <td>-</td>                                                                                                                                     "
+			+ "	  <td><input id = 'COLUMNA1T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA2T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA3T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA4T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA5T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA6T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA7T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA8T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA9T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB1T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB2T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB3T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB4T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB5T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB6T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB7T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB8T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNB9T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC1T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC2T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC3T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC4T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC5T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC6T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC7T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC8T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNC9T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND1T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND2T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND3T' type='text' 		value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND4T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND5T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMND6T' type='text' 		value=''/></td>                                                                  "
+			+ "	<td>                                                                                                                                             "
+			+ "		-                                                                                                                                            "
+			+ "	</td>                                                                                                                                            "
+			+ "	<td>                                                                                                                                             "
+			+ "		<button type='button' class='btn btn-primary' id='createButton' onclick='createButton_onclikcData()' style='font-size: 10px'>추가</button>         "
+			+ "	</td>                                                                                                                                            "
+			+ "</tr>                                                                                                                                               "
+	   			;
+		//$("#itemTable>tbody").prepend("<tr><td>Test Row Append</td></tr>");
+		$("#itemTable>tbody").prepend(tmpTExt);
+	}
+
   	// 입력 호출
 	function createButton_onclikcData(){
   		debugger;
-  		
-		// form 변수 초기화
-		var $form = $("#createProductSearchLst");
-		
-		// 수정 값체크
-		var $create0 = $("#create-name0").val();
-		var $create1 = $("#create-name1").val();
-		var $create2 = $("#create-name2").val();
-		var $create3 = $("#create-name3").val();
-		var $create4 = $("#create-name4").val();
-		var $create5 = $("#create-name5").val();
-		var $create6 = $("#create-name6").val();
-		var $create7 = $("#create-name7").val();
-		var $create8 = $("#create-name8").val();
-		var $create9 = $("#create-name9").val();
-		var $create10 = $("#create-name10").val();
-		var $create11 = $("#create-name11").val();
-		var $create12 = $("#create-name12").val();
-		var $create13 = $("#create-name13").val();
-		
-		// form 값 초기화
-		$("#IDX1").val($create0);
-		$("#TARGETCOMMANT1").val($create1);
-		$("#SHOPIDX1").val($create2);
-		$("#TARGETWEBURL1").val($create3);
-		$("#TARGETAMT1").val($create4);
-		$("#GBUPDOWN1").val($create5);
-		$("#GBCARD1").val($create6);
-		$("#ALAMSOLDOUT1").val($create7);
-		$("#ID1").val($create8);
-		$("#PWD1").val($create9);
-		$("#ALAMYN1").val($create12);
-		$("#AUDITID1").val($create13);
-		
-		// 변경 호출
-		$form.submit()
+  	    if (!confirm("아이템을 추가 하시겠습니까?\n확인(예) 또는 취소(아니오)를 선택해주세요.")) {
+  	       return false;
+  	    } else {
+
+  			// form 변수 초기화
+  			var $form = $("#modifyAdminPage");
+  			
+  			// 수정 값체크
+  			var $create0 	= $("#COLUMNA1T").val();
+  			var $create1 	= $("#COLUMNA2T").val();
+  			var $create2 	= $("#COLUMNA3T").val();
+  			var $create3 	= $("#COLUMNA4T").val();
+  			var $create4 	= $("#COLUMNA5T").val();
+  			var $create5 	= $("#COLUMNA6T").val();
+  			var $create6 	= $("#COLUMNA7T").val();
+  			var $create7 	= $("#COLUMNA8T").val();
+  			var $create8 	= $("#COLUMNA9T").val();
+  			var $create9 	= $("#COLUMNB1T").val();
+  			var $create10 	= $("#COLUMNB2T").val();
+  			var $create11 	= $("#COLUMNB3T").val();
+  			var $create12 	= $("#COLUMNB4T").val();
+  			var $create13 	= $("#COLUMNB5T").val();
+  			var $create14 	= $("#COLUMNB6T").val();
+  			var $create15 	= $("#COLUMNB7T").val();
+  			var $create16 	= $("#COLUMNB8T").val();
+  			var $create17 	= $("#COLUMNB9T").val();
+  			var $create18 	= $("#COLUMNC1T").val();
+  			var $create19 	= $("#COLUMNC2T").val();
+  			var $create20 	= $("#COLUMNC3T").val();
+  			var $create21 	= $("#COLUMNC4T").val();
+  			var $create22 	= $("#COLUMNC5T").val();
+  			var $create23 	= $("#COLUMNC6T").val();
+  			var $create24 	= $("#COLUMNC7T").val();
+  			var $create25 	= $("#COLUMNC8T").val();
+  			var $create26 	= $("#COLUMNC9T").val();
+  			var $create27 	= $("#COLUMND1T").val();
+  			var $create28 	= $("#COLUMND2T").val();
+  			var $create29 	= $("#COLUMND3T").val();
+  			var $create30 	= $("#COLUMND4T").val();
+  			var $create31 	= $("#COLUMND5T").val();
+  			var $create32 	= $("#COLUMND6T").val();
+  			
+  			// form 값 초기화
+  			$("#COLUMNA1").val($create0 );
+  			$("#COLUMNA2").val($create1 );
+  			$("#COLUMNA3").val($create2 );
+  			$("#COLUMNA4").val($create3 );
+  			$("#COLUMNA5").val($create4 );
+  			$("#COLUMNA6").val($create5 );
+  			$("#COLUMNA7").val($create6 );
+  			$("#COLUMNA8").val($create7 );
+  			$("#COLUMNA9").val($create8 );
+  			$("#COLUMNB1").val($create9 );
+  			$("#COLUMNB2").val($create10);
+  			$("#COLUMNB3").val($create11);
+  			$("#COLUMNB4").val($create12);
+  			$("#COLUMNB5").val($create13);
+  			$("#COLUMNB6").val($create14);
+  			$("#COLUMNB7").val($create15);
+  			$("#COLUMNB8").val($create16);
+  			$("#COLUMNB9").val($create17);
+  			$("#COLUMNC1").val($create18);
+  			$("#COLUMNC2").val($create19);
+  			$("#COLUMNC3").val($create20);
+  			$("#COLUMNC4").val($create21);
+  			$("#COLUMNC5").val($create22);
+  			$("#COLUMNC6").val($create23);
+  			$("#COLUMNC7").val($create24);
+  			$("#COLUMNC8").val($create25);
+  			$("#COLUMNC9").val($create26);
+  			$("#COLUMND1").val($create27);
+  			$("#COLUMND2").val($create28);
+  			$("#COLUMND3").val($create29);
+  			$("#COLUMND4").val($create30);
+  			$("#COLUMND5").val($create31);
+  			$("#COLUMND6").val($create32);
+  			$("#GBCD").val("I");
+  			
+  			// url 호출
+  			$form.submit();
+  	    }
 	}
 
   	function searchItemList(){

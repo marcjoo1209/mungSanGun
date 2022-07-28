@@ -8,6 +8,11 @@ plugins {
 group = 'com.jyj'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+apply plugin: 'war'
+
+
+bootWar.enabled = false
+war.enabled = true
 
 repositories {
 	mavenCentral()
@@ -32,10 +37,10 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	
 	// lombok
-	compileOnly 'org.projectlombok:lombok:1.18.12'
-	annotationProcessor 'org.projectlombok:lombok:1.18.12'
-	testCompileOnly 'org.projectlombok:lombok:1.18.12'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+	//compileOnly 'org.projectlombok:lombok:1.18.12'
+	//annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	//testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	//testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
 	
 	// swagger
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
@@ -73,6 +78,12 @@ dependencies {
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
+}
+
+bootWar {
+	archiveBaseName = 'web' // <-war 패키징 시 이름 설정
+	archiveFileName = 'web.war' // <-war 패키징 시 이름 설정
+	archiveVersion = '0.0.0'
 }
 
 tasks.named('test') {

@@ -26,13 +26,12 @@ import com.jyj.msg.controller.dto.ShopLstOutDto;
 import com.jyj.msg.service.ProductSearchLstService;
 import com.jyj.msg.service.ShopLstService;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
 **/
-@Slf4j
+//@Slf4j
 @RestController
 //@RequestMapping(value = "/api/v1/app/")
 public class ProductSearchLstController {
@@ -42,7 +41,7 @@ public class ProductSearchLstController {
   @RequestMapping(value="/getProductSearchLst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 조회", notes="상품 대상 리스트 조회")
   public Object getProductSearchLst(HttpServletRequest request, Model model) {
-    log.debug("/getProductSearchLst 호출 시작");
+   // log.debug("/getProductSearchLst 호출 시작");
     ProductSearchLstInDto inDto = new ProductSearchLstInDto();
     inDto.setIDX(request.getParameter("IDX"));
     JSONObject j_obj = new JSONObject();
@@ -69,7 +68,7 @@ public class ProductSearchLstController {
   @RequestMapping(value="/getListProductSearchLst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 조회", notes="상품 대상 리스트 조회")
   public void getListProductSearchLst() {
-    log.debug("/getListProductSearchLst 호출 시작");
+   // log.debug("/getListProductSearchLst 호출 시작");
     List<ProductSearchLstOutDto> outDto = productSearchLstService.getListProductSearchLst();
     System.out.println(outDto);
     
@@ -78,7 +77,7 @@ public class ProductSearchLstController {
   @RequestMapping(value="/createProductSearchLst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 생성", notes="상품 대상 리스트 생성")
   public ResponseEntity<?> createProductSearchLst(HttpServletRequest request, Model model) {
-    log.debug("/createProductSearchLst 호출 시작");
+   // log.debug("/createProductSearchLst 호출 시작");
     ProductSearchLstInDto inDto = new ProductSearchLstInDto();
     inDto.setIDX(request.getParameter("IDX1"));
     inDto.setTARGETCOMMANT(request.getParameter("TARGETCOMMANT1"));
@@ -95,7 +94,7 @@ public class ProductSearchLstController {
     Integer outDto = productSearchLstService.createProductSearchLst(inDto);
     
     if(outDto > 0) {
-      log.debug("/modifyProductSearchLst 정상 호출");
+    //  log.debug("/modifyProductSearchLst 정상 호출");
     }
     
     HttpHeaders headers = new HttpHeaders();
@@ -106,7 +105,7 @@ public class ProductSearchLstController {
   @RequestMapping(value="/modifyProductSearchLst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 수정", notes="상품 대상 리스트 수정")
   public ResponseEntity<?> modifyProductSearchLst(HttpServletRequest request, Model model) {
-    log.debug("/modifyProductSearchLst 호출 시작");
+   // log.debug("/modifyProductSearchLst 호출 시작");
     ProductSearchLstInDto inDto = new ProductSearchLstInDto();
     inDto.setIDX(request.getParameter("IDX"));
     inDto.setTARGETCOMMANT(request.getParameter("TARGETCOMMANT"));
@@ -123,7 +122,7 @@ public class ProductSearchLstController {
     Integer outDto = productSearchLstService.modifyProductSearchLst(inDto);
     
     if(outDto > 0) {
-      log.debug("/modifyProductSearchLst 정상 호출");
+     // log.debug("/modifyProductSearchLst 정상 호출");
     }
 
     HttpHeaders headers = new HttpHeaders();
@@ -134,14 +133,14 @@ public class ProductSearchLstController {
   @RequestMapping(value="/removeProductSearchLst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 삭제", notes="상품 대상 리스트 삭제")
   public ResponseEntity<?> removeProductSearchLst(HttpServletRequest request, Model model) {
-    log.debug("/removeProductSearchLst 호출 시작");
+   // log.debug("/removeProductSearchLst 호출 시작");
     ProductSearchLstInDto inDto = new ProductSearchLstInDto();
     inDto.setIDX(request.getParameter("IDX2"));
     inDto.setUSEYN(request.getParameter("USEYN2"));
     Integer outDto = productSearchLstService.removeProductSearchLst(inDto);
     
     if(outDto > 0) {
-      log.debug("/removeProductSearchLst 정상 호출");
+    //  log.debug("/removeProductSearchLst 정상 호출");
     }
     
     HttpHeaders headers = new HttpHeaders();
@@ -152,7 +151,7 @@ public class ProductSearchLstController {
   @RequestMapping(value="/getlist-product-search-lst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 조회 로컬 호출", notes="상품 대상 리스트 조회 로컬 호출")
   public List<ProductSearchLstOutDto> getListProductSearchLstLocal(@RequestBody ProductSearchLstInDto inDto) throws IOException {
-    log.debug("/getlist-product-search-lst 호출 시작");
+   // log.debug("/getlist-product-search-lst 호출 시작");
     //ProductSearchLstInDto inDto = new ProductSearchLstInDto();
     //inDto.setSHOPIDX(shopidx);
     List<ProductSearchLstOutDto> outDto = productSearchLstService.getListProductSearchLstLocal(inDto);

@@ -8,19 +8,13 @@ package com.jyj.msg.controller.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Getter
-@Setter
 public class TelegramNotiUserLstInDto {
   @ApiModelProperty(value = "순서", example = "1", required = true)
-  @NotEmpty(message = "순서를 입력 하세요.")
-  @Size(max = 5, message = "순서 입력 길이를 확인 하세요.")
   private String IDX;
 
   @ApiModelProperty(value = "채팅 token", example = "채팅 token")
@@ -37,5 +31,54 @@ public class TelegramNotiUserLstInDto {
   
   @ApiModelProperty(value = "수정 사용자", example = "testuser")
   private String AUDITID;
+
+  public String getIDX() {
+    return IDX;
+  }
+
+  public void setIDX(String iDX) {
+    IDX = iDX;
+  }
+
+  public String getTOKEN() {
+    return TOKEN;
+  }
+
+  public void setTOKEN(String tOKEN) {
+    TOKEN = tOKEN;
+  }
+
+  public String getCHATID() {
+    return CHATID;
+  }
+
+  public void setCHATID(String cHATID) {
+    CHATID = cHATID;
+  }
+
+  public String getUSEYN() {
+    return USEYN;
+  }
+
+  public void setUSEYN(String uSEYN) {
+    USEYN = uSEYN;
+  }
+
+  public String getAUDITDTM() {
+    return AUDITDTM;
+  }
+
+  public void setAUDITDTM(String aUDITDTM) {
+    AUDITDTM = aUDITDTM;
+  }
+
+  public String getAUDITID() {
+    return AUDITID;
+  }
+
+  public void setAUDITID(String aUDITID) {
+    AUDITID = aUDITID;
+  }
+
   
 }

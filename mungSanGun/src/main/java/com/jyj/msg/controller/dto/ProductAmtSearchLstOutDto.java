@@ -8,15 +8,11 @@ package com.jyj.msg.controller.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Getter
-@Setter
 public class ProductAmtSearchLstOutDto {
   @ApiModelProperty(value = "순서", example = "1")
   private String IDX;
@@ -47,5 +43,78 @@ public class ProductAmtSearchLstOutDto {
 
   @ApiModelProperty(value = "사용유무", example = "Y")
   private String USEYN;
+
+  public String getIDX() {
+    return IDX;
+  }
+
+  public void setIDX(String iDX) {
+    IDX = iDX;
+  }
+
+  public String getPRODUCTIDX() {
+    return PRODUCTIDX;
+  }
+
+  public void setPRODUCTIDX(String pRODUCTIDX) {
+    PRODUCTIDX = pRODUCTIDX;
+  }
+
+  public String getPRODUCTNM() {
+    return PRODUCTNM;
+  }
+
+  public void setPRODUCTNM(String pRODUCTNM) {
+    PRODUCTNM = pRODUCTNM;
+  }
+
+  public String getSHOPIDX() {
+    return SHOPIDX;
+  }
+
+  public void setSHOPIDX(String sHOPIDX) {
+    SHOPIDX = sHOPIDX;
+  }
+
+  public String getPRODUCTURL() {
+    return PRODUCTURL;
+  }
+
+  public void setPRODUCTURL(String pRODUCTURL) {
+    PRODUCTURL = pRODUCTURL;
+  }
+
+  public String getLOGINID() {
+    return LOGINID;
+  }
+
+  public void setLOGINID(String lOGINID) {
+    LOGINID = lOGINID;
+  }
+
+  public String getLOGINPWD() {
+    return LOGINPWD;
+  }
+
+  public void setLOGINPWD(String lOGINPWD) {
+    LOGINPWD = lOGINPWD;
+  }
+
+  public String getAMTGB() {
+    return AMTGB;
+  }
+
+  public void setAMTGB(String aMTGB) {
+    AMTGB = aMTGB;
+  }
+
+  public String getUSEYN() {
+    return USEYN;
+  }
+
+  public void setUSEYN(String uSEYN) {
+    USEYN = uSEYN;
+  }
+
   
 }

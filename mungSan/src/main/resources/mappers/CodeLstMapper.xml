@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CodeLstMapper">
+
+    <select id="getListCodeLst" resultType="com.jyj.msg.controller.dto.CodeLstOutDto">
+        SELECT
+        	IDX
+        	, CODEID
+        	, CODENM
+        	, CODEVAL1
+        	, CODEVAL2
+        	, CODEVAL3
+        	, CODEVAL4
+        	, CODEVAL5
+        	, CODEVAL6
+        	, CODEVAL7
+        	, CODEVAL8
+        	, CODEVAL9
+        	, CODEVAL10
+        	, AUDITID
+        	, AUDITDTM
+        FROM code_lst
+        WHERE 1 = 1
+	</select>
+
+    <insert id="createCodeLst">
+        INSERT INTO code_lst
+        (
+        	IDX
+        	, CODEID
+        	, CODENM
+        	, CODEVAL1
+        	, CODEVAL2
+        	, CODEVAL3
+        	, CODEVAL4
+        	, CODEVAL5
+        	, CODEVAL6
+        	, CODEVAL7
+        	, CODEVAL8
+        	, CODEVAL9
+        	, CODEVAL10
+        	, AUDITID
+        	, AUDITDTM
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(cl.IDX AS INTEGER))
+        		  FROM code_lst cl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{CODEID}
+        	, #{CODENM}
+        	, #{CODEVAL1}
+        	, #{CODEVAL2}
+        	, #{CODEVAL3}
+        	, #{CODEVAL4}
+        	, #{CODEVAL5}
+        	, #{CODEVAL6}
+        	, #{CODEVAL7}
+        	, #{CODEVAL8}
+        	, #{CODEVAL9}
+        	, #{CODEVAL10}
+        	, #{AUDITID}
+        	, sysdate()
+        )
+	</insert>
+
+    <update id="modifyCodeLst">
+        UPDATE code_lst
+        SET
+        	CODEID		= #{CODEID}
+        	, CODENM	= #{CODENM}
+        	, CODEVAL1	= #{CODEVAL1}
+        	, CODEVAL2	= #{CODEVAL2}
+        	, CODEVAL3	= #{CODEVAL3}
+        	, CODEVAL4	= #{CODEVAL4}
+        	, CODEVAL5	= #{CODEVAL5}
+        	, CODEVAL6	= #{CODEVAL6}
+        	, CODEVAL7	= #{CODEVAL7}
+        	, CODEVAL8	= #{CODEVAL8}
+        	, CODEVAL9	= #{CODEVAL9}
+        	, CODEVAL10	= #{CODEVAL10}
+        	, AUDITID	= #{AUDITID}
+        	, AUDITDTM	= sysdate()
+        WHERE IDX			= #{IDX}
+	</update>
+
+</mapper>

@@ -27,13 +27,12 @@ import com.jyj.msg.service.ProductAmtSearchLogService;
 import com.jyj.msg.service.ProductAmtSearchLstService;
 import com.jyj.msg.service.ProductSearchLstService;
 import com.jyj.msg.service.ShopLstService;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Slf4j
+//@Slf4j
 @Controller
 public class MsgMainController {
   @Autowired
@@ -52,7 +51,7 @@ public class MsgMainController {
   //@RequestMapping(value = "/")
   @RequestMapping(value = "/tttttttttttttttttttttttttttttttttt")
   public String mainView(Model model) throws Exception {
-    log.debug("/ 호출 시작");
+   // log.debug("/ 호출 시작");
     List<ProductAmtSearchLstOutDto> outDto = productAmtSearchLstService.getListProductAmtSearchLst();
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
@@ -68,7 +67,7 @@ public class MsgMainController {
   //@RequestMapping(value = "/main", method = RequestMethod.POST)
   @RequestMapping(value = "/tttttttttttttttttttttttttttttttttt1")
   public String mainPage(Model model) throws Exception {
-    log.debug("Main Page POST");
+  //  log.debug("Main Page POST");
 
     return "redirect:main";
   }
@@ -76,7 +75,7 @@ public class MsgMainController {
   //@RequestMapping(value = "/main", method = RequestMethod.GET)
   @RequestMapping(value = "/tttttttttttttttttttttttttttttttttt2")
   public String main(Model model) throws Exception {
-    log.debug("Main Page");
+   // log.debug("Main Page");
     List<ProductSearchLstOutDto> outDto = productSearchLstService.getListProductSearchLst();
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
@@ -92,7 +91,7 @@ public class MsgMainController {
   //@RequestMapping(value = "/log", method = RequestMethod.POST)
   @RequestMapping(value = "/tttttttttttttttttttttttttttttttttt3")
   public String logPage(Model model) throws Exception {
-    log.debug("log Page POST");
+  //  log.debug("log Page POST");
 
     return "redirect:log";
   }
@@ -100,7 +99,7 @@ public class MsgMainController {
   //@RequestMapping(value = "/log", method = RequestMethod.GET)
   @RequestMapping(value = "/tttttttttttttttttttttttttttttttttt4")
   public String log(Model model) throws Exception {
-    log.debug("log Page");
+   // log.debug("log Page");
     List<ProductAmtSearchLogOutDto> outDto = productAmtSearchLogService.getListProductAmtSearchLog();
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
@@ -115,7 +114,7 @@ public class MsgMainController {
   
   @RequestMapping(value = "/admin-page-lst")
   public String adminPageLst(Model model, HttpServletRequest request) throws Exception {
-    log.debug("admin Page Lst");
+   // log.debug("admin Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
     List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
@@ -126,14 +125,126 @@ public class MsgMainController {
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
     model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
     model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
     return "admin_page_lst";
   }
   
+  @RequestMapping(value = "/modifyAdminPage")
+  public String modifyAdminPage(Model model, HttpServletRequest request) throws Exception {
+   // log.debug("modifyAdminPage");
+    MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
+    String GBCD = request.getParameter("GBCD");
+    
+    inDto.setDIDX(request.getParameter("DIDX"));
+    
+    inDto.setCOLUMNA1(request.getParameter("COLUMNA1"));
+    inDto.setCOLUMNA2(request.getParameter("COLUMNA2"));
+    inDto.setCOLUMNA3(request.getParameter("COLUMNA3"));
+    inDto.setCOLUMNA4(request.getParameter("COLUMNA4"));
+    inDto.setCOLUMNA5(request.getParameter("COLUMNA5"));
+    inDto.setCOLUMNA6(request.getParameter("COLUMNA6"));
+    inDto.setCOLUMNA7(request.getParameter("COLUMNA7"));
+    inDto.setCOLUMNA8(request.getParameter("COLUMNA8"));
+    inDto.setCOLUMNA9(request.getParameter("COLUMNA9"));
+    inDto.setCOLUMNB1(request.getParameter("COLUMNB1"));
+    inDto.setCOLUMNB2(request.getParameter("COLUMNB2"));
+    inDto.setCOLUMNB3(request.getParameter("COLUMNB3"));
+    inDto.setCOLUMNB4(request.getParameter("COLUMNB4"));
+    inDto.setCOLUMNB5(request.getParameter("COLUMNB5"));
+    inDto.setCOLUMNB6(request.getParameter("COLUMNB6"));
+    inDto.setCOLUMNB7(request.getParameter("COLUMNB7"));
+    inDto.setCOLUMNB8(request.getParameter("COLUMNB8"));
+    inDto.setCOLUMNB9(request.getParameter("COLUMNB9"));
+    inDto.setCOLUMNC1(request.getParameter("COLUMNC1"));
+    inDto.setCOLUMNC2(request.getParameter("COLUMNC2"));
+    inDto.setCOLUMNC3(request.getParameter("COLUMNC3"));
+    inDto.setCOLUMNC4(request.getParameter("COLUMNC4"));
+    inDto.setCOLUMNC5(request.getParameter("COLUMNC5"));
+    inDto.setCOLUMNC6(request.getParameter("COLUMNC6"));
+    inDto.setCOLUMNC7(request.getParameter("COLUMNC7"));
+    inDto.setCOLUMNC8(request.getParameter("COLUMNC8"));
+    inDto.setCOLUMNC9(request.getParameter("COLUMNC9"));
+    inDto.setCOLUMND1(request.getParameter("COLUMND1"));
+    inDto.setCOLUMND2(request.getParameter("COLUMND2"));
+    inDto.setCOLUMND3(request.getParameter("COLUMND3"));
+    inDto.setCOLUMND4(request.getParameter("COLUMND4"));
+    inDto.setCOLUMND5(request.getParameter("COLUMND5"));
+    inDto.setCOLUMND6(request.getParameter("COLUMND6"));
+    
+    // 입력
+    if("I".equals(GBCD)) {
+     // log.debug("입력 호출");
+      mngShopProductTmpTblService.createMngShopProductTmpTbl(inDto);
+    }
+    // 수정
+    else if("U".equals(GBCD)) {
+     // log.debug("수정 호출");
+      mngShopProductTmpTblService.modifyMngShopProductTmpTbl(inDto);
+    }
+    inDto.setCOLUMNA1("");
+    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
+    List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+    
+    model.addAttribute("outDto", outDto);
+    model.addAttribute("shopOutDto", shopOutDto);
+    model.addAttribute("codeOutDto", codeOutDto);
+    model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
+    
+    return "admin_page_lst";
+  }
+
+  @RequestMapping(value = "/removeAdminPage")
+  public String removeAdminPage(Model model, HttpServletRequest request) throws Exception {
+    //log.debug("removeAdminPage");
+    MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
+    
+    inDto.setDIDX(request.getParameter("DIDX1"));
+    
+    // 입력
+    //log.debug("삭제 호출");
+    mngShopProductTmpTblService.removeMngShopProductTmpTbl(inDto);
+
+    inDto.setCOLUMNA1("");
+    inDto.setDIDX("");
+    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
+    List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+    
+    model.addAttribute("outDto", outDto);
+    model.addAttribute("shopOutDto", shopOutDto);
+    model.addAttribute("codeOutDto", codeOutDto);
+    model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
+    
+    return "admin_page_lst";
+  }
+  
+  @RequestMapping(value = "/user-page")
+  public String userPageLst(Model model, HttpServletRequest request) throws Exception {
+   // log.debug("admin Page Lst");
+    MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
+    inDto.setCOLUMNA1(request.getParameter("COL1"));
+    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
+    List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+    
+    model.addAttribute("outDto", outDto);
+    model.addAttribute("shopOutDto", shopOutDto);
+    model.addAttribute("codeOutDto", codeOutDto);
+    model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("searchTxt", inDto.getCOLUMNA1());
+    
+    return "user_page_lst";
+  }
+  
   @RequestMapping(value = "/admin-page-lst-main")
   public String adminPageLstMain(Model model, HttpServletRequest request) throws Exception {
-    log.debug("admin Page Lst Main");
+    //log.debug("admin Page Lst Main");
     /*
      * MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
      * inDto.setCOLUMNA1(request.getParameter("COL1")); List<MngShopProductTmpTblOutDto> outDto =
@@ -151,7 +262,7 @@ public class MsgMainController {
 
   @RequestMapping(value = "")
   public String root(Model model, HttpServletRequest request) throws Exception {
-    log.debug("root Page Lst");
+   // log.debug("root Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
     List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
@@ -161,15 +272,16 @@ public class MsgMainController {
     model.addAttribute("outDto", outDto);
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
-    model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
-    return "nomal_page_lst";
+    return "user_page_lst";
   }
   
   @RequestMapping(value = "/")
   public String nomalPageLst(Model model, HttpServletRequest request) throws Exception {
-    log.debug("nomal Page Lst");
+   // log.debug("nomal Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
     List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
@@ -179,9 +291,10 @@ public class MsgMainController {
     model.addAttribute("outDto", outDto);
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
-    model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     model.addAttribute("headGb", "2");
+    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
-    return "nomal_page_lst";
+    return "user_page_lst";
   }
 }

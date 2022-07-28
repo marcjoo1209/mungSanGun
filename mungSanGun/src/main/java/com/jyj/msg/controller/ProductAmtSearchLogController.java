@@ -18,13 +18,12 @@ import com.jyj.msg.controller.dto.ShopLstOutDto;
 import com.jyj.msg.service.ProductAmtSearchLogService;
 import com.jyj.msg.service.ShopLstService;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @create 2022. 7. 14.
  * @author 주영주
  **/
-@Slf4j
+//@Slf4j
 @RestController
 //@RequestMapping(value = "/api/v1/app/")
 public class ProductAmtSearchLogController {
@@ -34,7 +33,7 @@ public class ProductAmtSearchLogController {
   @RequestMapping(value = "/getlist-product-amt-search-log", method = RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 로그 조회", notes = "상품 대상 리스트 로그 조회")
   public List<ProductAmtSearchLogOutDto> getListProductAmtSearchLog() throws IOException {
-    log.debug("/getlist-product-amt-search-log 호출 시작");
+   // log.debug("/getlist-product-amt-search-log 호출 시작");
     List<ProductAmtSearchLogOutDto> outDto = productAmtSearchLogService.getListProductAmtSearchLog();
 
     return outDto;
@@ -43,7 +42,7 @@ public class ProductAmtSearchLogController {
   @RequestMapping(value = "/get-product-amt-search-log", method = RequestMethod.POST)
   @ApiOperation(value = "상품 대상 로그 조회", notes = "상품 대상 리스트 로그 조회")
   public ProductAmtSearchLogOutDto getProductAmtSearchLog(@RequestBody ProductAmtSearchLogInDto inDto) {
-    log.debug("/get-product-amt-search-log 호출 시작");
+   // log.debug("/get-product-amt-search-log 호출 시작");
     ProductAmtSearchLogOutDto outDto = productAmtSearchLogService.getProductAmtSearchLog(inDto);
     System.out.println(outDto);
     return outDto;
@@ -52,7 +51,7 @@ public class ProductAmtSearchLogController {
   @RequestMapping(value = "/create-product-amt-search-log", method = RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 로그 생성", notes = "상품 대상 리스트 로그 생성")
   public Integer createProductAmtSearchLog(@RequestBody ProductAmtSearchLogInDto inDto) {
-    log.debug("/create-product-amt-search-log 호출 시작");
+   // log.debug("/create-product-amt-search-log 호출 시작");
     Integer outDto = productAmtSearchLogService.createProductAmtSearchLog(inDto);
     return outDto;
 
@@ -61,7 +60,7 @@ public class ProductAmtSearchLogController {
   @RequestMapping(value = "/modify-product-amt-search-log", method = RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 로그 수정", notes = "상품 대상 리스트 로그 수정")
   public Integer modifyProductAmtSearchLog(@RequestBody ProductAmtSearchLogInDto inDto) {
-    log.debug("/modify-product-amt-search-log 호출 시작");
+   // log.debug("/modify-product-amt-search-log 호출 시작");
     Integer outDto = productAmtSearchLogService.modifyProductAmtSearchLog(inDto);
     return outDto;
 
