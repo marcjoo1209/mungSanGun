@@ -62,81 +62,21 @@
 						<tr>
 							<th>순서</th>
 							<th>상품명 </th>
-							<th>롯데온 </th>
-							<th>최저가 </th>
+							<th>가격 </th>
 							<th>참고링크 </th>
-							<th>쿠팡</th>
-							<th>최저가</th>
-							<th>참고링크</th>
-							<th>지마켓</th>
-							<th>최저가</th>
-							<th>링크</th>
-							<th>옥션</th>
-							<th>최저가</th>
-							<th>링크</th>
-							<th>티몬</th>
-							<th>최저가</th>
-							<th>링크</th>
-							<th>인터파크</th>
-							<th>최저가</th>
-							<th>링크</th>
-							<th>SSG</th>
-							<th>최저가</th>
-							<th>링크</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${outDto}" var="list" varStatus="status">
 							<tr>
-								  <td>${list.DIDX }</td>
-								  <td>${list.COLUMNA1}</td>
-								  <td>${list.COLUMNA6}</td>
-								  <td>${list.COLUMNA8}</td>
+								  <td>${list.IDX }</td>
+								  <td>${list.PRODUCTNM}</td>
 								  <td>
-								  	<c:if test="${list.COLUMNA9 ne null && not empty list.COLUMNA9}">
-								  		<a href='${list.COLUMNA9}' target='_blank'>링크</a>
-								  	</c:if>
+								  	${list.LOWAMT}
 								  </td>
-								  <td>${list.COLUMNB1}</td>
-								  <td>${list.COLUMNB3}</td>
 								  <td>
-								  	<c:if test="${list.COLUMNB4 ne null && not empty list.COLUMNB4}">
-								  		<a href='${list.COLUMNB4}' target='_blank'>링크</a>
-								  	</c:if>
-								  </td>
-								  <td>${list.COLUMNB5}</td>
-								  <td>${list.COLUMNB7}</td>
-								  <td>
-								  	<c:if test="${list.COLUMNB8 ne null && not empty list.COLUMNB8}">
-								  		<a href='${list.COLUMNB8}' target='_blank'>링크</a>
-								  	</c:if>
-								  </td>
-								  <td>${list.COLUMNB9}</td>
-								  <td>${list.COLUMNC2}</td>
-								  <td>
-								  	<c:if test="${list.COLUMNC3 ne null && not empty list.COLUMNC3}">
-								  		<a href='${list.COLUMNC3}' target='_blank'>링크</a>
-								  	</c:if>
-								  </td>
-								  <td>${list.COLUMNC4}</td>
-								  <td>${list.COLUMNC6}</td>
-								  <td>
-								  	<c:if test="${list.COLUMNC7 ne null && not empty list.COLUMNC7}">
-								  		<a href='${list.COLUMNC7}' target='_blank'>링크</a>
-								  	</c:if>
-								  </td>
-								  <td>${list.COLUMNC8}</td>
-								  <td>${list.COLUMND1}</td>
-								  <td>
-								  	<c:if test="${list.COLUMND2 ne null && not empty list.COLUMND2}">
-								  		<a href='${list.COLUMND2}' target='_blank'>링크</a>
-								  	</c:if>
-								  </td>
-								  <td>${list.COLUMND3}</td>
-								  <td>${list.COLUMND5}</td>
-								  <td>
-								  	<c:if test="${list.COLUMND6 ne null && not empty list.COLUMND6}">
-								  		<a href='${list.COLUMND6}' target='_blank'>링크</a>
+								  	<c:if test="${list.URL ne null && not empty list.URL}">
+								  		<a href='${list.URL}' target='_blank'>링크</a>
 								  	</c:if>
 								  </td>
 							</tr>

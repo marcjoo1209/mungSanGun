@@ -15,35 +15,35 @@
 			  , COLUMNA5
 			  , COLUMNA6
 			  , COLUMNA7
-			  , COLUMNA8
+			  , IFNULL(COLUMNA8, 0)
 			  , COLUMNA9
 			  , COLUMNB1
 			  , COLUMNB2
-			  , COLUMNB3
+			  , IFNULL(COLUMNB3, 0)
 			  , COLUMNB4
 			  , COLUMNB5
 			  , COLUMNB6
-			  , COLUMNB7
+			  , IFNULL(COLUMNB7, 0)
 			  , COLUMNB8
 			  , COLUMNB9
 			  , COLUMNC1
-			  , COLUMNC2
+			  , IFNULL(COLUMNC2, 0)
 			  , COLUMNC3
 			  , COLUMNC4
 			  , COLUMNC5
-			  , COLUMNC6
+			  , IFNULL(COLUMNC6, 0)
 			  , COLUMNC7
 			  , COLUMNC8
 			  , COLUMNC9
-			  , COLUMND1
+			  , IFNULL(COLUMND1, 0)
 			  , COLUMND2
 			  , COLUMND3
 			  , COLUMND4
-			  , COLUMND5
+			  , IFNULL(COLUMND5, 0)
 			  , COLUMND6
 			  , COLUMND7
 			  , COLUMND8
-			  , COLUMND9
+			  , IFNULL(COLUMND9, 0)
 			  , COLUMNE1
 			  , COLUMNE2
 			  , COLUMNE3

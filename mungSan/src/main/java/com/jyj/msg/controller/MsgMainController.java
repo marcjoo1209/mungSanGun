@@ -5,6 +5,7 @@
  **/
 package com.jyj.msg.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import com.jyj.msg.controller.dto.ProductAmtSearchLogOutDto;
 import com.jyj.msg.controller.dto.ProductAmtSearchLstOutDto;
 import com.jyj.msg.controller.dto.ProductSearchLstOutDto;
 import com.jyj.msg.controller.dto.ShopLstOutDto;
+import com.jyj.msg.controller.dto.UserPageLstOutDto;
 import com.jyj.msg.service.CodeLstService;
 import com.jyj.msg.service.MngShopProductTmpTblService;
 import com.jyj.msg.service.ProductAmtSearchLogService;
@@ -230,15 +232,122 @@ public class MsgMainController {
    // log.debug("admin Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
-    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<MngShopProductTmpTblOutDto> outList = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+
+    UserPageLstOutDto pageOutDto = new UserPageLstOutDto();
+    List<UserPageLstOutDto> pageOutDtoList = new ArrayList<UserPageLstOutDto>();
+    for(MngShopProductTmpTblOutDto outDto : outList) {
+      pageOutDto = new UserPageLstOutDto();
+      
+      // 최소가격 확인
+      int col1 = -1;
+      int col2 = -1;
+      int col3 = -1;
+      int col4 = -1;
+      int col5 = -1;
+      int col6 = -1;
+      int col7 = -1;
+      if(outDto.getCOLUMNA8() != null) {
+        col1 = Integer.parseInt(outDto.getCOLUMNA8());
+      } else {
+        col1 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB3() != null) {
+        col2 = Integer.parseInt(outDto.getCOLUMNB3());
+      } else {
+        col2 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB7() != null) {
+        col3 = Integer.parseInt(outDto.getCOLUMNB7());
+      } else {
+        col3 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC2() != null) {
+        col4 = Integer.parseInt(outDto.getCOLUMNC2());
+      } else {
+        col4 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC6() != null) {
+        col5 = Integer.parseInt(outDto.getCOLUMNC6());
+      } else {
+        col5 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND1() != null) {
+        col6 = Integer.parseInt(outDto.getCOLUMND1());
+      } else {
+        col6 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND5() != null) {
+        col7 = Integer.parseInt(outDto.getCOLUMND5());
+      } else {
+        col7 = 100000000;
+      }
+      
+      int lowAmtTmp = -1;
+      String lowAmt = "";
+      String urlTmp = "";
+      
+      if(col1 < col2) {
+        lowAmtTmp = col1;
+        urlTmp    = outDto.getCOLUMNA9();
+      }else {
+        lowAmtTmp = col2;
+        urlTmp    = outDto.getCOLUMNB4();
+      }
+      
+      if(lowAmtTmp > col3) {
+        lowAmtTmp = col3;
+        urlTmp    = outDto.getCOLUMNB8();
+      }
+      
+      if(lowAmtTmp > col4) {
+        lowAmtTmp = col4;
+        urlTmp    = outDto.getCOLUMNC3();
+      }
+      
+      if(lowAmtTmp > col5) {
+        lowAmtTmp = col5;
+        urlTmp    = outDto.getCOLUMNC7();
+      }
+      
+      if(lowAmtTmp > col6) {
+        lowAmtTmp = col6;
+        urlTmp    = outDto.getCOLUMND2();
+      }
+      
+      if(lowAmtTmp > col7) {
+        lowAmtTmp = col7;
+        urlTmp    = outDto.getCOLUMND6();
+      }
+      
+      if(lowAmtTmp == 100000000) {
+        lowAmtTmp = 0;
+        urlTmp = "";
+      }
+
+      lowAmt = Integer.toString(lowAmtTmp);
+      
+      pageOutDto.setPRODUCTNM(outDto.getCOLUMNA1());
+      pageOutDto.setIDX(outDto.getDIDX());
+      pageOutDto.setLOWAMT(lowAmt);
+      pageOutDto.setURL(urlTmp);
+      
+      pageOutDtoList.add(pageOutDto);
+    }
     
-    model.addAttribute("outDto", outDto);
+    model.addAttribute("outDto", pageOutDtoList);
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
     model.addAttribute("headGb", "2");
-    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("list2cnt", pageOutDtoList.size());
     model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
     return "jsp/user_page_lst";
@@ -267,15 +376,122 @@ public class MsgMainController {
    // log.debug("root Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
-    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<MngShopProductTmpTblOutDto> outList = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+
+    UserPageLstOutDto pageOutDto = new UserPageLstOutDto();
+    List<UserPageLstOutDto> pageOutDtoList = new ArrayList<UserPageLstOutDto>();
+    for(MngShopProductTmpTblOutDto outDto : outList) {
+      pageOutDto = new UserPageLstOutDto();
+      
+      // 최소가격 확인
+      int col1 = -1;
+      int col2 = -1;
+      int col3 = -1;
+      int col4 = -1;
+      int col5 = -1;
+      int col6 = -1;
+      int col7 = -1;
+      if(outDto.getCOLUMNA8() != null) {
+        col1 = Integer.parseInt(outDto.getCOLUMNA8());
+      } else {
+        col1 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB3() != null) {
+        col2 = Integer.parseInt(outDto.getCOLUMNB3());
+      } else {
+        col2 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB7() != null) {
+        col3 = Integer.parseInt(outDto.getCOLUMNB7());
+      } else {
+        col3 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC2() != null) {
+        col4 = Integer.parseInt(outDto.getCOLUMNC2());
+      } else {
+        col4 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC6() != null) {
+        col5 = Integer.parseInt(outDto.getCOLUMNC6());
+      } else {
+        col5 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND1() != null) {
+        col6 = Integer.parseInt(outDto.getCOLUMND1());
+      } else {
+        col6 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND5() != null) {
+        col7 = Integer.parseInt(outDto.getCOLUMND5());
+      } else {
+        col7 = 100000000;
+      }
+      
+      int lowAmtTmp = -1;
+      String lowAmt = "";
+      String urlTmp = "";
+      
+      if(col1 < col2) {
+        lowAmtTmp = col1;
+        urlTmp    = outDto.getCOLUMNA9();
+      }else {
+        lowAmtTmp = col2;
+        urlTmp    = outDto.getCOLUMNB4();
+      }
+      
+      if(lowAmtTmp > col3) {
+        lowAmtTmp = col3;
+        urlTmp    = outDto.getCOLUMNB8();
+      }
+      
+      if(lowAmtTmp > col4) {
+        lowAmtTmp = col4;
+        urlTmp    = outDto.getCOLUMNC3();
+      }
+      
+      if(lowAmtTmp > col5) {
+        lowAmtTmp = col5;
+        urlTmp    = outDto.getCOLUMNC7();
+      }
+      
+      if(lowAmtTmp > col6) {
+        lowAmtTmp = col6;
+        urlTmp    = outDto.getCOLUMND2();
+      }
+      
+      if(lowAmtTmp > col7) {
+        lowAmtTmp = col7;
+        urlTmp    = outDto.getCOLUMND6();
+      }
+      
+      if(lowAmtTmp == 100000000) {
+        lowAmtTmp = 0;
+        urlTmp = "";
+      }
+
+      lowAmt = Integer.toString(lowAmtTmp);
+      
+      pageOutDto.setPRODUCTNM(outDto.getCOLUMNA1());
+      pageOutDto.setIDX(outDto.getDIDX());
+      pageOutDto.setLOWAMT(lowAmt);
+      pageOutDto.setURL(urlTmp);
+      
+      pageOutDtoList.add(pageOutDto);
+    }
     
-    model.addAttribute("outDto", outDto);
+    model.addAttribute("outDto", pageOutDtoList);
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
     model.addAttribute("headGb", "2");
-    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("list2cnt", pageOutDtoList.size());
     model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
     return "jsp/user_page_lst";
@@ -286,15 +502,122 @@ public class MsgMainController {
    // log.debug("nomal Page Lst");
     MngShopProductTmpTblInDto inDto = new MngShopProductTmpTblInDto();
     inDto.setCOLUMNA1(request.getParameter("COL1"));
-    List<MngShopProductTmpTblOutDto> outDto = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
+    List<MngShopProductTmpTblOutDto> outList = mngShopProductTmpTblService.getListMngShopProductTmpTbl(inDto);
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     List<CodeLstOutDto> codeOutDto = codeLstService.getListCodeLst();
+
+    UserPageLstOutDto pageOutDto = new UserPageLstOutDto();
+    List<UserPageLstOutDto> pageOutDtoList = new ArrayList<UserPageLstOutDto>();
+    for(MngShopProductTmpTblOutDto outDto : outList) {
+      pageOutDto = new UserPageLstOutDto();
+      
+      // 최소가격 확인
+      int col1 = -1;
+      int col2 = -1;
+      int col3 = -1;
+      int col4 = -1;
+      int col5 = -1;
+      int col6 = -1;
+      int col7 = -1;
+      if(outDto.getCOLUMNA8() != null) {
+        col1 = Integer.parseInt(outDto.getCOLUMNA8());
+      } else {
+        col1 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB3() != null) {
+        col2 = Integer.parseInt(outDto.getCOLUMNB3());
+      } else {
+        col2 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNB7() != null) {
+        col3 = Integer.parseInt(outDto.getCOLUMNB7());
+      } else {
+        col3 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC2() != null) {
+        col4 = Integer.parseInt(outDto.getCOLUMNC2());
+      } else {
+        col4 = 100000000;
+      }
+      
+      if(outDto.getCOLUMNC6() != null) {
+        col5 = Integer.parseInt(outDto.getCOLUMNC6());
+      } else {
+        col5 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND1() != null) {
+        col6 = Integer.parseInt(outDto.getCOLUMND1());
+      } else {
+        col6 = 100000000;
+      }
+      
+      if(outDto.getCOLUMND5() != null) {
+        col7 = Integer.parseInt(outDto.getCOLUMND5());
+      } else {
+        col7 = 100000000;
+      }
+      
+      int lowAmtTmp = -1;
+      String lowAmt = "";
+      String urlTmp = "";
+      
+      if(col1 < col2) {
+        lowAmtTmp = col1;
+        urlTmp    = outDto.getCOLUMNA9();
+      }else {
+        lowAmtTmp = col2;
+        urlTmp    = outDto.getCOLUMNB4();
+      }
+      
+      if(lowAmtTmp > col3) {
+        lowAmtTmp = col3;
+        urlTmp    = outDto.getCOLUMNB8();
+      }
+      
+      if(lowAmtTmp > col4) {
+        lowAmtTmp = col4;
+        urlTmp    = outDto.getCOLUMNC3();
+      }
+      
+      if(lowAmtTmp > col5) {
+        lowAmtTmp = col5;
+        urlTmp    = outDto.getCOLUMNC7();
+      }
+      
+      if(lowAmtTmp > col6) {
+        lowAmtTmp = col6;
+        urlTmp    = outDto.getCOLUMND2();
+      }
+      
+      if(lowAmtTmp > col7) {
+        lowAmtTmp = col7;
+        urlTmp    = outDto.getCOLUMND6();
+      }
+      
+      if(lowAmtTmp == 100000000) {
+        lowAmtTmp = 0;
+        urlTmp = "";
+      }
+
+      lowAmt = Integer.toString(lowAmtTmp);
+      
+      pageOutDto.setPRODUCTNM(outDto.getCOLUMNA1());
+      pageOutDto.setIDX(outDto.getDIDX());
+      pageOutDto.setLOWAMT(lowAmt);
+      pageOutDto.setURL(urlTmp);
+      
+      pageOutDtoList.add(pageOutDto);
+    }
     
-    model.addAttribute("outDto", outDto);
+    model.addAttribute("outDto", pageOutDtoList);
     model.addAttribute("shopOutDto", shopOutDto);
     model.addAttribute("codeOutDto", codeOutDto);
     model.addAttribute("headGb", "2");
-    model.addAttribute("list2cnt", outDto.size());
+    model.addAttribute("list2cnt", pageOutDtoList.size());
     model.addAttribute("searchTxt", inDto.getCOLUMNA1());
     
     return "jsp/user_page_lst";

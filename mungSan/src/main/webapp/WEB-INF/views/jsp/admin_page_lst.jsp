@@ -135,27 +135,27 @@ th     { background:#eee; }
 								  <td><input id = 'COLUMNA8${list.DIDX}' type='number' 	value='${list.COLUMNA8}'/></td>
 								  <td><input id = 'COLUMNA9${list.DIDX}' type='text' 	value='${list.COLUMNA9}'/></td>
 								  <td><input id = 'COLUMNB1${list.DIDX}' type='text' 	value='${list.COLUMNB1}'/></td>
-								  <td><input id = 'COLUMNB2${list.DIDX}' type='number' 	value='${list.COLUMNB2}'/></td>
+								  <td><input id = 'COLUMNB2${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNB2}'/></td>
 								  <td><input id = 'COLUMNB3${list.DIDX}' type='number' 	value='${list.COLUMNB3}'/></td>
 								  <td><input id = 'COLUMNB4${list.DIDX}' type='text' 	value='${list.COLUMNB4}'/></td>
 								  <td><input id = 'COLUMNB5${list.DIDX}' type='text' 	value='${list.COLUMNB5}'/></td>
-								  <td><input id = 'COLUMNB6${list.DIDX}' type='number' 	value='${list.COLUMNB6}'/></td>
+								  <td><input id = 'COLUMNB6${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNB6}'/></td>
 								  <td><input id = 'COLUMNB7${list.DIDX}' type='number' 	value='${list.COLUMNB7}'/></td>
 								  <td><input id = 'COLUMNB8${list.DIDX}' type='text' 	value='${list.COLUMNB8}'/></td>
 								  <td><input id = 'COLUMNB9${list.DIDX}' type='text' 	value='${list.COLUMNB9}'/></td>
-								  <td><input id = 'COLUMNC1${list.DIDX}' type='number' 	value='${list.COLUMNC1}'/></td>
+								  <td><input id = 'COLUMNC1${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC1}'/></td>
 								  <td><input id = 'COLUMNC2${list.DIDX}' type='number' 	value='${list.COLUMNC2}'/></td>
 								  <td><input id = 'COLUMNC3${list.DIDX}' type='text' 	value='${list.COLUMNC3}'/></td>
 								  <td><input id = 'COLUMNC4${list.DIDX}' type='text' 	value='${list.COLUMNC4}'/></td>
-								  <td><input id = 'COLUMNC5${list.DIDX}' type='number' 	value='${list.COLUMNC5}'/></td>
+								  <td><input id = 'COLUMNC5${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC5}'/></td>
 								  <td><input id = 'COLUMNC6${list.DIDX}' type='number' 	value='${list.COLUMNC6}'/></td>
 								  <td><input id = 'COLUMNC7${list.DIDX}' type='text' 	value='${list.COLUMNC7}'/></td>
 								  <td><input id = 'COLUMNC8${list.DIDX}' type='text' 	value='${list.COLUMNC8}'/></td>
-								  <td><input id = 'COLUMNC9${list.DIDX}' type='number' 	value='${list.COLUMNC9}'/></td>
+								  <td><input id = 'COLUMNC9${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC9}'/></td>
 								  <td><input id = 'COLUMND1${list.DIDX}' type='number' 	value='${list.COLUMND1}'/></td>
 								  <td><input id = 'COLUMND2${list.DIDX}' type='text' 	value='${list.COLUMND2}'/></td>
 								  <td><input id = 'COLUMND3${list.DIDX}' type='text' 	value='${list.COLUMND3}'/></td>
-								  <td><input id = 'COLUMND4${list.DIDX}' type='number' 	value='${list.COLUMND4}'/></td>
+								  <td><input id = 'COLUMND4${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMND4}'/></td>
 								  <td><input id = 'COLUMND5${list.DIDX}' type='number' 	value='${list.COLUMND5}'/></td>
 								  <td><input id = 'COLUMND6${list.DIDX}' type='text' 	value='${list.COLUMND6}'/></td>
 								<td>
@@ -465,7 +465,7 @@ th     { background:#eee; }
 			+ "	  <td><input id = 'COLUMNA1T' type='text' 		value=''/></td>                                                                  "
 			+ "	  <td><input id = 'COLUMNA2T' type='number' 	value=''/></td>                                                                  "
 			+ "	  <td><input id = 'COLUMNA3T' type='number' 	value=''/></td>                                                                  "
-			+ "	  <td><input id = 'COLUMNA4T' type='number' 	value=''/></td>                                                                  "
+			+ "	  <td><input id = 'COLUMNA4T' type='number' 	value='0.88'/></td>                                                                  "
 			+ "	  <td><input id = 'COLUMNA5T' type='number' 	value=''/></td>                                                                  "
 			+ "	  <td><input id = 'COLUMNA6T' type='text' 		value=''/></td>                                                                  "
 			+ "	  <td><input id = 'COLUMNA7T' type='number' 	value=''/></td>                                                                  "
