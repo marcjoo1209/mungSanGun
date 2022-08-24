@@ -42,9 +42,23 @@
 table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
-</style>
-<body>
 
+
+/* hide Arrows*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+<body onload="inputSizeAuto()">
+		<div id='inputTmp'></div>
 		<div class="page-header">
 			<h2>상품 관리 페이지</h2>
 		</div>
@@ -123,39 +137,84 @@ th     { background:#eee; }
 					</thead>
 					<tbody>
 						<c:forEach items="${outDto}" var="list" varStatus="status">
+							<!-- 정산가 : 판매가 * 수수료 + 배송비 * 0.967 -->
+							<c:set var='totAmt' value='${(list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)}'/>
+							<c:set var='totAmt0' value='${totAmt - list.COLUMNA6}'/>
+							<c:set var='totAmt1' value='${totAmt - list.COLUMNB2}'/>
+							<c:set var='totAmt2' value='${totAmt - list.COLUMNB6}'/>
+							<c:set var='totAmt3' value='${totAmt - list.COLUMNC1}'/>
+							<c:set var='totAmt4' value='${totAmt - list.COLUMNC5}'/>
+							<c:set var='totAmt5' value='${totAmt - list.COLUMNC9}'/>
+							<c:set var='totAmt6' value='${totAmt - list.COLUMND4}'/>
+							
+							<c:set var='totAmtP' value='${totAmt-(totAmt%1)}'/>
+							<c:set var='totAmtP0' value='${totAmt0-(totAmt0%1)}'/>
+							<c:set var='totAmtP1' value='${totAmt1-(totAmt1%1)}'/>
+							<c:set var='totAmtP2' value='${totAmt2-(totAmt2%1)}'/>
+							<c:set var='totAmtP3' value='${totAmt3-(totAmt3%1)}'/>
+							<c:set var='totAmtP4' value='${totAmt4-(totAmt4%1)}'/>
+							<c:set var='totAmtP5' value='${totAmt5-(totAmt5%1)}'/>
+							<c:set var='totAmtP6' value='${totAmt6-(totAmt6%1)}'/>
+							
+							
 							<tr>
+								<!--순서-->
 								  <td>${list.DIDX }</td>
+								<!--상품명-->
 								  <td><input id = 'COLUMNA1${list.DIDX}' type='text' 	value='${list.COLUMNA1}'/></td>
+								<!--판매가-->
 								  <td><input id = 'COLUMNA2${list.DIDX}' type='number' 	value='${list.COLUMNA2}'/></td>
+								<!--배송비-->
 								  <td><input id = 'COLUMNA3${list.DIDX}' type='number' 	value='${list.COLUMNA3}'/></td>
+								<!--수수료-->
 								  <td><input id = 'COLUMNA4${list.DIDX}' type='number' 	value='${list.COLUMNA4}'/></td>
-								  <td><input id = 'COLUMNA5${list.DIDX}' type='number' 	value='${(list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)}'/></td>
+								<!--정산가-->
+								  <td>
+								  	<input id = 'COLUMNA5${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP }' />"/>
+								  </td>
+								<!--롯데온-->
 								  <td><input id = 'COLUMNA6${list.DIDX}' type='text' 	value='${list.COLUMNA6}'/></td>
-								  <td><input id = 'COLUMNA7${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNA6}'/></td>
+								<!--마진-->
+								  <td>
+								  	<input id = 'COLUMNA7${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP0 }' />"/>
+								  </td>
+								<!--최저가-->
 								  <td><input id = 'COLUMNA8${list.DIDX}' type='number' 	value='${list.COLUMNA8}'/></td>
 								  <td><input id = 'COLUMNA9${list.DIDX}' type='text' 	value='${list.COLUMNA9}'/></td>
 								  <td><input id = 'COLUMNB1${list.DIDX}' type='text' 	value='${list.COLUMNB1}'/></td>
-								  <td><input id = 'COLUMNB2${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNB2}'/></td>
+								  <td>
+								  	<input id = 'COLUMNB2${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP1 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMNB3${list.DIDX}' type='number' 	value='${list.COLUMNB3}'/></td>
 								  <td><input id = 'COLUMNB4${list.DIDX}' type='text' 	value='${list.COLUMNB4}'/></td>
 								  <td><input id = 'COLUMNB5${list.DIDX}' type='text' 	value='${list.COLUMNB5}'/></td>
-								  <td><input id = 'COLUMNB6${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNB6}'/></td>
+								  <td>
+								  	<input id = 'COLUMNB6${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP2 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMNB7${list.DIDX}' type='number' 	value='${list.COLUMNB7}'/></td>
 								  <td><input id = 'COLUMNB8${list.DIDX}' type='text' 	value='${list.COLUMNB8}'/></td>
 								  <td><input id = 'COLUMNB9${list.DIDX}' type='text' 	value='${list.COLUMNB9}'/></td>
-								  <td><input id = 'COLUMNC1${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC1}'/></td>
+								  <td>
+								  	<input id = 'COLUMNC1${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP3 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMNC2${list.DIDX}' type='number' 	value='${list.COLUMNC2}'/></td>
 								  <td><input id = 'COLUMNC3${list.DIDX}' type='text' 	value='${list.COLUMNC3}'/></td>
 								  <td><input id = 'COLUMNC4${list.DIDX}' type='text' 	value='${list.COLUMNC4}'/></td>
-								  <td><input id = 'COLUMNC5${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC5}'/></td>
+								  <td>
+								  	<input id = 'COLUMNC5${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP4 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMNC6${list.DIDX}' type='number' 	value='${list.COLUMNC6}'/></td>
 								  <td><input id = 'COLUMNC7${list.DIDX}' type='text' 	value='${list.COLUMNC7}'/></td>
 								  <td><input id = 'COLUMNC8${list.DIDX}' type='text' 	value='${list.COLUMNC8}'/></td>
-								  <td><input id = 'COLUMNC9${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMNC9}'/></td>
+								  <td>
+								  	<input id = 'COLUMNC9${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP5 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMND1${list.DIDX}' type='number' 	value='${list.COLUMND1}'/></td>
 								  <td><input id = 'COLUMND2${list.DIDX}' type='text' 	value='${list.COLUMND2}'/></td>
 								  <td><input id = 'COLUMND3${list.DIDX}' type='text' 	value='${list.COLUMND3}'/></td>
-								  <td><input id = 'COLUMND4${list.DIDX}' type='number' 	value='${((list.COLUMNA2 * list.COLUMNA4)+(list.COLUMNA3 * 0.967)) - list.COLUMND4}'/></td>
+								  <td>
+								  	<input id = 'COLUMND4${list.DIDX}' type='number' 	value="<fmt:formatNumber type='number' pattern='##################' value='${totAmtP6 }' />"/>
+								  </td>
 								  <td><input id = 'COLUMND5${list.DIDX}' type='number' 	value='${list.COLUMND5}'/></td>
 								  <td><input id = 'COLUMND6${list.DIDX}' type='text' 	value='${list.COLUMND6}'/></td>
 								<td>
@@ -676,6 +735,76 @@ th     { background:#eee; }
   	            return XLSX.utils.table_to_sheet(this.getExcelData());
   	        }
   	}
+  	
+  	function inputSizeAuto(){
+  		debugger;
+  		var get_text_input = $("#itemTable input[type=text]");
+  		var get_number_input = $("#itemTable input[type=number]");
+  		/*
+  		console.log(get_text_input);
+  		console.log('이녀석 타입은 뭐야? ' + typeof (get_text_input)); // object
+  		console.log('이녀석 Array이니? ' + Array.isArray(get_text_input)); //false
+  		console.log(get_number_input);
+  		console.log('이녀석 타입은 뭐야? ' + typeof (get_number_input)); // object
+  		console.log('이녀석 Array이니? ' + Array.isArray(get_number_input)); //false
+  		*/
+  		$.each(get_text_input, function (index, value) {
+  			/*
+  			console.log('인덱스값:' + index);
+  			console.log(value);
+  			console.log('id =' + $(value).attr("id"));
+  			console.log('name =' + $(value).attr("name"));
+  			console.log('value =' + $(value).val());
+  			*/
+  			if(value.value.length > 0){
+  				/*
+  				//console.log('==============================');
+  				let valuetmp = $(value).val();
+  				//console.log('valuetmp =' + valuetmp);
+  				$("#inputTmp").append('<span id="virtual_dom">' + valuetmp + '</span>');
+  				let inputWidth =  $('#virtual_dom').width(); // 글자 하나의 대략적인 크기
+  				//console.log('inputWidth =' + inputWidth);
+  				$(value).css('width', inputWidth)
+  			  	$('#virtual_dom').remove();
+  				//console.log('==============================');
+  				*/
+  				value.style.width = (value.value.length+1) + 'em';
+  			} else {
+  				value.style.width = 5 + 'em';
+  			}
+  		});
+  		$.each(get_number_input, function (index, value) {
+  			/*
+  			console.log('인덱스값:' + index);
+  			console.log(value);
+  			console.log('id =' + $(value).attr("id"));
+  			console.log('name =' + $(value).attr("name"));
+  			console.log('value =' + $(value).val());
+  			*/
+  			if(value.value.length > 0){
+  				/*
+  				//console.log('==============================');
+  				let valuetmp = $(value).val();
+  				//console.log('valuetmp =' + valuetmp);
+  				$("#inputTmp").append('<span id="virtual_dom">' + valuetmp + '</span>');
+  				let inputWidth =  $('#virtual_dom').width(); // 글자 하나의 대략적인 크기
+  				//console.log('inputWidth =' + inputWidth);
+  				$(value).css('width', inputWidth)
+  			  	$('#virtual_dom').remove();
+  				//console.log('==============================');
+  				*/
+  				value.style.width = (value.value.length+1) + 'em';
+  			} else {
+  				value.style.width = 5 + 'em';
+  			}
+  		});
+  	}
+
+  	// input 값 변경 될 경우 input size 자동 변경
+  	$("input").change(function(){    //실행할 내용
+  		this.style.width = (this.value.length + 1) + 'em';
+  		
+  	});
   	
   	$(document).ready(function() { 
   	});

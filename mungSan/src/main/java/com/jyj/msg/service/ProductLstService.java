@@ -17,7 +17,9 @@ public interface ProductLstService {
 
   ProductLstOutDto getProductLst(ProductLstInDto inDto);
   
-  List<ProductLstOutDto> getListProductLst();
+  List<ProductLstOutDto> getListProductLst(ProductLstInDto inDto);
+
+  List<ProductLstOutDto> getListProductLstLowPrice(ProductLstInDto inDto);
   
   Integer createProductLst(ProductLstInDto inDto);
 

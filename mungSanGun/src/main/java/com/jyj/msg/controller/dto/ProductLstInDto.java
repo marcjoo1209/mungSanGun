@@ -46,6 +46,18 @@ public class ProductLstInDto {
   
   @ApiModelProperty(value = "수정일자", example = "yyyymmdd")
   private String AUDITDTM;
+  
+  @ApiModelProperty(value = "정렬구분", example = "yyyymmdd")
+  private String PRODUCTNMDESC;
+
+  
+  public String getPRODUCTNMDESC() {
+    return PRODUCTNMDESC;
+  }
+
+  public void setPRODUCTNMDESC(String pRODUCTNMDESC) {
+    PRODUCTNMDESC = pRODUCTNMDESC;
+  }
 
   public String getIDX() {
     return IDX;

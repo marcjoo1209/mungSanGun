@@ -9,6 +9,10 @@
         	, AUDITDTM
         	, AUDITID
         	, SHOPNM
+        	, ID
+        	, PWD
+        	, TOKENID
+        	, URL
         FROM shop_lst
         WHERE 1 = 1
 	</select>
@@ -21,6 +25,10 @@
         	, AUDITDTM
         	, AUDITID
         	, SHOPNM
+        	, ID
+        	, PWD
+        	, TOKENID
+        	, URL
         )
         VALUES
         (
@@ -35,6 +43,10 @@
         	, sysdate()
         	, #{AUDITID}
         	, #{SHOPNM}
+        	, #{ID}
+        	, #{PWD}
+        	, #{TOKENID}
+        	, #{URL}
         )
 	</insert>
 
@@ -44,6 +56,15 @@
         	AUDITDTM		= sysdate()
         	, AUDITID		= #{AUDITID}
         	, SHOPNM		= #{SHOPNM}
+        	, ID			= #{ID}
+        	, PWD			= #{PWD}
+        	, TOKENID		= #{TOKENID}
+        	, URL			= #{URL}
+        WHERE IDX			= #{IDX}
+	</update>
+
+    <update id="removeShopLst">
+        DELETE FROM shop_lst
         WHERE IDX			= #{IDX}
 	</update>
 

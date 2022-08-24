@@ -4,77 +4,173 @@
 
     <select id="getListProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
         SELECT
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTNM
-        	, CARDAMT
-        	, COUPONAMT
-        	, NOMALAMT
-        	, LOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
         FROM product_lst
         WHERE 1 		= 1
           AND USEYN 	= 'Y'
+		  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+		  AND PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+		  </if>
+		  <if test="IDX != null and IDX != ''" >
+		  AND IDX = #{IDX}
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'ASC'">
+		  ORDER BY PRODUCTNMDESC ASC
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'DESC'">
+		  ORDER BY PRODUCTNMDESC DESC
+		  </if>
+		  <if test="PRODUCTNMDESC == null or PRODUCTNMDESC.equals('')" >
+		  ORDER BY CAST(IDX as unsigned)
+		  </if>
 	</select>
 
+    <select id="getListProductLstLowPrice" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	pl.IDX,
+			pl.PRODUCTNM,
+			pl.IMGURL,
+			IFNULL(pdl.DTLNOMALAMT, 0) as NOMALAMT,
+			IFNULL(pdl.DTLSHIPAMT, 0) as SHIPAMT,
+			IFNULL(pdl.DTLCOMMITIONAMT, 0) as COMMITIONAMT,
+			IFNULL(pdl.DTLCALCAMT, 0) as CALCAMT,
+			IFNULL(pdl.DTLPAYAMT, 0) as PAYAMT,
+			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
+			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
+			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK,
+			USEYN,
+			pl.CREATEDTM,
+			pl.AUDITDTM,
+			pl.AUDITID,
+			pl.MEMO,
+			pl.LEADAMT
+        FROM product_lst pl
+        LEFT OUTER JOIN (select 
+        			b.productidx,
+        			b.IDX ,
+        			b.SHOPIDX ,
+        			b.DTLNOMALAMT ,
+        			b.DTLSHIPAMT ,
+        			b.DTLCOMMITIONAMT ,
+        			b.DTLCALCAMT ,
+        			b.DTLPAYAMT ,
+        			b.DTLINCOMMAMT ,
+        			b.DTLLOWAMT ,
+        			b.DTLPRODUCTLINK 
+        		 from product_dtl_lst b
+				where (b.productidx, b.DTLNOMALAMT) in (
+					SELECT 
+						a.PRODUCTIDX 
+						, MIN(CAST(a.DTLNOMALAMT as unsigned))
+					FROM product_dtl_lst a
+					where useyn = 'Y' 
+					GROUP BY a.PRODUCTIDX
+					)
+				) pdl
+        ON pl.IDX = pdl.PRODUCTIDX
+        where USEYN = 'Y'
+		  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+		  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+		  </if>
+		  <if test="IDX != null and IDX != ''" >
+		  AND pl.IDX = #{IDX}
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'ASC'">
+		  ORDER BY pl.PRODUCTNMDESC ASC
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'DESC'">
+		  ORDER BY pl.PRODUCTNMDESC DESC
+		  </if>
+		  <if test="PRODUCTNMDESC == null or PRODUCTNMDESC.equals('')" >
+		  ORDER BY CAST(pl.IDX as unsigned)
+		  </if>
+	</select>
+	
     <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
         SELECT
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTNM
-        	, CARDAMT
-        	, COUPONAMT
-        	, NOMALAMT
-        	, LOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
         FROM product_lst
         WHERE 1 		= 1
           AND USEYN 	= 'Y'
-		  <if test="SHOPIDX != null and SHOPIDX != ''" >
-		  AND SHOPIDX = #{SHOPIDX}
-		  </if>
 	</select>
 
     <select id="getProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
         SELECT
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTNM
-        	, CARDAMT
-        	, COUPONAMT
-        	, NOMALAMT
-        	, LOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
         FROM product_lst
         WHERE 1 		= 1
           AND USEYN 	= 'Y'
           AND IDX		= #{IDX}
-          AND SHOPIDX	= #{SHOPIDX}
 	</select>
 
     <insert id="createProductLst">
         INSERT INTO product_lst
         (
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTNM
-        	, CARDAMT
-        	, COUPONAMT
-        	, NOMALAMT
-        	, LOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
         )
         VALUES
         (
@@ -86,32 +182,49 @@
         		) , 0
         	) +1)
         	, #{PRODUCTNM}
-        	, IFNULL(#{CARDAMT}, '0')
-        	, IFNULL(#{COUPONAMT}, '0')
+        	, #{IMGURL}
         	, IFNULL(#{NOMALAMT}, '0')
-        	, IFNULL(#{LOWAMT}, '99999999999999999999')
-        	, #{USEYN}
-        	, #{CREATEDTM}
-        	, #{AUDITID}
-        	, #{AUDITDTM}
-        	, #{AUDITID}
+        	, IFNULL(#{SHIPAMT}, '0')
+        	, IFNULL(#{COMMITIONAMT}, '0')
+        	, IFNULL(#{CALCAMT}, '0')
+        	, IFNULL(#{PAYAMT}, '0')
+        	, IFNULL(#{INCOMEAMT}, '0')
+        	, IFNULL(#{LOWAMT}, '0')
+        	, #{PRODUCTLINK}
+        	, 'Y'
         	, CURRENT_TIMESTAMP(6)
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        	, #{MEMO}
+        	, #{LEADAMT}
         )
 	</insert>
 
     <update id="modifyProductLst">
         UPDATE product_lst
         SET
-        	PRODUCTNM		= #{PRODUCTNM}
-        	, CARDAMT		= IFNULL(#{CARDAMT}, '0')
-        	, COUPONAMT		= IFNULL(#{COUPONAMT}, '0')
-        	, NOMALAMT		= IFNULL(#{NOMALAMT}, '0')
-        	, LOWAMT		= IFNULL(#{LOWAMT}, '99999999999999999999')
-        	, USEYN			= #{USEYN}
-        	, AUDITID		= #{AUDITID}
-        	, AUDITDTM		= CURRENT_TIMESTAMP(6)
-        WHERE IDX			= #{IDX}
-          AND SHOPIDX		= #{SHOPIDX}
+			PRODUCTNM 		= #{PRODUCTNM},
+			IMGURL 			= #{IMGURL},
+			NOMALAMT 		= #{NOMALAMT},
+			SHIPAMT 		= #{SHIPAMT},
+			COMMITIONAMT 	= #{COMMITIONAMT},
+			CALCAMT 		= #{CALCAMT},
+			PAYAMT 			= #{PAYAMT},
+			INCOMEAMT 		= #{INCOMEAMT},
+			LOWAMT 			= #{LOWAMT},
+			PRODUCTLINK 	= #{PRODUCTLINK},
+			AUDITDTM 		= CURRENT_TIMESTAMP(6),
+			AUDITID 		= 'cila10',
+        	MEMO			= #{MEMO},
+        	LEADAMT			= #{LEADAMT}
+          WHERE IDX			= #{IDX}
 	</update>
 
+    <update id="removeProductLst">
+        UPDATE product_lst
+        SET
+			USEYN 			= 'N',
+			AUDITDTM 		= CURRENT_TIMESTAMP(6)
+          WHERE IDX			= #{IDX}
+	</update>
 </mapper>

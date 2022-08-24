@@ -40,6 +40,23 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
                     || request.getRequestURI().equals("/modifyAdminPage")
                     || request.getRequestURI().equals("/excelDownload")
                     || request.getRequestURI().equals("/excelUpload")
+                    || request.getRequestURI().equals("/getlistproductdtllst")
+                    || request.getRequestURI().equals("/getlist-product-lst")
+                    || request.getRequestURI().equals("/create-product-lst")
+                    || request.getRequestURI().equals("/remove-product-lst")
+                    || request.getRequestURI().equals("/modify-product-lst")
+                    || request.getRequestURI().equals("/admin-page-lst-sub")
+                    || request.getRequestURI().equals("/get-list-product-dtl-lst")
+                    || request.getRequestURI().equals("/create-product-dtl-lst")
+                    || request.getRequestURI().equals("/remove-product-dtl-lst")
+                    || request.getRequestURI().equals("/modify-product-dtl-lst")
+                    || request.getRequestURI().equals("/admin-page-product-code")
+                    || request.getRequestURI().equals("/admin-page-shop-code")
+                    || request.getRequestURI().equals("/modify-shop-lst")
+                    || request.getRequestURI().equals("/remove-shop-lst")
+                    || request.getRequestURI().equals("/create-shop-lst")
+                    || request.getRequestURI().equals("/product-lst")
+                    || request.getRequestURI().equals("/user-main")
 			   ) {
 				return true;
 			} 

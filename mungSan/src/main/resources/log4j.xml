@@ -10,9 +10,32 @@
 			<!-- param name="ConversionPattern" value="%-5p: %c - %m%n" / -->
 		</layout>
 	</appender>
+
+	<!-- 날짜별 로그 파일 생성 -->
+	<appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logfile.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">    	
+			<param name="ConversionPattern" value="%t> [%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%L line] [%p] %m %n"/> 
+			<!-- param name="ConversionPattern" value="%-5p: %c - %m%n" / -->
+		</layout>
+	</appender>
+
+	<!-- 날짜별 로그 파일 생성(에러만) -->
+	<appender name="errorFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="ERROR" />
+		<param name="File" value="Errorfile.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">    	
+			<param name="ConversionPattern" value="%t> [%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%L line] [%p] %m %n"/> 
+			<!-- param name="ConversionPattern" value="%-5p: %c - %m%n" / -->
+		</layout>
+	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.jyj.tony">
+	<logger name="com.jyj.msg">
 		<level value="debug" />
 	</logger>
 	
@@ -60,8 +83,10 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
+		<appender-ref ref="rollingFile" />
+		<appender-ref ref="errorFile" />
 	</root>
 	
 </log4j:configuration>

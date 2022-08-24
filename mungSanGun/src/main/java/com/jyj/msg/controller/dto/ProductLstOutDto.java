@@ -14,9 +14,6 @@ import io.swagger.annotations.ApiModelProperty;
 public class ProductLstOutDto {
   @ApiModelProperty(value = "순서", example = "1")
   private String IDX;
-
-  @ApiModelProperty(value = "쇼핑몰 idx", example = "쇼핑몰 idx")
-  private String SHOPIDX;
   
   @ApiModelProperty(value = "상품 이름", example = "상품 이름")
   private String PRODUCTNM;
@@ -51,14 +48,6 @@ public class ProductLstOutDto {
 
   public void setIDX(String iDX) {
     IDX = iDX;
-  }
-
-  public String getSHOPIDX() {
-    return SHOPIDX;
-  }
-
-  public void setSHOPIDX(String sHOPIDX) {
-    SHOPIDX = sHOPIDX;
   }
 
   public String getPRODUCTNM() {

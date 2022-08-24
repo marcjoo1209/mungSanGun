@@ -67,6 +67,7 @@
 		  <if test="COLUMNA1 != null and COLUMNA1 != ''" >
 		  AND COLUMNA1 	like CONCAT('%',#{COLUMNA1},'%')
 		  </if>
+		ORDER BY DIDX DESC
 	</select>
 
     <select id="getMngShopProductTmpTbl" resultType="com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto">
@@ -129,6 +130,7 @@
         WHERE 1 	= 1
           AND DUSEYN = 'Y'
           AND DIDX 	= #{DIDX}
+		ORDER BY DIDX DESC
 	</select>
 
     <insert id="createMngShopProductTmpTbl">

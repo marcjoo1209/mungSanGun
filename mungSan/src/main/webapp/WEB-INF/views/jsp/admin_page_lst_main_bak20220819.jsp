@@ -34,6 +34,17 @@
 .mycenterStyle{font-size: 11px; text-align:center; vertical-align:middle}
 input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:70px;}
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
+.modal-dialog.modal-80size {
+  width: 80%;
+  height: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content.modal-80size {
+  height: auto;
+  min-height: 80%;
+}
 
 </style>
 </head>
@@ -97,7 +108,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 							<th>처리</th>
 							<th>이미지 </th>
 							<th>상품명 </th> <!-- 상품명을 정렬해서 볼 수 있습니다.(내-외부용 모두) -->
-							<th>Lead Price </th>
 							<th>판매가 </th>
 							<th>배송비 </th>
 							<th>수수료 </th>
@@ -106,7 +116,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 							<th>마진 </th>
 							<th>최저가 </th>
 							<th>링크</th>
-							<th>메모</th>
 						</tr>
 					</thead>
 					<tbody valign='bottom'>
@@ -156,21 +165,9 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='PRODUCTNMIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
-								<!-- leadPrice -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
-									<span id='LEADAMTSPAN${list.IDX}'>${list.LEADAMT}</span>
-									<a href="javascript:modifyProduct(${list.IDX}, '10');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='LEADAMTIMG1${list.IDX}'>
-									</a>
-									<input type='hidden' class='price1' id='LEADAMT${list.IDX}' value='${list.LEADAMT}'/>
-									<a href="javascript:modifyProductDone(${list.IDX}, '10');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='LEADAMTIMG2${list.IDX}' style='visibility:hidden;'>
-									</a>
-								</td>
 								<!-- 판매가 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='NOMALAMTSPAN${list.IDX}'>${list.NOMALAMT }</span>
-									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '2');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='NOMALAMTIMG1${list.IDX}'>
 									</a>
@@ -178,12 +175,10 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '1');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='NOMALAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									-->
 								</td>
 								<!-- 배송비 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='SHIPAMTSPAN${list.IDX}'>${list.SHIPAMT }</span>
-									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '3');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='SHIPAMTIMG1${list.IDX}'>
 									</a>
@@ -191,12 +186,10 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '3');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='SHIPAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									-->
 								</td>
 								<!-- 수수료 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='COMMITIONAMTSPAN${list.IDX}'>${list.COMMITIONAMT }</span>
-									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '4');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='COMMITIONAMTIMG1${list.IDX}'>
 									</a>
@@ -204,19 +197,15 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '4');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='COMMITIONAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									 -->
 								</td>
 								<!-- 정산가 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='CALCAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmt }' /></span>
-									<!-- 
 									<input type='hidden' class='price1' id='CALCAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmt }' /> '/>
-									 -->
 								</td>
 								<!-- 구입가 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='PAYAMTSPAN${list.IDX}'>${list.PAYAMT }</span>
-									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='PAYAMTIMG1${list.IDX}'>
 									</a>
@@ -224,19 +213,15 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '6');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='PAYAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									 -->
 								</td>
 								<!-- 마진 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='INCOMEAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmtP }' /></span>
-									<!-- 
 									<input type='hidden' class='price1' id='INCOMEAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmtP }' /> '/>
-									 -->
 								</td>
 								<!-- 최저가 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
 									<span id='LOWAMTSPAN${list.IDX}'>${list.LOWAMT }</span>
-									<!--  
 									<a href="javascript:modifyProduct(${list.IDX}, '8');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='LOWAMTIMG1${list.IDX}'>
 									</a>
@@ -244,26 +229,9 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '8');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='LOWAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									-->
 								</td>
 								<!-- 링크 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
-									<a href='${list.PRODUCTLINK }' target="_blank">
-										<span id='PRODUCTLINKSPAN${list.IDX}'>링크</span>
-									</a>
-								</td>
-								<!-- memo -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
-									<span id='MEMOSPAN${list.IDX}'>${list.MEMO }</span>
-									<a href="javascript:modifyProduct(${list.IDX}, '11');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='MEMOIMG1${list.IDX}'>
-									</a>
-									<input type='hidden' class='price1' id='MEMO${list.IDX}' value='${list.MEMO } '/>
-									<a href="javascript:modifyProductDone(${list.IDX}, '11');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='MEMOIMG2${list.IDX}' style='visibility:hidden;'>
-									</a>
-								</td>
-									<!-- 
 									<span id='PRODUCTLINKSPAN${list.IDX}'>${list.PRODUCTLINK }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '9');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='PRODUCTLINKIMG1${list.IDX}'>
@@ -272,7 +240,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 									<a href="javascript:modifyProductDone(${list.IDX}, '9');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='PRODUCTLINKIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
-									 -->
 								</td>
 							</tr>
 						</c:forEach>
@@ -283,28 +250,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 	<!-- /.container -->
 
 	<!-- modify Modal -->
-	<div class="modal fade" id="listModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
-			<div class="modal-content">
-				<div class="modal-header">상품 상세 리스트</div>
-				<div class="modal-body">
-				    <div class="col-lg">
-				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 11px">추가</button>
-				    </div>
-				</div>
-				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 
-	<div class="modal fade" id="c" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
+	<div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
 		<div class="modal-dialog modal-80size" role="document">
 			<div class="modal-content modal-content modal-80size">
 				<div class="modal-header">상품 상세 리스트</div>
@@ -321,7 +267,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 			</div>
 		</div>
 	</div>
-	 -->
+	
 	<form id="SearchLst" method="post" action="/admin-page-lst-main">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
 	</form>
@@ -333,7 +279,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 	<form id="ProductLst" name="ProductLst">
 		<input type='hidden' id="IDX" name="IDX" value=''>  
 		<input type='hidden' id="IMGURL" name="IMGURL" value=''>  
-		<input type='hidden' id="LEADAMT" name="LEADAMT" value=''>  
 		<input type='hidden' id="PRODUCTNM" name="PRODUCTNM" value=''>  
 		<input type='hidden' id="NOMALAMT" name="NOMALAMT" value=''>  
 		<input type='hidden' id="SHIPAMT" name="SHIPAMT" value=''>  
@@ -342,7 +287,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		<input type='hidden' id="PAYAMT" name="PAYAMT" value=''>  
 		<input type='hidden' id="INCOMEAMT" name="INCOMEAMT" value=''>  
 		<input type='hidden' id="LOWAMT" name="LOWAMT" value=''>  
-		<input type='hidden' id="MEMO" name="MEMO" value=''>  
 		<input type='hidden' id="PRODUCTLINK" name="PRODUCTLINK" value=''>  
 		<input type='hidden' id="GB" name="GB" value=''>  
 	</form>
@@ -388,8 +332,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 
 		// 조회 호출
 		$form.submit()
-
-		/*
+  		/*
 		let data =JSON.stringify({"productidx":idx});
 		
 		//let data ={PRODUCTIDX : idx};
@@ -422,6 +365,8 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 							+"		<th>마진 </th>                            "
 							+"		<th>최저가 </th>                            "
 							+"		<th>링크 </th>                            "
+							+"		<th>수정</th>                               "
+							+"		<th>삭제</th>                               "
 							+"	</tr>                                           "
 							+"</thead>                                          "
 							+"<tbody valign='bottom'>							"
@@ -471,6 +416,14 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 					  		// 링크
 					  		+ 			"<input type='text' class='longstr' id='DTLPRODUCTLINK"+json[i].idx+"' value='"+json[i].dtlproductlink+" '/>"
 					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수정
+							+			"<button type='button' class='btn btn-primary' id='modifyButton' onclick='modifyDtlButton_onclickData("+json[i].idx+")' style='font-size: 10px'>수정</button>"
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 삭제
+							+			"<button type='button' class='btn btn-primary' id='modifyButton' onclick='removeDtlButton_onclickData("+json[i].idx+")' style='font-size: 10px'>삭제</button>"
+					  		+"		</td>"
 					  		+"	</tr>"
 				  		;
 			  	}
@@ -516,58 +469,53 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 			+ "		<!-- 리스트 -->                                                                "
 			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
 			+ "		</td>                                                                       "
+			+ "		<!-- 이미지 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='IMGURL" + totCnt + "' value=''/>                             "
+			+ "		</td>                                                                       "
+			+ "		<!-- 상품명 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='PRODUCTNM" + totCnt + "' value=''/>                         "
+			+ "		</td>                                                                       "
+			+ "		<!-- 판매가 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='NOMALAMT" + totCnt + "' value=''/>                           "
+			+ "		</td>                                                                       "
+			+ "		<!-- 배송비 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='SHIPAMT" + totCnt + "' value=''/>                            "
+			+ "		</td>                                                                       "
+			+ "		<!-- 수수료 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='COMMITIONAMT" + totCnt + "' value=''/>                       "
+			+ "		</td>                                                                       "
+			+ "		<!-- 정산가 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='CALCAMT" + totCnt + "' value=''/>                            "
+			+ "		</td>                                                                       "
+			+ "		<!-- 구입가 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='PAYAMT" + totCnt + "' value=''/>                             "
+			+ "		</td>                                                                       "
+			+ "		<!-- 마진 -->                                                                 "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='INCOMEAMT" + totCnt + "' value=''/>                          "
+			+ "		</td>                                                                       "
+			+ "		<!-- 최저가 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='LOWAMT" + totCnt + "' value=''/>                             "
+			+ "		</td>                                                                       "
+			+ "		<!-- 링크 -->                                                                "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "			<input id='PRODUCTLINK" + totCnt + "' value=''/>                            "
+			+ "		</td>                                                                       "
+			+ "		<!-- 수정버튼 -->                                                               "
+			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		</td>                                                                       "
 			+ "		<!-- 등록버튼 -->                                                               "
 			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
 			+ "			<button type='button' class='btn btn-primary' id='removeButton' onclick='createProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>"
-			+ "		<!-- 이미지 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			+ "			<input class='longstr' id='IMGURL" + totCnt + "' value=''/>                             "
-			+ "		</td>                                                                       "
-			+ "		<!-- 상품명 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			+ "			<input class='longstr' id='PRODUCTNM" + totCnt + "' value=''/>                         "
-			+ "		</td>                                                                       "
-			+ "		<!-- LEADAMT -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			+ "			<input class='price1' id='LEADAMT" + totCnt + "' value=''/>                             "
-			+ "		</td>                                                                       "
-			+ "		<!-- 판매가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='NOMALAMT" + totCnt + "' value=''/>                           "
-			+ "		</td>                                                                       "
-			+ "		<!-- 배송비 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='SHIPAMT" + totCnt + "' value=''/>                            "
-			+ "		</td>                                                                       "
-			+ "		<!-- 수수료 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='COMMITIONAMT" + totCnt + "' value=''/>                       "
-			+ "		</td>                                                                       "
-			+ "		<!-- 정산가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='CALCAMT" + totCnt + "' value=''/>                            "
-			+ "		</td>                                                                       "
-			+ "		<!-- 구입가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='PAYAMT" + totCnt + "' value=''/>                             "
-			+ "		</td>                                                                       "
-			+ "		<!-- 마진 -->                                                                 "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='INCOMEAMT" + totCnt + "' value=''/>                          "
-			+ "		</td>                                                                       "
-			+ "		<!-- 최저가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='LOWAMT" + totCnt + "' value=''/>                             "
-			+ "		</td>                                                                       "
-			+ "		<!-- 링크 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			//+ "			<input id='PRODUCTLINK" + totCnt + "' value=''/>                            "
-			+ "		</td>                                                                       "
-			+ "		<!-- 메모 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			+ "			<input class='longstr' id='MEMO" + totCnt + "' value=''/>                            "
-			+ "		</td>                                                                       "
 			+ "	</tr>"
 	   			;
 		$("#itemTable>tbody").prepend(tmpTExt);
@@ -585,10 +533,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 			+ "		<!-- 쇼핑몰명(구매처) -->                                                                "
 			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='SHOPIDX" + totCnt + "' value=''/>                             "
-			+ "		</td>                                                                       "
-			+ "		<!-- LEADAMT -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
-			+ "			<input id='LEADMAT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 배송비 -->                                                                "
 			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
@@ -641,7 +585,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		// 수정 값체크
 		var $IMGURL = $("#IMGURL"+inkeyNum).val();
 		var $PRODUCTNM = $("#PRODUCTNM"+inkeyNum).val();
-		var $LEADAMT = $("#LEADAMT"+inkeyNum).val();
 		var $NOMALAMT = $("#NOMALAMT"+inkeyNum).val();
 		var $SHIPAMT = $("#SHIPAMT"+inkeyNum).val();
 		var $COMMITIONAMT = $("#COMMITIONAMT"+inkeyNum).val();
@@ -650,12 +593,10 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		var $INCOMEAMT = $("#INCOMEAMT"+inkeyNum).val();
 		var $LOWAMT = $("#LOWAMT"+inkeyNum).val();
 		var $PRODUCTLINK = $("#PRODUCTLINK"+inkeyNum).val();
-		var $MEMO = $("#MEMO"+inkeyNum).val();
 		
 		// form 값 초기화
 		$("#IMGURL").val($IMGURL);
 		$("#PRODUCTNM").val($PRODUCTNM);
-		$("#LEADAMT").val($LEADAMT);
 		$("#NOMALAMT").val($NOMALAMT);
 		$("#SHIPAMT").val($SHIPAMT);
 		$("#COMMITIONAMT").val($COMMITIONAMT);
@@ -664,7 +605,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		$("#INCOMEAMT").val($INCOMEAMT);
 		$("#LOWAMT").val($LOWAMT);
 		$("#PRODUCTLINK").val($PRODUCTLINK);
-		$("#MEMO").val($MEMO);
 		$("#GB").val("I");
 		
 		// 변경 호출
@@ -682,7 +622,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		var $IDX = inkeyNum;
 		var $IMGURL = $("#IMGURL"+inkeyNum).val();
 		var $PRODUCTNM = $("#PRODUCTNM"+inkeyNum).val();
-		var $LEADAMT = $("#LEADAMT"+inkeyNum).val();
 		var $NOMALAMT = $("#NOMALAMT"+inkeyNum).val();
 		var $SHIPAMT = $("#SHIPAMT"+inkeyNum).val();
 		var $COMMITIONAMT = $("#COMMITIONAMT"+inkeyNum).val();
@@ -691,13 +630,11 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		var $INCOMEAMT = $("#INCOMEAMT"+inkeyNum).val();
 		var $LOWAMT = $("#LOWAMT"+inkeyNum).val();
 		var $PRODUCTLINK = $("#PRODUCTLINK"+inkeyNum).val();
-		var $MEMO = $("#MEMO"+inkeyNum).val();
 		
 		// form 값 초기화
 		$("#IDX").val($IDX);
 		$("#IMGURL").val($IMGURL);
 		$("#PRODUCTNM").val($PRODUCTNM);
-		$("#LEADAMT").val($LEADAMT);
 		$("#NOMALAMT").val($NOMALAMT);
 		$("#SHIPAMT").val($SHIPAMT);
 		$("#COMMITIONAMT").val($COMMITIONAMT);
@@ -706,7 +643,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		$("#INCOMEAMT").val($INCOMEAMT);
 		$("#LOWAMT").val($LOWAMT);
 		$("#PRODUCTLINK").val($PRODUCTLINK);
-		$("#MEMO").val($MEMO);
 		$("#GB").val("D");
 		
 		// 변경 호출
@@ -724,7 +660,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		var $IDX = inkeyNum;
 		var $IMGURL = $("#IMGURL"+inkeyNum).val();
 		var $PRODUCTNM = $("#PRODUCTNM"+inkeyNum).val();
-		var $LEADAMT = $("#LEADAMT"+inkeyNum).val();
 		var $NOMALAMT = $("#NOMALAMT"+inkeyNum).val();
 		var $SHIPAMT = $("#SHIPAMT"+inkeyNum).val();
 		var $COMMITIONAMT = $("#COMMITIONAMT"+inkeyNum).val();
@@ -733,13 +668,11 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		var $INCOMEAMT = $("#INCOMEAMT"+inkeyNum).val();
 		var $LOWAMT = $("#LOWAMT"+inkeyNum).val();
 		var $PRODUCTLINK = $("#PRODUCTLINK"+inkeyNum).val();
-		var $MEMO = $("#MEMO"+inkeyNum).val();
 		
 		// form 값 초기화
 		$("#IDX").val($IDX);
 		$("#IMGURL").val($IMGURL);
 		$("#PRODUCTNM").val($PRODUCTNM);
-		$("#LEADAMT").val($LEADAMT);
 		$("#NOMALAMT").val($NOMALAMT);
 		$("#SHIPAMT").val($SHIPAMT);
 		$("#COMMITIONAMT").val($COMMITIONAMT);
@@ -748,7 +681,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		$("#INCOMEAMT").val($INCOMEAMT);
 		$("#LOWAMT").val($LOWAMT);
 		$("#PRODUCTLINK").val($PRODUCTLINK);
-		$("#MEMO").val($MEMO);
 		$("#GB").val("U");
 		
 		// 변경 호출
@@ -855,20 +787,6 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
   			$("#PRODUCTLINKIMG1"+inkeyNum).hide();
   			$("#PRODUCTLINK"+inkeyNum).attr("type", "text");
   			$("#PRODUCTLINKIMG2"+inkeyNum).css('visibility', 'visible'); 
-  		}
-  		// 상품링크
-  		if(gb == '10'){
-  			$("#LEADAMTSPAN"+inkeyNum).hide();
-  			$("#LEADAMTIMG1"+inkeyNum).hide();
-  			$("#LEADAMT"+inkeyNum).attr("type", "text");
-  			$("#LEADAMTIMG2"+inkeyNum).css('visibility', 'visible'); 
-  		}
-  		// 상품링크
-  		if(gb == '11'){
-  			$("#MEMOSPAN"+inkeyNum).hide();
-  			$("#MEMOIMG1"+inkeyNum).hide();
-  			$("#MEMO"+inkeyNum).attr("type", "text");
-  			$("#MEMOIMG2"+inkeyNum).css('visibility', 'visible'); 
   		}
   	}
   	

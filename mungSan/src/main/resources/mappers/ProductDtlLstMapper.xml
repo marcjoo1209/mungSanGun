@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductDtlLstMapper">
+
+    <select id="getListProductDtlLst" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTIDX
+        	, DTLSHIPAMT
+        	, DTLCOMMITIONAMT
+        	, DTLCALCAMT
+        	, DTLPAYAMT
+        	, DTLINCOMMAMT
+        	, DTLLOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        	, DTLPRODUCTLINK
+        	, DTLNOMALAMT
+        FROM product_dtl_lst
+        WHERE 1 			= 1
+          AND USEYN 		= 'Y'
+          AND PRODUCTIDX	= #{PRODUCTIDX}
+        ORDER BY DTLPAYAMT
+	</select>
+
+    <select id="getListProductDtlLstByShop" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTIDX
+        	, DTLSHIPAMT
+        	, DTLCOMMITIONAMT
+        	, DTLCALCAMT
+        	, DTLPAYAMT
+        	, DTLINCOMMAMT
+        	, DTLLOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        	, DTLPRODUCTLINK
+        	, DTLNOMALAMT
+        FROM product_dtl_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+		  <if test="SHOPIDX != null and SHOPIDX != ''" >
+		  AND SHOPIDX = #{SHOPIDX}
+		  </if>
+		  <if test="PRODUCTIDX != null and PRODUCTIDX != ''" >
+		  AND PRODUCTIDX = #{PRODUCTIDX}
+		  </if>
+	</select>
+
+    <select id="getProductDtlLst" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
+        SELECT
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTIDX
+        	, DTLSHIPAMT
+        	, DTLCOMMITIONAMT
+        	, DTLCALCAMT
+        	, DTLPAYAMT
+        	, DTLINCOMMAMT
+        	, DTLLOWAMT
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        	, DTLPRODUCTLINK
+        	, DTLNOMALAMT
+        FROM product_dtl_lst
+        WHERE 1 			= 1
+          AND USEYN 		= 'Y'
+          AND IDX			= #{IDX}
+          AND SHOPIDX		= #{SHOPIDX}
+          AND PRODUCTIDX	= #{PRODUCTIDX}
+	</select>
+
+    <insert id="createProductDtlLst">
+        INSERT INTO product_dtl_lst
+        (
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTIDX
+        	, DTLNOMALAMT
+        	, DTLSHIPAMT
+        	, DTLCOMMITIONAMT
+        	, DTLCALCAMT
+        	, DTLPAYAMT
+        	, DTLINCOMMAMT
+        	, DTLLOWAMT
+        	, DTLPRODUCTLINK
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(cl.IDX AS INTEGER))
+        		  FROM product_dtl_lst cl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{SHOPIDX}
+        	, #{PRODUCTIDX}
+        	, #{DTLNOMALAMT}
+        	, #{DTLSHIPAMT}
+        	, #{DTLCOMMITIONAMT}
+        	, #{DTLCALCAMT}
+        	, #{DTLPAYAMT}
+        	, #{DTLINCOMMAMT}
+        	, #{DTLLOWAMT}
+        	, #{DTLPRODUCTLINK}
+        	, 'Y'
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        	, CURRENT_TIMESTAMP(6)
+        )
+	</insert>
+
+    <update id="modifyProductDtlLst">
+        UPDATE product_dtl_lst
+        SET
+        	DTLNOMALAMT			= #{DTLNOMALAMT}
+        	, DTLSHIPAMT		= #{DTLSHIPAMT}
+        	, DTLCOMMITIONAMT	= #{DTLCOMMITIONAMT}
+        	, DTLCALCAMT		= #{DTLCALCAMT}
+        	, DTLPAYAMT			= #{DTLPAYAMT}
+        	, DTLINCOMMAMT		= #{DTLINCOMMAMT}
+        	, DTLLOWAMT			= #{DTLLOWAMT}
+        	, DTLPRODUCTLINK	= #{DTLPRODUCTLINK}
+        	, SHOPIDX			= #{SHOPIDX}
+        	, AUDITID			= #{AUDITID}
+        	, AUDITDTM			= CURRENT_TIMESTAMP(6)
+        WHERE IDX				= #{IDX}
+          AND SHOPIDX			= #{OLDSHOPIDX}
+          AND PRODUCTIDX		= #{PRODUCTIDX}
+	</update>
+
+    <update id="removeProductDtlLst">
+        UPDATE product_dtl_lst
+        SET
+        	USEYN				= 'N'
+        	, AUDITID			= #{AUDITID}
+        	, AUDITDTM			= CURRENT_TIMESTAMP(6)
+        WHERE IDX				= #{IDX}
+          AND SHOPIDX			= #{OLDSHOPIDX}
+          AND PRODUCTIDX		= #{PRODUCTIDX}
+	</update>
+</mapper>

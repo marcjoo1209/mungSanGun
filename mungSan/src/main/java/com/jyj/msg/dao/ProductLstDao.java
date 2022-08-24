@@ -31,9 +31,16 @@ public class ProductLstDao {
   }
   
   // 리스트 조회
-  public List<ProductLstOutDto> getListProductLst() {
+  public List<ProductLstOutDto> getListProductLst(ProductLstInDto inDto) {
     List<ProductLstOutDto> outDto =
-        mybatis.selectList("ProductLstMapper.getListProductLst");
+        mybatis.selectList("ProductLstMapper.getListProductLst", inDto);
+    return outDto;
+  }
+
+  // 리스트 조회
+  public List<ProductLstOutDto> getListProductLstLowPrice(ProductLstInDto inDto) {
+    List<ProductLstOutDto> outDto =
+        mybatis.selectList("ProductLstMapper.getListProductLstLowPrice", inDto);
     return outDto;
   }
   

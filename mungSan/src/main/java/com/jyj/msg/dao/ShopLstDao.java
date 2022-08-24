@@ -42,4 +42,10 @@ public class ShopLstDao {
         mybatis.update("ShopLstMapper.modifyShopLst", inDto);
     return outDto;
   }
+  // 리스트 삭제
+  public Integer removeShopLst(ShopLstInDto inDto) {
+    Integer outDto =
+        mybatis.delete("ShopLstMapper.removeShopLst", inDto);
+    return outDto;
+  }
 }

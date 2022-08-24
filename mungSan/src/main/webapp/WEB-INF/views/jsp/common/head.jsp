@@ -28,44 +28,52 @@
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item <c:if test='${headGb eq \"1\"}'>active</c:if>">
-					<a class="nav-link" href="/main">
-					상품 감시 대상 리스트
-					
-						<span class="sr-only">(current)</span>
-					
-					</a>
-				</li>
-				<li class="nav-item <c:if test='${headGb eq \"2\"}'>active</c:if>">
-					<a class="nav-link" href="/log">
-					상품 감시 로그
+					<a class="nav-link" href="/admin-page-lst-main">
+					상품 관리 페이지
 					<c:if test='${headGb eq "2"}'>
 						<span class="sr-only">(current)</span>
 					</c:if>
 					</a>
 				</li>
-				<li class="nav-item <c:if test='${headGb eq \"3\"}'>active</c:if>">
-					<a class="nav-link disabled" href="#">
-					관리2
-					<c:if test='${headGb eq "3"}'>
+				<li class="nav-item <c:if test='${headGb eq \"2\"}'>active</c:if>">
+					<a class="nav-link" href="/admin-page-lst-sub">
+					상품 상세 관리 페이지
+					<c:if test='${headGb eq "2"}'>
 						<span class="sr-only">(current)</span>
 					</c:if>
 					</a>
 				</li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="https://example.com"
-					id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">관리3</a>
+				<li class="nav-item">
+					<a class="nav-link" href="/product-lst">
+					사용자 상품 리스트
+					</a>
+				</li>
+				<li class="nav-item dropdown <c:if test='${headGb eq \"3\" || headGb eq \"4\"}'>active</c:if>">
+					<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						코드관리
+					</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="#">관리3-1</a> <a
-							class="dropdown-item" href="#">관리3-2</a> <a
-							class="dropdown-item" href="#">관리3-3</a>
-					</div></li>
+						<a class="dropdown-item" href="/admin-page-product-code">상품 코드 관리</a> 
+						<a class="dropdown-item" href="/admin-page-shop-code">이커머스 코드 관리</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown <c:if test='${headGb eq \"3\" || headGb eq \"4\"}'>active</c:if>">
+					<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						OLD
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<a class="dropdown-item" href="/admin-page-lst">관리자</a> 
+						<a class="dropdown-item" href="/user-main">사용자</a>
+					</div>
+				</li>
 			</ul>
+			<!-- 
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search"
 					aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
+			-->
 		</div>
 	</nav>
 

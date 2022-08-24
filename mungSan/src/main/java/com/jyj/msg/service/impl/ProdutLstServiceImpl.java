@@ -27,8 +27,12 @@ public class ProdutLstServiceImpl implements ProductLstService{
     return productLstMapper.getProductLst(inDto);
   }
   
-  public List<ProductLstOutDto> getListProductLst() {
-    return productLstMapper.getListProductLst();
+  public List<ProductLstOutDto> getListProductLst(ProductLstInDto inDto) {
+    return productLstMapper.getListProductLst(inDto);
+  }
+
+  public List<ProductLstOutDto> getListProductLstLowPrice(ProductLstInDto inDto) {
+    return productLstMapper.getListProductLstLowPrice(inDto);
   }
   
   public Integer createProductLst(ProductLstInDto inDto) {

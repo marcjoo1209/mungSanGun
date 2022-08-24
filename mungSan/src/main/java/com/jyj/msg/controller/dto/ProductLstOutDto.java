@@ -21,29 +21,66 @@ public class ProductLstOutDto {
   @ApiModelProperty(value = "상품 이름", example = "상품 이름")
   private String PRODUCTNM;
   
-  @ApiModelProperty(value = "카드가격", example = "1000")
-  private String CARDAMT;
+  @ApiModelProperty(value = "이미지URL", example = "1000")
+  private String IMGURL;
   
-  @ApiModelProperty(value = "쿠폰가격", example = "1000")
-  private String COUPONAMT;
-  
-  @ApiModelProperty(value = "일반가격", example = "1000")
+  @ApiModelProperty(value = "판매가", example = "1000")
   private String NOMALAMT;
   
-  @ApiModelProperty(value = "최저가격", example = "1000")
+  @ApiModelProperty(value = "배송비", example = "1000")
+  private String SHIPAMT;
+  
+  @ApiModelProperty(value = "수수료", example = "1000")
+  private String COMMITIONAMT;
+  
+  @ApiModelProperty(value = "정산가", example = "Y")
+  private String CALCAMT;
+  
+  @ApiModelProperty(value = "구입가", example = "yyyymmdd")
+  private String PAYAMT;
+
+  @ApiModelProperty(value = "마진", example = "testUser")
+  private String INCOMEAMT;
+  
+  @ApiModelProperty(value = "최저가", example = "yyyymmdd")
   private String LOWAMT;
   
-  @ApiModelProperty(value = "사용유무", example = "Y")
+  @ApiModelProperty(value = "링크", example = "yyyymmdd")
+  private String PRODUCTLINK;
+  
+  @ApiModelProperty(value = "사용여부", example = "yyyymmdd")
   private String USEYN;
   
   @ApiModelProperty(value = "생성일자", example = "yyyymmdd")
   private String CREATEDTM;
-
-  @ApiModelProperty(value = "수정사용자", example = "testUser")
-  private String AUDITID;
   
   @ApiModelProperty(value = "수정일자", example = "yyyymmdd")
   private String AUDITDTM;
+  
+  @ApiModelProperty(value = "수정사용자", example = "yyyymmdd")
+  private String AUDITID;
+  
+  @ApiModelProperty(value = "MEMO", example = "yyyymmdd")
+  private String MEMO;
+  
+  @ApiModelProperty(value = "LEADAMT", example = "yyyymmdd")
+  private String LEADAMT;
+
+  public String getMEMO() {
+    return MEMO;
+  }
+
+  public void setMEMO(String mEMO) {
+    MEMO = mEMO;
+  }
+
+  public String getLEADAMT() {
+    return LEADAMT;
+  }
+
+  public void setLEADAMT(String lEADAMT) {
+    LEADAMT = lEADAMT;
+  }
 
   public String getIDX() {
     return IDX;
@@ -69,20 +106,12 @@ public class ProductLstOutDto {
     PRODUCTNM = pRODUCTNM;
   }
 
-  public String getCARDAMT() {
-    return CARDAMT;
+  public String getIMGURL() {
+    return IMGURL;
   }
 
-  public void setCARDAMT(String cARDAMT) {
-    CARDAMT = cARDAMT;
-  }
-
-  public String getCOUPONAMT() {
-    return COUPONAMT;
-  }
-
-  public void setCOUPONAMT(String cOUPONAMT) {
-    COUPONAMT = cOUPONAMT;
+  public void setIMGURL(String iMGURL) {
+    IMGURL = iMGURL;
   }
 
   public String getNOMALAMT() {
@@ -93,12 +122,60 @@ public class ProductLstOutDto {
     NOMALAMT = nOMALAMT;
   }
 
+  public String getSHIPAMT() {
+    return SHIPAMT;
+  }
+
+  public void setSHIPAMT(String sHIPAMT) {
+    SHIPAMT = sHIPAMT;
+  }
+
+  public String getCOMMITIONAMT() {
+    return COMMITIONAMT;
+  }
+
+  public void setCOMMITIONAMT(String cOMMITIONAMT) {
+    COMMITIONAMT = cOMMITIONAMT;
+  }
+
+  public String getCALCAMT() {
+    return CALCAMT;
+  }
+
+  public void setCALCAMT(String cALCAMT) {
+    CALCAMT = cALCAMT;
+  }
+
+  public String getPAYAMT() {
+    return PAYAMT;
+  }
+
+  public void setPAYAMT(String pAYAMT) {
+    PAYAMT = pAYAMT;
+  }
+
+  public String getINCOMEAMT() {
+    return INCOMEAMT;
+  }
+
+  public void setINCOMEAMT(String iNCOMEAMT) {
+    INCOMEAMT = iNCOMEAMT;
+  }
+
   public String getLOWAMT() {
     return LOWAMT;
   }
 
   public void setLOWAMT(String lOWAMT) {
     LOWAMT = lOWAMT;
+  }
+
+  public String getPRODUCTLINK() {
+    return PRODUCTLINK;
+  }
+
+  public void setPRODUCTLINK(String pRODUCTLINK) {
+    PRODUCTLINK = pRODUCTLINK;
   }
 
   public String getUSEYN() {
@@ -117,14 +194,6 @@ public class ProductLstOutDto {
     CREATEDTM = cREATEDTM;
   }
 
-  public String getAUDITID() {
-    return AUDITID;
-  }
-
-  public void setAUDITID(String aUDITID) {
-    AUDITID = aUDITID;
-  }
-
   public String getAUDITDTM() {
     return AUDITDTM;
   }
@@ -133,5 +202,13 @@ public class ProductLstOutDto {
     AUDITDTM = aUDITDTM;
   }
 
-  
+  public String getAUDITID() {
+    return AUDITID;
+  }
+
+  public void setAUDITID(String aUDITID) {
+    AUDITID = aUDITID;
+  }
+
+
 }
