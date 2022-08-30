@@ -35,6 +35,11 @@
 input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:70px;}
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
 
+img.custom:hover,
+img.custom:focus {
+    transform:scale(3.5);
+    transition: transform.5s;
+    }
 </style>
 
 <!-- eXCEL -->
@@ -100,7 +105,15 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 							<th>더보기</th> 
 							<th>처리</th>
 							<th>이미지 </th>
-							<th>상품명 </th> <!-- 상품명을 정렬해서 볼 수 있습니다.(내-외부용 모두) -->
+							<th>
+								상품명 
+								<c:if test="${orderNum  eq 'b'}">
+									<a href="javascript:searchItemList('a')">오름차순</a>
+								</c:if>
+								<c:if test="${orderNum  eq 'a'}">
+									<a href="javascript:searchItemList('b')">내림차순</a>
+								</c:if>
+							</th> <!-- 상품명을 정렬해서 볼 수 있습니다.(내-외부용 모두) -->
 							<th>Lead Price </th>
 							<th>판매가 </th>
 							<th>배송비 </th>
@@ -140,7 +153,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 								</td>
 								<!-- 이미지 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
-									<img src='${list.IMGURL} ' width='50px' height='50px'>
+									<img class="custom" src='${list.IMGURL} ' width='50px' height='50px'>
 									<a href="javascript:modifyProduct(${list.IDX}, '0');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='IMGURLIMG1${list.IDX}'>
 									</a>
@@ -503,6 +516,8 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 	
 	<form id="SearchLst" method="post" action="/admin-page-lst-main">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
+		<input type='hidden' id="ORDERNUM" name="ORDERNUM" value=''>
+		
 	</form>
 	
 	<form id="ProductDtlLst" method="post" action="/admin-page-lst-sub">
@@ -673,15 +688,16 @@ function test(){
   	}
 
   	//  상품명 조회 호출
-  	function searchItemList(){
+  	function searchItemList(orderNum){
 		// form 변수 초기화
 		var $form = $("#SearchLst");
 		
 		// 조회 값체크
 		var $searchItemNm = $("#searchItemNm").val();
-
+		
 		// form 값 초기화
 		$("#SEARCHPRODUCTNM").val($searchItemNm);
+		$("#ORDERNUM").val(orderNum);
 
 		// 조회 호출
 		$form.submit()

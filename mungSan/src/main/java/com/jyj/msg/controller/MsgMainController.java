@@ -65,9 +65,15 @@ public class MsgMainController {
   // 상품 관리 페이지
   @RequestMapping(value = "/admin-page-lst-main")
   public String adminPageLstMain(Model model, HttpServletRequest request) throws Exception {
-
+    String orderNum = "";
+    if(request.getParameter("ORDERNUM") == null) {
+      orderNum = "a";
+    } else {
+      orderNum = request.getParameter("ORDERNUM");
+    }
     ProductLstInDto inDto = new ProductLstInDto();
     inDto.setPRODUCTNM(request.getParameter("SEARCHPRODUCTNM"));
+    inDto.setPRODUCTNMDESC(orderNum);
     
     String searchTxt = request.getParameter("SEARCHPRODUCTNM");
     
@@ -77,6 +83,7 @@ public class MsgMainController {
     
     model.addAttribute("outDto", outDto);
     model.addAttribute("searchTxt", searchTxt);
+    model.addAttribute("orderNum", orderNum);
     model.addAttribute("listCnt", listCnt);
     model.addAttribute("headGb", "1");
     
