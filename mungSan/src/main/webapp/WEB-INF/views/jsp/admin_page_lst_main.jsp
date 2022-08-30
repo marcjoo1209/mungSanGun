@@ -36,6 +36,10 @@ input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; bo
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
 
 </style>
+
+<!-- eXCEL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 </head>
 <body>
 
@@ -303,25 +307,200 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 			</div>
 		</div>
 	</div>
-	<!-- 
-	<div class="modal fade" id="c" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
-		<div class="modal-dialog modal-80size" role="document">
-			<div class="modal-content modal-content modal-80size">
-				<div class="modal-header">상품 상세 리스트</div>
-				<div class="modal-body">
-				    <div class="col-lg">
-				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 11px">추가</button>
-				    </div>
+	
+	<!-- excel down table -->
+	<!-- Excel Export 용 테이블 hide -->
+	
+				<table id="excelTable" hidden>
+					<thead>
+						<tr>
+							<th>순서</th>
+							<th>상품명 </th>
+							<th>url </th>
+							<th>lead price </th>
+							<th>memo </th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							<!-- 
+							<th>상세순서 </th>
+							<th>쇼핑몰순서 </th>
+							<th>쇼핑몰명 </th>
+							<th>판매가 </th>
+							<th>배송비 </th>
+							<th>수수료</th>
+							<th>정산가</th>
+							<th>구매가</th>
+							<th>마진</th>
+							<th>최저가</th>
+							<th>링크</th>
+							 -->
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+
+	<!-- excel Modal -->
+	<div class="modal fade" id="excelModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">엑셀 업로드</div>
+				<div class="modal-body" id="modalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
+					<form id="excelForm" name="excelForm" method="post" enctype="multipart/form-data" action="/excelUploadMain">
+    					<input type="file" id="excelFileInput" name="excelFileInput"/>
+    				</form>
 				</div>
-				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">...</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary" onclick='excelUp()'>저장</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	 -->
+	
+	<!-- progressModal -->
+	<div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<center>
+					<img src='/resources/img/progress-icon-gif-1.gif' width = '300px' height = '300px'>
+				</center>
+			</div>
+		</div>
+	</div>
+	
 	<form id="SearchLst" method="post" action="/admin-page-lst-main">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
 	</form>
@@ -372,7 +551,10 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 		src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.7/holder.min.js"></script>
 
 	<script>
-
+function test(){
+	   	// progress modal 활성화
+	   	$('#progressModal').modal('show');
+}
 	// 총 조회 건수
   	let totCnt = 0;
   	totCnt = ${listCnt};
@@ -883,17 +1065,22 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
   		debugger;
   		alert("엑셀다운로드를 진행 합니다.");
   		//$("#excelDownload").submit();
-  		exportExcel();
+  		createExcelData();
   		
   	}
 
-	// excel 업로드 호출
   	function excelUp(){
   		debugger;
   	    if (!confirm("엑셀업로드를 진행 합니다.\n확인(예) 또는 취소(아니오)를 선택해주세요.")) {
    	       return false;
    	    } else {
   			$("#excelForm").submit();
+
+	 	   	// excel modal non 활성화
+	 	   	$('#excelModal').modal('hide');
+	 	   	
+	 	   	// progress modal 활성화
+	 	   	$('#progressModal').modal('show');
    	    }
   		/*
   		let input = event.target;
@@ -910,6 +1097,718 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
   	    reader.readAsBinaryString(input.files[0]);
   	    */
   	}
+
+  	function s2ab(s) { 
+  	    var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+  	    var view = new Uint8Array(buf);  //create uint8array as viewer
+  	    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+  	    return buf;    
+  	}
+  	
+  	function exportExcel(){ 
+  	    // step 1. workbook 생성
+  	    var wb = XLSX.utils.book_new();
+
+  	    // step 2. 시트 만들기 
+  	    var newWorksheet = excelHandler.getWorksheet();
+  	    
+  	    // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
+  	    XLSX.utils.book_append_sheet(wb, newWorksheet, excelHandler.getSheetName());
+
+  	    // step 4. 엑셀 파일 만들기 
+  	    var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+
+  	    // step 5. 엑셀 파일 내보내기 
+  	    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), excelHandler.getExcelFileName());
+  	}
+  	
+  	var excelHandler = {
+  	        getExcelFileName : function(){
+  	            return '상품리스트.xlsx';
+  	        },
+  	        getSheetName : function(){
+  	            return '상품리스트 Sheet';
+  	        },
+  	        getExcelData : function(){
+  	            return document.getElementById('excelTable'); 
+  	        },
+  	        getWorksheet : function(){
+  	            return XLSX.utils.table_to_sheet(this.getExcelData());
+  	        }
+  	}
+  	
+  	function inputSizeAuto(){
+  		debugger;
+  		var get_text_input = $("#itemTable input[type=text]");
+  		var get_number_input = $("#itemTable input[type=number]");
+  		/*
+  		console.log(get_text_input);
+  		console.log('이녀석 타입은 뭐야? ' + typeof (get_text_input)); // object
+  		console.log('이녀석 Array이니? ' + Array.isArray(get_text_input)); //false
+  		console.log(get_number_input);
+  		console.log('이녀석 타입은 뭐야? ' + typeof (get_number_input)); // object
+  		console.log('이녀석 Array이니? ' + Array.isArray(get_number_input)); //false
+  		*/
+  		$.each(get_text_input, function (index, value) {
+  			/*
+  			console.log('인덱스값:' + index);
+  			console.log(value);
+  			console.log('id =' + $(value).attr("id"));
+  			console.log('name =' + $(value).attr("name"));
+  			console.log('value =' + $(value).val());
+  			*/
+  			if(value.value.length > 0){
+  				/*
+  				//console.log('==============================');
+  				let valuetmp = $(value).val();
+  				//console.log('valuetmp =' + valuetmp);
+  				$("#inputTmp").append('<span id="virtual_dom">' + valuetmp + '</span>');
+  				let inputWidth =  $('#virtual_dom').width(); // 글자 하나의 대략적인 크기
+  				//console.log('inputWidth =' + inputWidth);
+  				$(value).css('width', inputWidth)
+  			  	$('#virtual_dom').remove();
+  				//console.log('==============================');
+  				*/
+  				value.style.width = (value.value.length+1) + 'em';
+  			} else {
+  				value.style.width = 5 + 'em';
+  			}
+  		});
+  		$.each(get_number_input, function (index, value) {
+  			/*
+  			console.log('인덱스값:' + index);
+  			console.log(value);
+  			console.log('id =' + $(value).attr("id"));
+  			console.log('name =' + $(value).attr("name"));
+  			console.log('value =' + $(value).val());
+  			*/
+  			if(value.value.length > 0){
+  				/*
+  				//console.log('==============================');
+  				let valuetmp = $(value).val();
+  				//console.log('valuetmp =' + valuetmp);
+  				$("#inputTmp").append('<span id="virtual_dom">' + valuetmp + '</span>');
+  				let inputWidth =  $('#virtual_dom').width(); // 글자 하나의 대략적인 크기
+  				//console.log('inputWidth =' + inputWidth);
+  				$(value).css('width', inputWidth)
+  			  	$('#virtual_dom').remove();
+  				//console.log('==============================');
+  				*/
+  				value.style.width = (value.value.length+1) + 'em';
+  			} else {
+  				value.style.width = 5 + 'em';
+  			}
+  		});
+  	}
+
+  	// 엑셀 내용 추가 이벤트
+	function createExcelData(){
+		debugger;
+		let data =JSON.stringify({"productidx":""});
+		$.ajax({
+			url 		: '/getlst-excel-lst',
+			method 		: 'POST',
+			data 		: data,
+			contentType	: 'application/json',
+			dataType	: 'json',
+			success : function(obj){
+				var data = JSON.stringify(obj);
+				var json = JSON.parse(data);
+				debugger;
+			  	let htmlTxt = "";
+
+				$("#excelTable>tbody").prepend(htmlTxt);
+				
+			  	for(let i = 0; i<json.length; i++){
+			  		htmlTxt = htmlTxt
+					  		+"	<tr>"
+					  		+"		<td>"
+					  		// 순서
+					  		+			json[i].idx
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 상품명
+					  		+			json[i].productnm
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// url
+					  		+			json[i].imgurl
+					  		+"		</td>"
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// lead price
+					  		+			json[i].leadamt
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// memo
+					  		+			json[i].memo
+					  		+"		</td>"
+					  		
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl1PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl1SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl1SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl1DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl1DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl1DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl1DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl1DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl1DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl1DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl1DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl2PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl2SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl2SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl2DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl2DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl2DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl2DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl2DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl2DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl2DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl2DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl3PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl3SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl3SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl3DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl3DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl3DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl3DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl3DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl3DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl3DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl3DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl4PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl4SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl4SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl4DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl4DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl4DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl4DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl4DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl4DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl4DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl4DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl5PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl5SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl5SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl5DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl5DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl5DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl5DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl5DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl5DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl5DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl5DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl6PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl6SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl6SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl6DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl6DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl6DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl6DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl6DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl6DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl6DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl6DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl7PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl7SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl7SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl7DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl7DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl7DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl7DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl7DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl7DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl7DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl7DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl8PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl8SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl8SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl8DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl8DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl8DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl8DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl8DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl8DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl8DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl8DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl9PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl9SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl9SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl9DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl9DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl9DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl9DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl9DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl9DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl9DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl9DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl10PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl10SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl10SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl10DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl10DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl10DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl10DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl10DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl10DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl10DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl10DTLPRODUCTLINK
+					  		+"		</td>"
+
+					  		
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl11PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl11SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl11SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl11DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl11DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl11DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl11DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl11DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl11DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl11DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl11DTLPRODUCTLINK
+					  		+"		</td>"
+					  		/*
+					  		+"		<td>"
+					  		// 상세순서
+					  		+			json[i].pdl12PDLIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰 순서
+					  		+			json[i].pdl12SHOPIDX
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 쇼핑몰명
+					  		+			json[i].pdl12SHOPNM
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 판매가
+					  		+			json[i].pdl12DTLNOMALAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 배송비
+					  		+			json[i].pdl12DTLSHIPAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 수수료
+					  		+			json[i].pdl12DTLCOMMITIONAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 정산가
+					  		+			json[i].pdl12DTLCALCAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 구매가
+					  		+			json[i].pdl12DTLPAYAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 마진
+					  		+			json[i].pdl12DTLINCOMMAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 최저가
+					  		+			json[i].pdl12DTLLOWAMT
+					  		+"		</td>"
+					  		+"		<td>"
+					  		// 링크
+					  		+			json[i].pdl12DTLPRODUCTLINK
+					  		+"		</td>"
+					  		*/
+					  		+"	</tr>"
+				  		;
+			  	}
+
+				$("#excelTable>tbody").prepend(htmlTxt);
+				
+		  		exportExcel();
+			},
+			 error:function(request,status,error){				    
+				    return;
+			}
+		}) ;
+
+	}
   </script>
 </body>
 </html>

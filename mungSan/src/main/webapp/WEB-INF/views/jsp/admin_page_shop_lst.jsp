@@ -505,7 +505,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 				  		+"		</td>"
 				  		+"		<td>"
 				  		// 마진
-				  		+			json[i].dtlinconnamt
+				  		+			json[i].dtlincommamt
 				  		+"		</td>"
 				  		+"		<td>"
 				  		// 최저가

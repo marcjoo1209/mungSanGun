@@ -36,9 +36,6 @@ public class ProductDtlLstInDto {
   @ApiModelProperty(value = "구입가", example = "Y")
   private String DTLPAYAMT;
   
-  @ApiModelProperty(value = "마진", example = "Y")
-  private String DTLINCONNAMT;
-
   @ApiModelProperty(value = "최저가", example = "Y")
   private String DTLLOWAMT;
   
@@ -150,14 +147,6 @@ public class ProductDtlLstInDto {
 
   public void setDTLPAYAMT(String dTLPAYAMT) {
     DTLPAYAMT = dTLPAYAMT;
-  }
-
-  public String getDTLINCONNAMT() {
-    return DTLINCONNAMT;
-  }
-
-  public void setDTLINCONNAMT(String dTLINCONNAMT) {
-    DTLINCONNAMT = dTLINCONNAMT;
   }
 
   public String getDTLLOWAMT() {

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ExcelMapper">
+
+    <select id="getListExcelLst" resultType="com.jyj.msg.controller.dto.ExcelLstOutDto">
+        select 
+			IFNULL(pl.IDX, '') 						as IDX
+			, IFNULL(pl.PRODUCTNM, '') 				as PRODUCTNM
+			, IFNULL(pl.IMGURL, '') 				as IMGURL
+			, IFNULL(pl.LEADAMT, 0) 				as LEADAMT
+			, IFNULL(pl.MEMO, '')					as MEMO
+			/****************************************/
+			, IFNULL(pdl1.PDLIDX			, '')	as pdl1PDLIDX			
+			, IFNULL(pdl1.SHOPIDX           , '')   as pdl1SHOPIDX        
+			, IFNULL(pdl1.SHOPNM            , '')   as pdl1SHOPNM         
+			, IFNULL(pdl1.DTLNOMALAMT       , '')   as pdl1DTLNOMALAMT    
+			, IFNULL(pdl1.DTLSHIPAMT        , '')   as pdl1DTLSHIPAMT     
+			, IFNULL(pdl1.DTLCOMMITIONAMT   , '')   as pdl1DTLCOMMITIONAMT
+			, IFNULL(pdl1.DTLCALCAMT        , '')   as pdl1DTLCALCAMT     
+			, IFNULL(pdl1.DTLPAYAMT         , '')   as pdl1DTLPAYAMT      
+			, IFNULL(pdl1.DTLINCOMMAMT      , '')   as pdl1DTLINCOMMAMT   
+			, IFNULL(pdl1.DTLLOWAMT         , '')   as pdl1DTLLOWAMT      
+			, IFNULL(pdl1.DTLPRODUCTLINK    , '')   as pdl1DTLPRODUCTLINK      
+			/****************************************/
+			, IFNULL(pdl2.PDLIDX			, '')	as pdl2PDLIDX			
+			, IFNULL(pdl2.SHOPIDX           , '')   as pdl2SHOPIDX        
+			, IFNULL(pdl2.SHOPNM            , '')   as pdl2SHOPNM         
+			, IFNULL(pdl2.DTLNOMALAMT       , '')   as pdl2DTLNOMALAMT    
+			, IFNULL(pdl2.DTLSHIPAMT        , '')   as pdl2DTLSHIPAMT     
+			, IFNULL(pdl2.DTLCOMMITIONAMT   , '')   as pdl2DTLCOMMITIONAMT
+			, IFNULL(pdl2.DTLCALCAMT        , '')   as pdl2DTLCALCAMT     
+			, IFNULL(pdl2.DTLPAYAMT         , '')   as pdl2DTLPAYAMT      
+			, IFNULL(pdl2.DTLINCOMMAMT      , '')   as pdl2DTLINCOMMAMT   
+			, IFNULL(pdl2.DTLLOWAMT         , '')   as pdl2DTLLOWAMT        
+			, IFNULL(pdl2.DTLPRODUCTLINK    , '')   as pdl2DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl3.PDLIDX			, '')	as pdl3PDLIDX			
+			, IFNULL(pdl3.SHOPIDX           , '')   as pdl3SHOPIDX        
+			, IFNULL(pdl3.SHOPNM            , '')   as pdl3SHOPNM         
+			, IFNULL(pdl3.DTLNOMALAMT       , '')   as pdl3DTLNOMALAMT    
+			, IFNULL(pdl3.DTLSHIPAMT        , '')   as pdl3DTLSHIPAMT     
+			, IFNULL(pdl3.DTLCOMMITIONAMT   , '')   as pdl3DTLCOMMITIONAMT
+			, IFNULL(pdl3.DTLCALCAMT        , '')   as pdl3DTLCALCAMT     
+			, IFNULL(pdl3.DTLPAYAMT         , '')   as pdl3DTLPAYAMT      
+			, IFNULL(pdl3.DTLINCOMMAMT      , '')   as pdl3DTLINCOMMAMT   
+			, IFNULL(pdl3.DTLLOWAMT         , '')   as pdl3DTLLOWAMT          
+			, IFNULL(pdl3.DTLPRODUCTLINK    , '')   as pdl3DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl4.PDLIDX			, '')	as pdl4PDLIDX			
+			, IFNULL(pdl4.SHOPIDX           , '')   as pdl4SHOPIDX        
+			, IFNULL(pdl4.SHOPNM            , '')   as pdl4SHOPNM         
+			, IFNULL(pdl4.DTLNOMALAMT       , '')   as pdl4DTLNOMALAMT    
+			, IFNULL(pdl4.DTLSHIPAMT        , '')   as pdl4DTLSHIPAMT     
+			, IFNULL(pdl4.DTLCOMMITIONAMT   , '')   as pdl4DTLCOMMITIONAMT
+			, IFNULL(pdl4.DTLCALCAMT        , '')   as pdl4DTLCALCAMT     
+			, IFNULL(pdl4.DTLPAYAMT         , '')   as pdl4DTLPAYAMT      
+			, IFNULL(pdl4.DTLINCOMMAMT      , '')   as pdl4DTLINCOMMAMT   
+			, IFNULL(pdl4.DTLLOWAMT         , '')   as pdl4DTLLOWAMT   
+			, IFNULL(pdl4.DTLPRODUCTLINK    , '')   as pdl4DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl5.PDLIDX			, '')	as pdl5PDLIDX			
+			, IFNULL(pdl5.SHOPIDX           , '')   as pdl5SHOPIDX        
+			, IFNULL(pdl5.SHOPNM            , '')   as pdl5SHOPNM         
+			, IFNULL(pdl5.DTLNOMALAMT       , '')   as pdl5DTLNOMALAMT    
+			, IFNULL(pdl5.DTLSHIPAMT        , '')   as pdl5DTLSHIPAMT     
+			, IFNULL(pdl5.DTLCOMMITIONAMT   , '')   as pdl5DTLCOMMITIONAMT
+			, IFNULL(pdl5.DTLCALCAMT        , '')   as pdl5DTLCALCAMT     
+			, IFNULL(pdl5.DTLPAYAMT         , '')   as pdl5DTLPAYAMT      
+			, IFNULL(pdl5.DTLINCOMMAMT      , '')   as pdl5DTLINCOMMAMT   
+			, IFNULL(pdl5.DTLLOWAMT         , '')   as pdl5DTLLOWAMT  
+			, IFNULL(pdl5.DTLPRODUCTLINK    , '')   as pdl5DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl6.PDLIDX			, '')	as pdl6PDLIDX			
+			, IFNULL(pdl6.SHOPIDX           , '')   as pdl6SHOPIDX        
+			, IFNULL(pdl6.SHOPNM            , '')   as pdl6SHOPNM         
+			, IFNULL(pdl6.DTLNOMALAMT       , '')   as pdl6DTLNOMALAMT    
+			, IFNULL(pdl6.DTLSHIPAMT        , '')   as pdl6DTLSHIPAMT     
+			, IFNULL(pdl6.DTLCOMMITIONAMT   , '')   as pdl6DTLCOMMITIONAMT
+			, IFNULL(pdl6.DTLCALCAMT        , '')   as pdl6DTLCALCAMT     
+			, IFNULL(pdl6.DTLPAYAMT         , '')   as pdl6DTLPAYAMT      
+			, IFNULL(pdl6.DTLINCOMMAMT      , '')   as pdl6DTLINCOMMAMT   
+			, IFNULL(pdl6.DTLLOWAMT         , '')   as pdl6DTLLOWAMT    
+			, IFNULL(pdl6.DTLPRODUCTLINK    , '')   as pdl6DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl7.PDLIDX			, '')	as pdl7PDLIDX			
+			, IFNULL(pdl7.SHOPIDX           , '')   as pdl7SHOPIDX        
+			, IFNULL(pdl7.SHOPNM            , '')   as pdl7SHOPNM         
+			, IFNULL(pdl7.DTLNOMALAMT       , '')   as pdl7DTLNOMALAMT    
+			, IFNULL(pdl7.DTLSHIPAMT        , '')   as pdl7DTLSHIPAMT     
+			, IFNULL(pdl7.DTLCOMMITIONAMT   , '')   as pdl7DTLCOMMITIONAMT
+			, IFNULL(pdl7.DTLCALCAMT        , '')   as pdl7DTLCALCAMT     
+			, IFNULL(pdl7.DTLPAYAMT         , '')   as pdl7DTLPAYAMT      
+			, IFNULL(pdl7.DTLINCOMMAMT      , '')   as pdl7DTLINCOMMAMT   
+			, IFNULL(pdl7.DTLLOWAMT         , '')   as pdl7DTLLOWAMT  
+			, IFNULL(pdl7.DTLPRODUCTLINK    , '')   as pdl7DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl8.PDLIDX			, '')	as pdl8PDLIDX			
+			, IFNULL(pdl8.SHOPIDX           , '')  as pdl8SHOPIDX        
+			, IFNULL(pdl8.SHOPNM            , '')  as pdl8SHOPNM         
+			, IFNULL(pdl8.DTLNOMALAMT       , '')  as pdl8DTLNOMALAMT    
+			, IFNULL(pdl8.DTLSHIPAMT        , '')  as pdl8DTLSHIPAMT     
+			, IFNULL(pdl8.DTLCOMMITIONAMT   , '')  as pdl8DTLCOMMITIONAMT
+			, IFNULL(pdl8.DTLCALCAMT        , '')  as pdl8DTLCALCAMT     
+			, IFNULL(pdl8.DTLPAYAMT         , '')  as pdl8DTLPAYAMT      
+			, IFNULL(pdl8.DTLINCOMMAMT      , '')  as pdl8DTLINCOMMAMT   
+			, IFNULL(pdl8.DTLLOWAMT         , '')  as pdl8DTLLOWAMT  
+			, IFNULL(pdl8.DTLPRODUCTLINK    , '')  as pdl8DTLPRODUCTLINK
+			 /****************************************/
+			, IFNULL(pdl9.PDLIDX			, '')	as pdl9PDLIDX			
+			, IFNULL(pdl9.SHOPIDX           , '')   as pdl9SHOPIDX        
+			, IFNULL(pdl9.SHOPNM            , '')   as pdl9SHOPNM         
+			, IFNULL(pdl9.DTLNOMALAMT       , '')   as pdl9DTLNOMALAMT    
+			, IFNULL(pdl9.DTLSHIPAMT        , '')   as pdl9DTLSHIPAMT     
+			, IFNULL(pdl9.DTLCOMMITIONAMT   , '')   as pdl9DTLCOMMITIONAMT
+			, IFNULL(pdl9.DTLCALCAMT        , '')   as pdl9DTLCALCAMT     
+			, IFNULL(pdl9.DTLPAYAMT         , '')   as pdl9DTLPAYAMT      
+			, IFNULL(pdl9.DTLINCOMMAMT      , '')   as pdl9DTLINCOMMAMT   
+			, IFNULL(pdl9.DTLLOWAMT         , '')   as pdl9DTLLOWAMT 
+			, IFNULL(pdl9.DTLPRODUCTLINK    , '')   as pdl9DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl10.PDLIDX			, '')	as pdl10PDLIDX			
+			, IFNULL(pdl10.SHOPIDX          , '')    as pdl10SHOPIDX        
+			, IFNULL(pdl10.SHOPNM           , '')    as pdl10SHOPNM         
+			, IFNULL(pdl10.DTLNOMALAMT      , '')    as pdl10DTLNOMALAMT    
+			, IFNULL(pdl10.DTLSHIPAMT       , '')    as pdl10DTLSHIPAMT     
+			, IFNULL(pdl10.DTLCOMMITIONAMT  , '')    as pdl10DTLCOMMITIONAMT
+			, IFNULL(pdl10.DTLCALCAMT       , '')    as pdl10DTLCALCAMT     
+			, IFNULL(pdl10.DTLPAYAMT        , '')    as pdl10DTLPAYAMT      
+			, IFNULL(pdl10.DTLINCOMMAMT     , '')    as pdl10DTLINCOMMAMT   
+			, IFNULL(pdl10.DTLLOWAMT        , '')    as pdl10DTLLOWAMT  
+			, IFNULL(pdl10.DTLPRODUCTLINK   , '')    as pdl10DTLPRODUCTLINK
+			/****************************************/
+			, IFNULL(pdl11.PDLIDX			, '')	as pdl11PDLIDX			
+			, IFNULL(pdl11.SHOPIDX          , '')    as pdl11SHOPIDX        
+			, IFNULL(pdl11.SHOPNM           , '')    as pdl11SHOPNM         
+			, IFNULL(pdl11.DTLNOMALAMT      , '')    as pdl11DTLNOMALAMT    
+			, IFNULL(pdl11.DTLSHIPAMT       , '')    as pdl11DTLSHIPAMT     
+			, IFNULL(pdl11.DTLCOMMITIONAMT  , '')    as pdl11DTLCOMMITIONAMT
+			, IFNULL(pdl11.DTLCALCAMT       , '')    as pdl11DTLCALCAMT     
+			, IFNULL(pdl11.DTLPAYAMT        , '')    as pdl11DTLPAYAMT      
+			, IFNULL(pdl11.DTLINCOMMAMT     , '')    as pdl11DTLINCOMMAMT   
+			, IFNULL(pdl11.DTLLOWAMT        , '')    as pdl11DTLLOWAMT  
+			, IFNULL(pdl11.DTLPRODUCTLINK   , '')    as pdl11DTLPRODUCTLINK
+			/****************************************/
+		from product_lst pl 
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '1'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl1
+		on pl.IDX = pdl1.PRODUCTIDX
+			/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '2'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl2
+		on pl.IDX = pdl2.PRODUCTIDX
+			/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '3'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl3
+		on pl.IDX = pdl3.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '4'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl4
+		on pl.IDX = pdl4.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '5'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl5
+		on pl.IDX = pdl5.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '6'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl6
+		on pl.IDX = pdl6.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '7'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl7
+		on pl.IDX = pdl7.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '8'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl8
+		on pl.IDX = pdl8.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '9'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl9
+		on pl.IDX = pdl9.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '10'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl10
+		on pl.IDX = pdl10.PRODUCTIDX
+		/****************************************/
+		left outer join
+			(
+			select
+				pdl.IDX 							as PDLIDX
+				, pdl.PRODUCTIDX					as PRODUCTIDX
+				, pdl.SHOPIDX 						as SHOPIDX
+				, sl.SHOPNM 						as SHOPNM
+				, pdl.DTLNOMALAMT 					as DTLNOMALAMT
+				, pdl.DTLSHIPAMT 					as DTLSHIPAMT 
+				, pdl.DTLCOMMITIONAMT 				as DTLCOMMITIONAMT 
+				, pdl.DTLCALCAMT 					as DTLCALCAMT 
+				, pdl.DTLPAYAMT 					as DTLPAYAMT 
+				, pdl.DTLINCOMMAMT 					as DTLINCOMMAMT 
+				, pdl.DTLLOWAMT 					as DTLLOWAMT 
+				, pdl.DTLPRODUCTLINK 
+			from product_dtl_lst pdl 
+			inner join shop_lst sl 
+			on sl.IDX = '11'
+			 and sl.IDX = pdl.SHOPIDX 
+			where pdl.USEYN = 'Y'
+			) as pdl11
+		on pl.IDX = pdl11.PRODUCTIDX
+		/****************************************/
+		where pl.USEYN = 'Y'
+	</select>
+	
+	<insert id='createListExcelListTbl'>
+        INSERT INTO product_lst
+        (
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
+        )
+        VALUES
+        (
+        	IFNULL(#{IDX},
+	        	(IFNULL(
+	            	(SELECT 
+	            		MAX(CAST(cl.IDX AS INTEGER))
+	        		  FROM product_lst cl
+	        		 WHERE 1 = 1
+	        		) , 0
+	        	) +1)
+        	)
+        	, #{PRODUCTNM}
+        	, #{IMGURL}
+        	, IFNULL(#{NOMALAMT}, '0')
+        	, IFNULL(#{SHIPAMT}, '0')
+        	, IFNULL(#{COMMITIONAMT}, '0')
+        	, IFNULL(#{CALCAMT}, '0')
+        	, IFNULL(#{PAYAMT}, '0')
+        	, IFNULL(#{INCOMEAMT}, '0')
+        	, IFNULL(#{LOWAMT}, '0')
+        	, #{PRODUCTLINK}
+        	, 'Y'
+        	, CURRENT_TIMESTAMP(6)
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        	, #{MEMO}
+        	, #{LEADAMT}
+        )
+        ON DUPLICATE KEY UPDATE
+			PRODUCTNM 		= #{PRODUCTNM},
+			IMGURL 			= #{IMGURL},
+			NOMALAMT 		= #{NOMALAMT},
+			SHIPAMT 		= #{SHIPAMT},
+			COMMITIONAMT 	= #{COMMITIONAMT},
+			CALCAMT 		= #{CALCAMT},
+			PAYAMT 			= #{PAYAMT},
+			INCOMEAMT 		= #{INCOMEAMT},
+			LOWAMT 			= #{LOWAMT},
+			PRODUCTLINK 	= #{PRODUCTLINK},
+			AUDITDTM 		= CURRENT_TIMESTAMP(6),
+			AUDITID 		= 'cila10',
+        	MEMO			= #{MEMO},
+        	LEADAMT			= #{LEADAMT}
+	</insert>
+	
+	<insert id='createListExcelDtlListTbl'>
+        INSERT INTO product_dtl_lst
+        (
+        	IDX
+        	, SHOPIDX
+        	, PRODUCTIDX
+        	, DTLNOMALAMT
+        	, DTLSHIPAMT
+        	, DTLCOMMITIONAMT
+        	, DTLCALCAMT
+        	, DTLPAYAMT
+        	, DTLINCOMMAMT
+        	, DTLLOWAMT
+        	, DTLPRODUCTLINK
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITID
+        	, AUDITDTM
+        )
+        VALUES
+        (
+        	IFNULL(#{IDX},
+	        	(IFNULL(
+	            	(SELECT 
+	            		MAX(CAST(cl.IDX AS INTEGER))
+	        		  FROM product_dtl_lst cl
+	        		 WHERE 1 = 1
+	        		) , 0
+	        	) +1)
+	        )
+        	, #{SHOPIDX}
+        	, #{PRODUCTIDX}
+        	, #{DTLNOMALAMT}
+        	, #{DTLSHIPAMT}
+        	, #{DTLCOMMITIONAMT}
+        	, #{DTLCALCAMT}
+        	, #{DTLPAYAMT}
+        	, #{DTLINCOMMAMT}
+        	, #{DTLLOWAMT}
+        	, #{DTLPRODUCTLINK}
+        	, 'Y'
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        	, CURRENT_TIMESTAMP(6)
+        )
+        ON DUPLICATE KEY UPDATE
+        	DTLNOMALAMT			= #{DTLNOMALAMT}
+        	, DTLSHIPAMT		= #{DTLSHIPAMT}
+        	, DTLCOMMITIONAMT	= #{DTLCOMMITIONAMT}
+        	, DTLCALCAMT		= #{DTLCALCAMT}
+        	, DTLPAYAMT			= #{DTLPAYAMT}
+        	, DTLINCOMMAMT		= #{DTLINCOMMAMT}
+        	, DTLLOWAMT			= #{DTLLOWAMT}
+        	, DTLPRODUCTLINK	= #{DTLPRODUCTLINK}
+        	, SHOPIDX			= #{SHOPIDX}
+        	, AUDITID			= #{AUDITID}
+        	, AUDITDTM			= CURRENT_TIMESTAMP(6)
+	</insert>
+</mapper>

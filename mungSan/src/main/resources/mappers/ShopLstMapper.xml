@@ -15,6 +15,7 @@
         	, URL
         FROM shop_lst
         WHERE 1 = 1
+        ORDER BY CAST(IDX AS UNSIGNED) ASC
 	</select>
 
     <insert id="createShopLst">
