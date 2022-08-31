@@ -516,7 +516,7 @@ img.custom:focus {
 	
 	<form id="SearchLst" method="post" action="/admin-page-lst-main">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
-		<input type='hidden' id="ORDERNUM" name="ORDERNUM" value=''>
+		<input type='hidden' id="ORDERNUM" name="ORDERNUM" value='${orderNum}'>
 		
 	</form>
 	
@@ -697,7 +697,9 @@ function test(){
 		
 		// form 값 초기화
 		$("#SEARCHPRODUCTNM").val($searchItemNm);
-		$("#ORDERNUM").val(orderNum);
+		if(orderNum != null){
+			$("#ORDERNUM").val(orderNum);
+		}
 
 		// 조회 호출
 		$form.submit()

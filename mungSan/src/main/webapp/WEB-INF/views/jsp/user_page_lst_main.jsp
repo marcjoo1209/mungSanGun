@@ -46,6 +46,11 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
   min-height: 80%;
 }
 
+img.custom:hover,
+img.custom:focus {
+    transform:scale(3.5);
+    transition: transform.5s;
+    }
 </style>
 </head>
 <body>
@@ -85,7 +90,14 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 							<th>순서</th>
 							<th>더보기</th> 
 							<th>이미지 </th>
-							<th>상품명 </th>
+							<th>상품명
+								<c:if test="${orderNum  eq 'b'}">
+									<a href="javascript:searchItemList('a')">오름차순</a>
+								</c:if>
+								<c:if test="${orderNum  eq 'a'}">
+									<a href="javascript:searchItemList('b')">내림차순</a>
+								</c:if>
+							</th>
 							<th>구입가 </th>
 							<th>링크</th>
 						</tr>
@@ -106,7 +118,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 								</td>
 								<!-- 이미지 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
-									<img src='${list.IMGURL} ' width='50px' height='50px'>
+									<img class="custom" src='${list.IMGURL} ' width='50px' height='50px'>
 								</td>
 								<!-- 상품명 -->
 								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
@@ -151,6 +163,7 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 	
 	<form id="SearchLst" method="post" action="/product-lst">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
+		<input type='hidden' id="ORDERNUM" name="ORDERNUM" value='${orderNum}'>
 	</form>
 	
 	<!-- FOOTER -->
@@ -193,19 +206,23 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
   	
 
   	//  상품명 조회 호출
-  	function searchItemList(){
+  	function searchItemList(orderNum){
 		// form 변수 초기화
 		var $form = $("#SearchLst");
 		
 		// 조회 값체크
 		var $searchItemNm = $("#searchItemNm").val();
-
+		
 		// form 값 초기화
 		$("#SEARCHPRODUCTNM").val($searchItemNm);
+		if(orderNum != null){
+			$("#ORDERNUM").val(orderNum);
+		}
 
 		// 조회 호출
 		$form.submit()
   	}
+
 
   	// 상품 상세 리스트 조회
   	function searchProductList(idx){
