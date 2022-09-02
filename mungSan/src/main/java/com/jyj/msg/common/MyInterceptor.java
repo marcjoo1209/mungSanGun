@@ -46,6 +46,7 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
                     || request.getRequestURI().equals("/remove-product-lst")
                     || request.getRequestURI().equals("/modify-product-lst")
                     || request.getRequestURI().equals("/admin-page-lst-sub")
+                    || request.getRequestURI().equals("/admin-page-lst-sub-pop")
                     || request.getRequestURI().equals("/get-list-product-dtl-lst")
                     || request.getRequestURI().equals("/create-product-dtl-lst")
                     || request.getRequestURI().equals("/remove-product-dtl-lst")

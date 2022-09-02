@@ -347,17 +347,27 @@ input::-webkit-inner-spin-button {
 
 	<!-- modify Modal -->
 	<div class="modal fade" id="listModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
+				<!-- 
 				<div class="modal-header">상품 상세 리스트</div>
 				<div class="modal-body">
 				    <div class="col-lg">
 				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 20px">추가</button>
 				    </div>
 				</div>
+				 -->
 				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
-					
+					<iframe id='adminPageListSubIframe'
+							name='adminPageListSubIframe'
+							title='상품상세관리 페이지'
+							width = '100%' 
+							height = '1024'
+							style='border:none'
+					src="/admin-page-lst-sub-pop">
+					    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+					</iframe>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -570,6 +580,10 @@ input::-webkit-inner-spin-button {
 		<input type='hidden' id="PRODUCTIDX" name="PRODUCTIDX" value=''>
 	</form>
 	
+	<form id="ProductDtlLstPop" method="post" action="/admin-page-lst-sub-pop" target='adminPageListSubIframe'>
+		<input type='hidden' id="PRODUCTIDX" name="PRODUCTIDX" value=''>
+	</form>
+	
 	<form id="ProductLst" name="ProductLst">
 		<input type='hidden' id="IDX" name="IDX" value=''>  
 		<input type='hidden' id="IMGURL" name="IMGURL" value=''>  
@@ -623,6 +637,18 @@ function test(){
   	// 상품 상세 리스트 조회
   	function searchProductList(idx){
   		debugger;
+  		
+		var $form = $("#ProductDtlLstPop");
+		
+		// form 값 초기화
+		$('#ProductDtlLstPop [name="PRODUCTIDX"]').val(idx);
+
+		// 조회 호출
+		$form.submit()
+		
+ 	   	// modal 활성화
+ 	   	$('#listModal').modal('show');
+  		/*
 		// form 변수 초기화
 		var $form = $("#ProductDtlLst");
 		
@@ -631,7 +657,7 @@ function test(){
 
 		// 조회 호출
 		$form.submit()
-
+*/
 		/*
 		let data =JSON.stringify({"productidx":idx});
 		
