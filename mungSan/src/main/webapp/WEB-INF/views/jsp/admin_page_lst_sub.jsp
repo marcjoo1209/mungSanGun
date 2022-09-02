@@ -547,7 +547,16 @@ input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; b
 			dataType	: 'json',
 			success : function(obj){
 				debugger;
-				window.location.href="/admin-page-lst-sub"
+				// form 변수 초기화
+				var $form = $("#SearchLst");
+				
+				// form 값 초기화
+				$('#SearchLst [name="PRODUCTIDX"]').val(prmproductidx);
+
+				// 조회 호출
+				$form.submit()
+				
+				//window.location.href="/admin-page-lst-sub"
 			},
 			 error:function(request,status,error){				    
 				    return;

@@ -31,7 +31,7 @@
 	rel="stylesheet">
 
 <style type="text/css">
-.mycenterStyle{font-size: 11px; text-align:center; vertical-align:middle}
+.mycenterStyle{font-size: 20px; text-align:center; vertical-align:middle}
 input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:70px;}
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
 .modal-dialog.modal-80size {
@@ -51,6 +51,25 @@ img.custom:focus {
     transform:scale(3.5);
     transition: transform.5s;
     }
+    
+
+.tableFixHead          { overflow: auto; height: 1024px; width: 100%; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+
+
+/* hide Arrows*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 </style>
 </head>
 <body>
@@ -68,10 +87,10 @@ img.custom:focus {
 		    <div class="col-md" align='right'>
 			  	<div class="row">
 				    <div class="col-lg">
-				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' style="font-size: 11px">
+				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' onkeyup="searchItemList_enterkey()" style="font-size: 20px">
 			    	</div>
 				    <div class="col-auto">
-				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 11px">검색</button>
+				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 20px">검색</button>
 			    	</div>
 		    	</div>
 		    </div>
@@ -82,10 +101,10 @@ img.custom:focus {
 		</div>
 
 		<div class="row">
-		    <div class="col-lg">
+		    <div class="tableFixHead">
 				<table class="table table-bordered table-responsive-sm"
-					id="itemTable" style="font-size: 11px; text-align:center; vertical-align:middle">
-					<thead>
+					id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle">
+					<thead class="thead-light">
 						<tr>
 							<th>순서</th>
 							<th>더보기</th> 
@@ -105,31 +124,31 @@ img.custom:focus {
 					<tbody valign='bottom'>
 						<c:forEach items='${outDto}' var='list' varStatus='status'>
 							
-							<tr style='font-size: 11px; text-align:center; vertical-align:middle'>
+							<tr style='font-size: 20px; text-align:center; vertical-align:middle'>
 								<!-- 순서 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									${list.IDX}
 								</td>
 								<!-- 리스트 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<a href='javascript:searchProductList(${list.IDX});' >
 									<img src='https://emoji-uc.akamaized.net/orig/38/9aa4151972abf59344d01195bb967e.png' width = '15px' height = '15px'>
 									</a>
 								</td>
 								<!-- 이미지 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<img class="custom" src='${list.IMGURL} ' width='50px' height='50px'>
 								</td>
 								<!-- 상품명 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='PRODUCTNMSPAN${list.IDX}'>${list.PRODUCTNM }</span>
 								</td>
 								<!-- 구입가 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='PAYAMTSPAN${list.IDX}'>${list.PAYAMT }</span>
 								</td>
 								<!-- 링크 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<a href='${list.PRODUCTLINK }' target="_blank">
 										<span id='PRODUCTLINKSPAN${list.IDX}'>링크</span>
 									</a>
@@ -223,6 +242,13 @@ img.custom:focus {
 		$form.submit()
   	}
 
+  	// 엔터키 이벤트
+  	function searchItemList_enterkey(){
+  		debugger;
+  		if (window.event.keyCode == 13) {
+  			searchItemList();
+  		}
+  	}
 
   	// 상품 상세 리스트 조회
   	function searchProductList(idx){
@@ -257,7 +283,7 @@ img.custom:focus {
 			  	let htmlTxt = "";
 			  	
 			  	htmlTxt = htmlTxt
-					  		+"<table class='table table-bordered table-responsive-sm' id='productDtlListTbl' style='font-size: 11px; text-align:center; vertical-align:middle'>"
+					  		+"<table class='table table-bordered table-responsive-sm' id='productDtlListTbl' style='font-size: 20px; text-align:center; vertical-align:middle'>"
 							+"	<thead>                                         "
 							+"	<tr>                                            "
 							+"		<th>순서</th>                               "

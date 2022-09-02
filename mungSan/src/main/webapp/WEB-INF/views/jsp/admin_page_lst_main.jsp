@@ -30,8 +30,15 @@
 	href="https://getbootstrap.com/docs/4.1/examples/starter-template/starter-template.css"
 	rel="stylesheet">
 
+<!-- bootstrap sticky -->
+<link href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<link href="https://unpkg.com/bootstrap-table@1.21.0/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
+
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+
 <style type="text/css">
-.mycenterStyle{font-size: 11px; text-align:center; vertical-align:middle}
+.mycenterStyle{font-size: 20px; text-align:center; vertical-align:middle}
 input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:70px;}
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
 
@@ -40,6 +47,25 @@ img.custom:focus {
     transform:scale(3.5);
     transition: transform.5s;
     }
+
+
+.tableFixHead          { overflow: auto; height: 1024px; width: 100%; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+
+
+/* hide Arrows*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 </style>
 
 <!-- eXCEL -->
@@ -60,7 +86,7 @@ img.custom:focus {
 		<div class="row">
 		  
 		    <div class="col-lg">
-		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 11px">추가</button>
+		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 20px">추가</button>
 		      
 			 	<!-- 엑셀 다운로드 -->
 				<a href="javascript:excelDown()">
@@ -75,10 +101,10 @@ img.custom:focus {
 		    <div class="col-md" align='right'>
 			  	<div class="row">
 				    <div class="col-lg">
-				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' style="font-size: 11px">
+				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' onkeyup="searchItemList_enterkey()" style="font-size: 20px">
 			    	</div>
 				    <div class="col-auto">
-				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 11px">검색</button>
+				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 20px">검색</button>
 			    	</div>
 		    	</div>
 		    </div>
@@ -93,10 +119,30 @@ img.custom:focus {
 		  	1. 이미지 상품명 판매가 배송비 수수료 정산가 구입가 마진 최저가 링크 중 알바와 공유하는 웹사이트로 노출되는걸 선택 할수 있습니다.
 		  	2. 상품 정보등 입력 수정 시 "연필" 클릭 후 별도 모달 창에서 수정 후 "체크"클릭시 바로 수정, 저장 되도록   
 		  	 -->
-		    <div class="col-lg">
-				<table class="table table-bordered table-responsive-sm"
-					id="itemTable" style="font-size: 11px; text-align:center; vertical-align:middle">
-					<thead>
+		    <div class="tableFixHead">
+				<table class="table table-bordered table-responsive-sm" id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle">
+					<!-- 
+				<table class="table table-bordered table-responsive-sm" id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle">
+					<caption>제목셀이 고정된 표입니다.</caption>
+					<colgroup>
+						<col width="1%">
+						<col width="1%">
+						<col width="5%">
+						<col width="5%">
+						<col width="38%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+						<col width="5%">
+					</colgroup>
+					 -->
+					<thead style="" class="thead-light" >
 						<tr>
 							<th>순서</th>
 							<!-- 더보기를 누르면 내가 기록한 해당 제품의 여러 오픈마켓의 정보가 나옵니다. 
@@ -133,18 +179,18 @@ img.custom:focus {
 							<!-- 마진 : 정산가 - 오픈마켓가격 (구입가)-->
 							<c:set var='totAmtP' value='${totAmt-list.PAYAMT}'/>
 							
-							<tr style='font-size: 11px; text-align:center; vertical-align:middle'>
+							<tr style='font-size: 20px; text-align:center; vertical-align:middle'>
 								<!-- 순서 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									${list.IDX}
 								</td>
 								<!-- 리스트 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<a href='javascript:searchProductList(${list.IDX});' >
 									<img src='https://emoji-uc.akamaized.net/orig/38/9aa4151972abf59344d01195bb967e.png' width = '15px' height = '15px'>
 									</a>
 								</td>
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<!-- 수정버튼 
 									<button type='button' class='btn btn-primary' id='modifyButton' onclick='modifyButton_onclickData(${list.IDX})' style='font-size: 10px'>수정</button>
 									-->
@@ -152,7 +198,7 @@ img.custom:focus {
 									<button type='button' class='btn btn-primary' id='removeButton' onclick='removeButton_onclickData(${list.IDX})' style='font-size: 10px; margin: 1px;'>삭제</button>
 								</td>
 								<!-- 이미지 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<img class="custom" src='${list.IMGURL} ' width='50px' height='50px'>
 									<a href="javascript:modifyProduct(${list.IDX}, '0');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='IMGURLIMG1${list.IDX}'>
@@ -163,7 +209,7 @@ img.custom:focus {
 									</a>
 								</td>
 								<!-- 상품명 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='PRODUCTNMSPAN${list.IDX}'>${list.PRODUCTNM }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '1');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='PRODUCTNMIMG1${list.IDX}'>
@@ -174,7 +220,7 @@ img.custom:focus {
 									</a>
 								</td>
 								<!-- leadPrice -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='LEADAMTSPAN${list.IDX}'>${list.LEADAMT}</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '10');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='LEADAMTIMG1${list.IDX}'>
@@ -185,7 +231,7 @@ img.custom:focus {
 									</a>
 								</td>
 								<!-- 판매가 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='NOMALAMTSPAN${list.IDX}'>${list.NOMALAMT }</span>
 									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '2');" >
@@ -198,7 +244,7 @@ img.custom:focus {
 									-->
 								</td>
 								<!-- 배송비 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='SHIPAMTSPAN${list.IDX}'>${list.SHIPAMT }</span>
 									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '3');" >
@@ -211,7 +257,7 @@ img.custom:focus {
 									-->
 								</td>
 								<!-- 수수료 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='COMMITIONAMTSPAN${list.IDX}'>${list.COMMITIONAMT }</span>
 									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '4');" >
@@ -224,14 +270,14 @@ img.custom:focus {
 									 -->
 								</td>
 								<!-- 정산가 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='CALCAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmt }' /></span>
 									<!-- 
 									<input type='hidden' class='price1' id='CALCAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmt }' /> '/>
 									 -->
 								</td>
 								<!-- 구입가 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='PAYAMTSPAN${list.IDX}'>${list.PAYAMT }</span>
 									<!-- 
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
@@ -244,14 +290,14 @@ img.custom:focus {
 									 -->
 								</td>
 								<!-- 마진 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='INCOMEAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmtP }' /></span>
 									<!-- 
 									<input type='hidden' class='price1' id='INCOMEAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmtP }' /> '/>
 									 -->
 								</td>
 								<!-- 최저가 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='LOWAMTSPAN${list.IDX}'>${list.LOWAMT }</span>
 									<!--  
 									<a href="javascript:modifyProduct(${list.IDX}, '8');" >
@@ -264,13 +310,13 @@ img.custom:focus {
 									-->
 								</td>
 								<!-- 링크 -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<a href='${list.PRODUCTLINK }' target="_blank">
 										<span id='PRODUCTLINKSPAN${list.IDX}'>링크</span>
 									</a>
 								</td>
 								<!-- memo -->
-								<td style='font-size: 11px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='MEMOSPAN${list.IDX}'>${list.MEMO }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '11');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='MEMOIMG1${list.IDX}'>
@@ -307,7 +353,7 @@ img.custom:focus {
 				<div class="modal-header">상품 상세 리스트</div>
 				<div class="modal-body">
 				    <div class="col-lg">
-				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 11px">추가</button>
+				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 20px">추가</button>
 				    </div>
 				</div>
 				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
@@ -606,7 +652,7 @@ function test(){
 			  	let htmlTxt = "";
 			  	
 			  	htmlTxt = htmlTxt
-					  		+"<table class='table table-bordered table-responsive-sm' id='productDtlListTbl' style='font-size: 11px; text-align:center; vertical-align:middle'>"
+					  		+"<table class='table table-bordered table-responsive-sm' id='productDtlListTbl' style='font-size: 20px; text-align:center; vertical-align:middle'>"
 							+"	<thead>                                         "
 							+"	<tr>                                            "
 							+"		<th>순서</th>                               "
@@ -704,68 +750,76 @@ function test(){
 		// 조회 호출
 		$form.submit()
   	}
+  	
+  	// 엔터키 이벤트
+  	function searchItemList_enterkey(){
+  		debugger;
+  		if (window.event.keyCode == 13) {
+  			searchItemList();
+  		}
+  	}
 
   	// 추가 버튼 이벤트
 	function createButton_onclick(){
 		totCnt = totCnt + 1;
 		var tmpTExt = 	
-			"	<tr style='font-size: 11px; text-align:center; vertical-align:middle'>			"
+			"	<tr style='font-size: 20px; text-align:center; vertical-align:middle'>			"
 			+ "		<!-- 순서 -->                                                                 "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "		</td>                                                                       "
 			+ "		<!-- 리스트 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "		</td>                                                                       "
 			+ "		<!-- 등록버튼 -->                                                               "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<button type='button' class='btn btn-primary' id='removeButton' onclick='createProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>"
 			+ "		<!-- 이미지 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='longstr' id='IMGURL" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 상품명 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='longstr' id='PRODUCTNM" + totCnt + "' value=''/>                         "
 			+ "		</td>                                                                       "
 			+ "		<!-- LEADAMT -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='LEADAMT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 판매가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='NOMALAMT" + totCnt + "' value=''/>                           "
 			+ "		</td>                                                                       "
 			+ "		<!-- 배송비 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='SHIPAMT" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 수수료 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='COMMITIONAMT" + totCnt + "' value=''/>                       "
 			+ "		</td>                                                                       "
 			+ "		<!-- 정산가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='CALCAMT" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 구입가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='PAYAMT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 마진 -->                                                                 "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='INCOMEAMT" + totCnt + "' value=''/>                          "
 			+ "		</td>                                                                       "
 			+ "		<!-- 최저가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='LOWAMT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 링크 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			//+ "			<input id='PRODUCTLINK" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 메모 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='longstr' id='MEMO" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "	</tr>"
@@ -778,52 +832,52 @@ function test(){
 		totCnt = totCnt + 1;
 
 		var tmpTExt = 	
-			"	<tr style='font-size: 11px; text-align:center; vertical-align:middle'>			"
+			"	<tr style='font-size: 20px; text-align:center; vertical-align:middle'>			"
 			+ "		<!-- 순서 -->                                                                 "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "		</td>                                                                       "
 			+ "		<!-- 쇼핑몰명(구매처) -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='SHOPIDX" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- LEADAMT -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='LEADMAT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 배송비 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='IMGURL" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 수수료 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='PRODUCTNM" + totCnt + "' value=''/>                         "
 			+ "		</td>                                                                       "
 			+ "		<!-- 정산가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='NOMALAMT" + totCnt + "' value=''/>                           "
 			+ "		</td>                                                                       "
 			+ "		<!-- 구입가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='SHIPAMT" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 마진 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='COMMITIONAMT" + totCnt + "' value=''/>                       "
 			+ "		</td>                                                                       "
 			+ "		<!-- 최저가 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='CALCAMT" + totCnt + "' value=''/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 링크 -->                                                                "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='PAYAMT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 수정 -->                                                                 "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input id='INCOMEAMT" + totCnt + "' value=''/>                          "
 			+ "		</td>                                                                       "
 			+ "		<!-- 등록버튼 -->                                                               "
-			+ "		<td style='font-size: 11px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<button type='button' class='btn btn-primary' id='removeButton' onclick='createDtlProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>"
 			+ "	</tr>"

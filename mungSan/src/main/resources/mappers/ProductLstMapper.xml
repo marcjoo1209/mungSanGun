@@ -80,6 +80,7 @@
 						, MIN(CAST(a.DTLNOMALAMT as unsigned))
 					FROM product_dtl_lst a
 					where useyn = 'Y' 
+					  and CAST(IFNULL(a.DTLNOMALAMT, '99999999999') as unsigned) != 0
 					GROUP BY a.PRODUCTIDX
 					)
 				) pdl
