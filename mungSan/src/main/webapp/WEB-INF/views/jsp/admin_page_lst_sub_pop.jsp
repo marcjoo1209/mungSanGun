@@ -31,11 +31,11 @@
 	rel="stylesheet">
 
 <style type="text/css">
-.mycenterStyle{font-size: 15px; text-align:center; vertical-align:middle}
+.mycenterStyle{font-size: 20px; text-align:center; vertical-align:middle}
 input.price1{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:70px;}
 input.longstr{border-right: #ffffff 1px solid; border-left: #ffffff 1px solid; border-top: #ffffff 1px solid; border-bottom: #000000 1px solid; width:200px;}
 
-.tableFixHead          { overflow: auto; height: 1024px; width: 100%; }
+.tableFixHead          { overflow: auto; height: 750px; width: 100%; }
 .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */
@@ -63,7 +63,7 @@ input::-webkit-inner-spin-button {
 		<div class="row">
 		  
 		    <div class="col-lg">
-		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 15px">추가</button>
+		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 20px">추가</button>
 		      
 			 	<!-- 엑셀 다운로드 
 				<a href="javascript:excelDown()">
@@ -86,10 +86,10 @@ input::-webkit-inner-spin-button {
 		    <div class="col-md" align='right'>
 			  	<div class="row">
 				    <div class="col-lg">
-				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' style="font-size: 15px">
+				     <input class="form-control" type="text" id='searchItemNm' placeholder="상품이름" value='${searchTxt }' style="font-size: 20px">
 			    	</div>
 				    <div class="col-auto">
-				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 15px">검색</button>
+				      <button type="button" class="btn btn-secondary" onclick="searchItemList()" style="font-size: 20px">검색</button>
 			    	</div>
 		    	</div>
 		    </div>
@@ -106,8 +106,7 @@ input::-webkit-inner-spin-button {
 		  	2. 상품 정보등 입력 수정 시 "연필" 클릭 후 별도 모달 창에서 수정 후 "체크"클릭시 바로 수정, 저장 되도록   
 		  	 -->
 		    <div class="tableFixHead">
-				<table class="table table-bordered table-responsive-sm" id="itemTable" style="font-size: 15px; text-align:center; vertical-align:middle">
-					<caption>제목셀이 고정된 표입니다.</caption>
+				<table class="table table-bordered table-responsive-sm" id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle">
 					<colgroup>
 						<col width="2%">
 						<col width="3%">
@@ -143,17 +142,17 @@ input::-webkit-inner-spin-button {
 							<!-- 마진 : 정산가 - 오픈마켓가격 (구입가)-->
 							<c:set var='totAmtP' value='${totAmt-list.DTLPAYAMT}'/>
 							
-							<tr style='font-size: 15px; text-align:center; vertical-align:middle'>
+							<tr style='font-size: 20px; text-align:center; vertical-align:middle'>
 								<!-- 순서 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									${list.IDX}
 								</td>
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<!-- 삭제버튼 -->
 									<button type='button' class='btn btn-primary' id='removeButton' onclick='removeButton_onclickData(${list.IDX})' style='font-size: 10px; margin: 1px;'>삭제</button>
 								</td>
 								<!-- 쇼핑몰명(구매처) -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<!-- span id='SHOPIDXSPAN${list.IDX}'>${list.SHOPIDX }</span -->
 									<c:forEach items ='${shopOutDto }' var ='list1' varStatus='status'>
 										<c:if test='${list1.IDX eq list.SHOPIDX}'>
@@ -161,7 +160,7 @@ input::-webkit-inner-spin-button {
 										</c:if>
 									</c:forEach>
 									<a href="javascript:modifyProduct(${list.IDX}, '0');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='SHOPIDXIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='SHOPIDXIMG1${list.IDX}'>
 									</a>
 									<select class='form-control' id='SHOPIDX${list.IDX}' style='display:none;'>
 							        	<c:forEach items ='${shopOutDto }' var ='list1' varStatus='status'>
@@ -170,83 +169,83 @@ input::-webkit-inner-spin-button {
 							        </select>
 									<!-- input type='hidden' class='longstr' id='SHOPIDX${list.IDX}' value='${list.SHOPIDX}'/ -->
 									<a href="javascript:modifyProductDone(${list.IDX}, '0');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='SHOPIDXIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='SHOPIDXIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 판매가 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLNOMALAMTSPAN${list.IDX}'>${list.DTLNOMALAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '1');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLNOMALAMTIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLNOMALAMTIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='price1' id='DTLNOMALAMT${list.IDX}' value='${list.DTLNOMALAMT}' onkeyup='calcAmt(${list.IDX})'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '1');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLNOMALAMTIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLNOMALAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 배송비 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLSHIPAMTSPAN${list.IDX}'>${list.DTLSHIPAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '2');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLSHIPAMTIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLSHIPAMTIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='price1' id='DTLSHIPAMT${list.IDX}' value='${list.DTLSHIPAMT}' onkeyup='calcAmt(${list.IDX})'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '2');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLSHIPAMTIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLSHIPAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 수수료 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLCOMMITIONAMTSPAN${list.IDX}'>${list.DTLCOMMITIONAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '3');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLCOMMITIONAMTIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLCOMMITIONAMTIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='price1' id='DTLCOMMITIONAMT${list.IDX}' value='${list.DTLCOMMITIONAMT}' onkeyup='calcAmt(${list.IDX})'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '3');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLCOMMITIONAMTIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLCOMMITIONAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 정산가 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLCALCAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmt}' /></span>
 									<input type='hidden' class='price1' id='DTLCALCAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmt}' /> '/>
 								</td>
 								<!-- 구입가 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLPAYAMTSPAN${list.IDX}'>${list.DTLPAYAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '4');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLPAYAMTIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLPAYAMTIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='price1' id='DTLPAYAMT${list.IDX}' value='${list.DTLPAYAMT}' onkeyup='calcAmt(${list.IDX})'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '4');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLPAYAMTIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLPAYAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 마진 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLINCOMMAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmtP}' /></span>
 									<input type='hidden' class='price1' id='DTLINCOMMAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmtP}' /> '/>
 								</td>
 								<!-- 최저가 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLLOWAMTSPAN${list.IDX}'>${list.DTLLOWAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '5');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLLOWAMTIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLLOWAMTIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='price1' id='DTLLOWAMT${list.IDX}' value='${list.DTLLOWAMT}'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '5');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLLOWAMTIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLLOWAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 								<!-- 링크 -->
-								<td style='font-size: 15px; text-align:center; vertical-align:middle'>
+								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
 									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${list.DTLPRODUCTLINK }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
-										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
+										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
 									</a>
 									<input type='hidden' class='longstr' id='DTLPRODUCTLINK${list.IDX}' value='${list.DTLPRODUCTLINK}'/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '6');" >
-										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG2${list.IDX}' style='visibility:hidden;'>
+										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '20px' height = '20px' id='DTLPRODUCTLINKIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
 								</td>
 							</tr>
@@ -353,16 +352,16 @@ input::-webkit-inner-spin-button {
   		debugger;
 		totCnt = totCnt + 1;
 		var tmpTExt = 	
-			"	<tr style='font-size: 15px; text-align:center; vertical-align:middle'>			"
+			"	<tr style='font-size: 20px; text-align:center; vertical-align:middle'>			"
 			+ "		<!-- 순서 -->                                                                 "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "		</td>                                                                       "
 			+ "		<!-- 처리 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<button type='button' class='btn btn-primary' id='createButton' onclick='createProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>                                                                       "
 			+ "		<!-- 쇼핑몰(구매처) -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 
 			+ "		<select class='form-control' id='SHOPIDX" + totCnt + "'>"
 			+ "				<option value='-' selected>----선택하세요.-----</option>"
@@ -379,37 +378,37 @@ input::-webkit-inner-spin-button {
 			//+ "			<input id='SHOPIDX" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 판매가 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='DTLNOMALAMT" + totCnt + "' value='' onkeyup='calcAmt(" + totCnt + ")'/>                         "
 			+ "		</td>                                                                       "
 			+ "		<!-- 배송비 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='DTLSHIPAMT" + totCnt + "' value='' onkeyup='calcAmt(" + totCnt + ")'/>                           "
 			+ "		</td>                                                                       "
 			+ "		<!-- 수수료 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='DTLCOMMITIONAMT" + totCnt + "' value='0.8' onkeyup='calcAmt(" + totCnt + ")'/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 정산가 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<span id='DTLCALCAMTSPAN" + totCnt + "'></span>"		
 			+ "			<input type='hidden' class='price1' id='DTLCALCAMT" + totCnt + "' value=''/>                       "
 			+ "		</td>                                                                       "
 			+ "		<!-- 구입가 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='DTLPAYAMT" + totCnt + "' value='' onkeyup='calcAmt(" + totCnt + ")'/>                            "
 			+ "		</td>                                                                       "
 			+ "		<!-- 마진 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<span id='DTLINCOMMAMTSPAN" + totCnt + "'></span>"		
 			+ "			<input type='hidden' class='price1' id='DTLINCOMMAMT" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<!-- 최저가 -->                                                                 "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='price1' id='DTLLOWAMT" + totCnt + "' value=''/>                          "
 			+ "		</td>                                                                       "
 			+ "		<!-- 링크 -->                                                                "
-			+ "		<td style='font-size: 15px; text-align:center; vertical-align:middle'>      "
+			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
 			+ "			<input class='longstr' id='DTLPRODUCTLINK" + totCnt + "' value=''/>                             "
 			+ "		</td>                                                                       "
 			+ "		<input type='hidden' id='PRODUCTIDX" + totCnt + "' value='" + prmproductidx + "'/>"

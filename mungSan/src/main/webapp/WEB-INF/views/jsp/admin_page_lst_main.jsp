@@ -66,6 +66,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.modal-xl {
+    max-width: 90% !important;
+}
 </style>
 
 <!-- eXCEL -->
@@ -358,21 +361,23 @@ input::-webkit-inner-spin-button {
 				    </div>
 				</div>
 				 -->
-				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
+				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block; ">
 					<iframe id='adminPageListSubIframe'
 							name='adminPageListSubIframe'
 							title='상품상세관리 페이지'
 							width = '100%' 
-							height = '1024'
+							height = '1000px'
 							style='border:none'
 					src="/admin-page-lst-sub-pop">
 					    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
 					</iframe>
 				</div>
+					<!-- 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 				</div>
+				 -->
 			</div>
 		</div>
 	</div>
