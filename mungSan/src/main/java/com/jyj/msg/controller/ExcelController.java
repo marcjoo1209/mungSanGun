@@ -1,5 +1,6 @@
 package com.jyj.msg.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -99,6 +100,10 @@ public class ExcelController {
       // 엑셀 데이터 정리
       List<ExcelLstOutDto> list = excelService.uploadExcelMainFile(file);
       for(int i = 0; i<list.size(); i++) {
+        if(list.get(i).getIDX() == null) {
+          LOGGER.error("IDX가 null 일 경우 입력 할 수 없습니다.");
+          break;
+        }
         ProductLstInDto pdlDto = new ProductLstInDto();
         ProductDtlLstInDto plDto1 = new ProductDtlLstInDto();
         ProductDtlLstInDto plDto2 = new ProductDtlLstInDto();

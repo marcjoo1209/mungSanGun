@@ -462,7 +462,8 @@
 			AUDITDTM 		= CURRENT_TIMESTAMP(6),
 			AUDITID 		= 'cila10',
         	MEMO			= #{MEMO},
-        	LEADAMT			= #{LEADAMT}
+        	LEADAMT			= #{LEADAMT},
+        	USEYN			= 'Y'
 	</insert>
 	
 	<insert id='createListExcelDtlListTbl'>
@@ -497,13 +498,13 @@
 	        )
         	, #{SHOPIDX}
         	, #{PRODUCTIDX}
-        	, #{DTLNOMALAMT}
-        	, #{DTLSHIPAMT}
-        	, #{DTLCOMMITIONAMT}
-        	, #{DTLCALCAMT}
-        	, #{DTLPAYAMT}
-        	, #{DTLINCOMMAMT}
-        	, #{DTLLOWAMT}
+        	, IFNULL(#{DTLNOMALAMT},'0')
+        	, IFNULL(#{DTLSHIPAMT},'0')
+        	, IFNULL(#{DTLCOMMITIONAMT},'0')
+        	, IFNULL(#{DTLCALCAMT},'0')
+        	, IFNULL(#{DTLPAYAMT},'0')
+        	, IFNULL(#{DTLINCOMMAMT},'0')
+        	, IFNULL(#{DTLLOWAMT},'0')
         	, #{DTLPRODUCTLINK}
         	, 'Y'
         	, CURRENT_TIMESTAMP(6)
@@ -511,16 +512,17 @@
         	, CURRENT_TIMESTAMP(6)
         )
         ON DUPLICATE KEY UPDATE
-        	DTLNOMALAMT			= #{DTLNOMALAMT}
-        	, DTLSHIPAMT		= #{DTLSHIPAMT}
-        	, DTLCOMMITIONAMT	= #{DTLCOMMITIONAMT}
-        	, DTLCALCAMT		= #{DTLCALCAMT}
-        	, DTLPAYAMT			= #{DTLPAYAMT}
-        	, DTLINCOMMAMT		= #{DTLINCOMMAMT}
-        	, DTLLOWAMT			= #{DTLLOWAMT}
+        	DTLNOMALAMT			= IFNULL(#{DTLNOMALAMT},'0')
+        	, DTLSHIPAMT		= IFNULL(#{DTLSHIPAMT},'0')
+        	, DTLCOMMITIONAMT	= IFNULL(#{DTLCOMMITIONAMT},'0')
+        	, DTLCALCAMT		= IFNULL(#{DTLCALCAMT},'0')
+        	, DTLPAYAMT			= IFNULL(#{DTLPAYAMT},'0')
+        	, DTLINCOMMAMT		= IFNULL(#{DTLINCOMMAMT},'0')
+        	, DTLLOWAMT			= IFNULL(#{DTLLOWAMT},'0')
         	, DTLPRODUCTLINK	= #{DTLPRODUCTLINK}
         	, SHOPIDX			= #{SHOPIDX}
         	, AUDITID			= #{AUDITID}
         	, AUDITDTM			= CURRENT_TIMESTAMP(6)
+        	, USEYN			= 'Y'
 	</insert>
 </mapper>

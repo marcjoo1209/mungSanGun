@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang='ko'>
 <head>
@@ -230,8 +231,8 @@ input::-webkit-inner-spin-button {
 									</a>
 								</td>
 								<!-- 링크 -->
-								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${list.DTLPRODUCTLINK }</span>
+								<td style='font-size: 20px; text-align:left; vertical-align:middle; width:200px;'>
+									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${fn:substring(list.DTLPRODUCTLINK, 0, 100) } ... </span>
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
 									</a>

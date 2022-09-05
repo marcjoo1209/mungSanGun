@@ -368,7 +368,7 @@ input::-webkit-inner-spin-button {
 							width = '100%' 
 							height = '1000px'
 							style='border:none'
-					src="/admin-page-lst-sub-pop">
+					src="">
 					    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
 					</iframe>
 				</div>
@@ -803,7 +803,7 @@ function test(){
 			+ "		</td>                                                                       "
 			+ "		<!-- 등록버튼 -->                                                               "
 			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
-			+ "			<button type='button' class='btn btn-primary' id='removeButton' onclick='createProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
+			+ "			<button type='button' class='btn btn-primary' id='createButton' onclick='createProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>"
 			+ "		<!-- 이미지 -->                                                                "
 			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
@@ -909,7 +909,7 @@ function test(){
 			+ "		</td>                                                                       "
 			+ "		<!-- 등록버튼 -->                                                               "
 			+ "		<td style='font-size: 20px; text-align:center; vertical-align:middle'>      "
-			+ "			<button type='button' class='btn btn-primary' id='removeButton' onclick='createDtlProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
+			+ "			<button type='button' class='btn btn-primary' id='createButton' onclick='createDtlProcButton_onclick(" + totCnt + ")' style='font-size: 10px'>등록</button> "
 			+ "		</td>"
 			+ "	</tr>"
 	   			;

@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import com.jyj.msg.controller.dto.ProductDtlLstInDto;
 import com.jyj.msg.controller.dto.ProductDtlLstOutDto;
 import com.jyj.msg.controller.dto.ProductLstInDto;
 import com.jyj.msg.controller.dto.ProductLstOutDto;
 import com.jyj.msg.controller.dto.ProductSearchDto;
+import com.jyj.msg.service.ProductDtlLstService;
 import com.jyj.msg.service.ProductLstService;
 import io.swagger.annotations.ApiOperation;
 
@@ -33,6 +35,8 @@ import io.swagger.annotations.ApiOperation;
 public class ProductLstController {
   @Autowired
   ProductLstService productLstService;
+  @Autowired
+  ProductDtlLstService productDtlLstService;
 
   @RequestMapping(value="/create-product-lst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
@@ -57,6 +61,16 @@ public class ProductLstController {
     System.out.println(inDto.getSHIPAMT());
     
     int outDto = productLstService.createProductLst(inDto);
+
+    ProductDtlLstInDto inDtlDto = new ProductDtlLstInDto();
+      for(int i = 1; i<=12; i++) {
+        inDtlDto = new ProductDtlLstInDto();
+        inDtlDto.setPRODUCTIDX(checkDataIsNull(data.get("IDX")));
+        inDtlDto.setSHOPIDX(String.valueOf(i));
+        
+        productDtlLstService.createProductDtlLst(inDtlDto);
+      }
+      
 
     return outDto;
   }
@@ -83,6 +97,10 @@ public class ProductLstController {
     
     System.out.println(inDto.getSHIPAMT());
     Integer outDto = productLstService.removeProductLst(inDto);
+    
+    ProductDtlLstInDto inDtlDto = new ProductDtlLstInDto();
+    inDtlDto.setPRODUCTIDX(checkDataIsNull(data.get("IDX")));
+    Integer outDto2 = productDtlLstService.removeProductDtlLst(inDtlDto);
     
     return outDto;
   }

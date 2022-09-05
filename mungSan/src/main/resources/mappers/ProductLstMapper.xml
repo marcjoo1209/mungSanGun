@@ -42,8 +42,8 @@
 	</select>
 
     <select id="getListProductLstLowPrice" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
-        SELECT
-        	pl.IDX,
+		select 
+			pl.IDX,
 			pl.PRODUCTNM,
 			pl.IMGURL,
 			IFNULL(pdl.DTLNOMALAMT, 0) as NOMALAMT,
@@ -54,44 +54,44 @@
 			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
 			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
 			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK,
-			USEYN,
+			pl.USEYN,
 			pl.CREATEDTM,
 			pl.AUDITDTM,
 			pl.AUDITID,
 			pl.MEMO,
 			pl.LEADAMT
-        FROM product_lst pl
-        LEFT OUTER JOIN (select 
-        			b.productidx,
-        			b.IDX ,
-        			b.SHOPIDX ,
-        			b.DTLNOMALAMT ,
-        			b.DTLSHIPAMT ,
-        			b.DTLCOMMITIONAMT ,
-        			b.DTLCALCAMT ,
-        			b.DTLPAYAMT ,
-        			b.DTLINCOMMAMT ,
-        			b.DTLLOWAMT ,
-        			b.DTLPRODUCTLINK 
-        		 from product_dtl_lst b
-				where (b.productidx, b.DTLNOMALAMT) in (
-					SELECT 
-						a.PRODUCTIDX 
-						, MIN(CAST(a.DTLNOMALAMT as unsigned))
-					FROM product_dtl_lst a
-					where useyn = 'Y' 
-					  and CAST(IFNULL(a.DTLNOMALAMT, '99999999999') as unsigned) != 0
-					GROUP BY a.PRODUCTIDX
-					)
-				) pdl
-        ON pl.IDX = pdl.PRODUCTIDX
-        where USEYN = 'Y'
-		  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
-		  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
-		  </if>
-		  <if test="IDX != null and IDX != ''" >
-		  AND pl.IDX = #{IDX}
-		  </if>
+		from product_dtl_lst pdl
+		right OUTER JOIN (
+			        SELECT
+			        	pl.IDX,
+						pl.PRODUCTNM,
+						pl.IMGURL,
+						pl.USEYN,
+						pl.CREATEDTM,
+						pl.AUDITDTM,
+						pl.AUDITID,
+						pl.MEMO,
+						pl.LEADAMT
+			        FROM product_lst pl
+			        where pl.useyn = 'Y'
+					  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+					  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+					  </if>
+					  <if test="IDX != null and IDX != ''" >
+					  AND pl.IDX = #{IDX}
+					  </if>
+					) pl
+		    ON pdl.PRODUCTIDX = pl.IDX 
+		where (pdl.productidx, pdl.DTLPAYAMT) in (
+			SELECT 
+				a.PRODUCTIDX 
+				, MIN(CAST(a.DTLPAYAMT as unsigned))
+			FROM product_dtl_lst a
+			where useyn = 'Y' 
+			  and CAST(IFNULL(a.DTLPAYAMT, '99999999999') as unsigned) != 0
+			GROUP BY a.PRODUCTIDX
+			)
+		  and pdl.USEYN = 'Y'
 		  <if test='PRODUCTNMDESC.equals("a")'>
 		  ORDER BY pl.PRODUCTNM ASC
 		  </if>
@@ -219,10 +219,7 @@
 	</update>
 
     <update id="removeProductLst">
-        UPDATE product_lst
-        SET
-			USEYN 			= 'N',
-			AUDITDTM 		= CURRENT_TIMESTAMP(6)
+        DELETE from product_lst
           WHERE IDX			= #{IDX}
 	</update>
 </mapper>

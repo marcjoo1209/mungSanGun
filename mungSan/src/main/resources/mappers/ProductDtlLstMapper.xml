@@ -4,54 +4,99 @@
 
     <select id="getListProductDtlLst" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
         SELECT
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTIDX
-        	, DTLSHIPAMT
-        	, DTLCOMMITIONAMT
-        	, DTLCALCAMT
-        	, DTLPAYAMT
-        	, DTLINCOMMAMT
-        	, DTLLOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
-        	, DTLPRODUCTLINK
-        	, DTLNOMALAMT
-        FROM product_dtl_lst
-        WHERE 1 			= 1
-          AND USEYN 		= 'Y'
-          AND PRODUCTIDX	= #{PRODUCTIDX}
-        ORDER BY DTLPAYAMT
+		    	pdl.IDX
+		    	, pdl.SHOPIDX
+		    	, pdl.PRODUCTIDX
+		    	, pdl.DTLSHIPAMT
+		    	, pdl.DTLCOMMITIONAMT
+		    	, pdl.DTLCALCAMT
+		    	, pdl.DTLPAYAMT
+		    	, pdl.DTLINCOMMAMT
+		    	, pdl.DTLLOWAMT
+		    	, pdl.USEYN
+		    	, pdl.CREATEDTM
+		    	, pdl.AUDITID
+		    	, pdl.AUDITDTM
+		    	, pdl.DTLPRODUCTLINK
+		    	, pdl.DTLNOMALAMT
+		FROM (
+		       SELECT
+		        	pdl.IDX
+		        	, pdl.SHOPIDX
+		        	, pdl.PRODUCTIDX
+		        	, pdl.DTLSHIPAMT
+		        	, pdl.DTLCOMMITIONAMT
+		        	, pdl.DTLCALCAMT
+		        	, pdl.DTLPAYAMT
+		        	, pdl.DTLINCOMMAMT
+		        	, pdl.DTLLOWAMT
+		        	, pdl.USEYN
+		        	, pdl.CREATEDTM
+		        	, pdl.AUDITID
+		        	, pdl.AUDITDTM
+		        	, pdl.DTLPRODUCTLINK
+		        	, pdl.DTLNOMALAMT
+		        	, if(
+						IFNULL(CAST(pdl.DTLPAYAMT as unsigned INTEGER),0) = 0
+						, '9999999999999999999999999'
+						, pdl.DTLPAYAMT) as orderNum
+		        FROM product_dtl_lst pdl
+		        WHERE 1 		= 1
+		          AND pdl.USEYN 	= 'Y'
+				  AND pdl.PRODUCTIDX = #{PRODUCTIDX}
+		) pdl
+		order by CAST(pdl.orderNum as unsigned)
 	</select>
 
     <select id="getListProductDtlLstByShop" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
         SELECT
-        	IDX
-        	, SHOPIDX
-        	, PRODUCTIDX
-        	, DTLSHIPAMT
-        	, DTLCOMMITIONAMT
-        	, DTLCALCAMT
-        	, DTLPAYAMT
-        	, DTLINCOMMAMT
-        	, DTLLOWAMT
-        	, USEYN
-        	, CREATEDTM
-        	, AUDITID
-        	, AUDITDTM
-        	, DTLPRODUCTLINK
-        	, DTLNOMALAMT
-        FROM product_dtl_lst
-        WHERE 1 		= 1
-          AND USEYN 	= 'Y'
-		  <if test="SHOPIDX != null and SHOPIDX != ''" >
-		  AND SHOPIDX = #{SHOPIDX}
-		  </if>
-		  <if test="PRODUCTIDX != null and PRODUCTIDX != ''" >
-		  AND PRODUCTIDX = #{PRODUCTIDX}
-		  </if>
+		    	pdl.IDX
+		    	, pdl.SHOPIDX
+		    	, pdl.PRODUCTIDX
+		    	, pdl.DTLSHIPAMT
+		    	, pdl.DTLCOMMITIONAMT
+		    	, pdl.DTLCALCAMT
+		    	, pdl.DTLPAYAMT
+		    	, pdl.DTLINCOMMAMT
+		    	, pdl.DTLLOWAMT
+		    	, pdl.USEYN
+		    	, pdl.CREATEDTM
+		    	, pdl.AUDITID
+		    	, pdl.AUDITDTM
+		    	, pdl.DTLPRODUCTLINK
+		    	, pdl.DTLNOMALAMT
+		FROM (
+		       SELECT
+		        	pdl.IDX
+		        	, pdl.SHOPIDX
+		        	, pdl.PRODUCTIDX
+		        	, pdl.DTLSHIPAMT
+		        	, pdl.DTLCOMMITIONAMT
+		        	, pdl.DTLCALCAMT
+		        	, pdl.DTLPAYAMT
+		        	, pdl.DTLINCOMMAMT
+		        	, pdl.DTLLOWAMT
+		        	, pdl.USEYN
+		        	, pdl.CREATEDTM
+		        	, pdl.AUDITID
+		        	, pdl.AUDITDTM
+		        	, pdl.DTLPRODUCTLINK
+		        	, pdl.DTLNOMALAMT
+		        	, if(
+						IFNULL(CAST(pdl.DTLPAYAMT as unsigned INTEGER),0) = 0
+						, '9999999999999999999999999'
+						, pdl.DTLPAYAMT) as orderNum
+		        FROM product_dtl_lst pdl
+		        WHERE 1 		= 1
+		          AND pdl.USEYN 	= 'Y'
+				  <if test="SHOPIDX != null and SHOPIDX != ''" >
+				  AND pdl.SHOPIDX = #{SHOPIDX}
+				  </if>
+				  <if test="PRODUCTIDX != null and PRODUCTIDX != ''" >
+				  AND pdl.PRODUCTIDX = #{PRODUCTIDX}
+				  </if>
+		) pdl
+		order by CAST(pdl.orderNum as unsigned)
 	</select>
 
     <select id="getProductDtlLst" resultType="com.jyj.msg.controller.dto.ProductDtlLstOutDto">
@@ -109,13 +154,13 @@
         	) +1)
         	, #{SHOPIDX}
         	, #{PRODUCTIDX}
-        	, #{DTLNOMALAMT}
-        	, #{DTLSHIPAMT}
-        	, #{DTLCOMMITIONAMT}
-        	, #{DTLCALCAMT}
-        	, #{DTLPAYAMT}
-        	, #{DTLINCOMMAMT}
-        	, #{DTLLOWAMT}
+        	, IFNULL(#{DTLNOMALAMT},'0')
+        	, IFNULL(#{DTLSHIPAMT},'0')
+        	, IFNULL(#{DTLCOMMITIONAMT},'0')
+        	, IFNULL(#{DTLCALCAMT},'0')
+        	, IFNULL(#{DTLPAYAMT},'0')
+        	, IFNULL(#{DTLINCOMMAMT},'0')
+        	, IFNULL(#{DTLLOWAMT},'0')
         	, #{DTLPRODUCTLINK}
         	, 'Y'
         	, CURRENT_TIMESTAMP(6)
@@ -144,13 +189,13 @@
 	</update>
 
     <update id="removeProductDtlLst">
-        UPDATE product_dtl_lst
-        SET
-        	USEYN				= 'N'
-        	, AUDITID			= #{AUDITID}
-        	, AUDITDTM			= CURRENT_TIMESTAMP(6)
+        DELETE FROM product_dtl_lst
         WHERE IDX				= #{IDX}
+		  <if test="OLDSHOPIDX != null and OLDSHOPIDX != ''" >
           AND SHOPIDX			= #{OLDSHOPIDX}
+          </if>
+		  <if test="PRODUCTIDX != null and PRODUCTIDX != ''" >
           AND PRODUCTIDX		= #{PRODUCTIDX}
+          </if>
 	</update>
 </mapper>

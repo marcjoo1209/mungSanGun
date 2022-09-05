@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang='ko'>
 <head>
@@ -106,20 +107,7 @@ input::-webkit-inner-spin-button {
 		  	2. 상품 정보등 입력 수정 시 "연필" 클릭 후 별도 모달 창에서 수정 후 "체크"클릭시 바로 수정, 저장 되도록   
 		  	 -->
 		    <div class="tableFixHead">
-				<table class="table table-bordered table-responsive-sm" id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle">
-					<colgroup>
-						<col width="2%">
-						<col width="3%">
-						<col width="15%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-					</colgroup>
+				<table class="table table-bordered " id="itemTable" style="font-size: 20px; text-align:center; vertical-align:middle" >
 					<thead style="" class="thead-light" >
 						<tr>
 							<th>순서</th>
@@ -238,8 +226,8 @@ input::-webkit-inner-spin-button {
 									</a>
 								</td>
 								<!-- 링크 -->
-								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${list.DTLPRODUCTLINK }</span>
+								<td style='font-size: 20px; text-align:left; vertical-align:middle; width:200px;'>
+									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${fn:substring(list.DTLPRODUCTLINK, 0, 100) } ... </span>
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
 									</a>
