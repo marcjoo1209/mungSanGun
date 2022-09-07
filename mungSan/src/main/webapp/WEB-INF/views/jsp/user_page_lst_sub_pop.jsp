@@ -110,7 +110,7 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 구입가 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									${list.DTLPAYAMT }
+									<span class='comma' >${list.DTLPAYAMT }</span>
 								</td>
 								<!-- 링크 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle; width:200px;'>
@@ -184,5 +184,6 @@ input::-webkit-inner-spin-button {
   	}
 
   </script>
+<script src='/resources/js/common.js'></script>
 </body>
 </html>

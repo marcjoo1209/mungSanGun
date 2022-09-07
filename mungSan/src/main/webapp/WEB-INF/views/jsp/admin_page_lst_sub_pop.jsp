@@ -162,7 +162,7 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 판매가 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLNOMALAMTSPAN${list.IDX}'>${list.DTLNOMALAMT }</span>
+									<span class='comma' id='DTLNOMALAMTSPAN${list.IDX}'>${list.DTLNOMALAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '1');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLNOMALAMTIMG1${list.IDX}'>
 									</a>
@@ -173,7 +173,7 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 배송비 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLSHIPAMTSPAN${list.IDX}'>${list.DTLSHIPAMT }</span>
+									<span class='comma' id='DTLSHIPAMTSPAN${list.IDX}'>${list.DTLSHIPAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '2');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLSHIPAMTIMG1${list.IDX}'>
 									</a>
@@ -184,7 +184,7 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 수수료 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLCOMMITIONAMTSPAN${list.IDX}'>${list.DTLCOMMITIONAMT }</span>
+									<span class='comma' id='DTLCOMMITIONAMTSPAN${list.IDX}'>${list.DTLCOMMITIONAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '3');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLCOMMITIONAMTIMG1${list.IDX}'>
 									</a>
@@ -195,12 +195,12 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 정산가 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLCALCAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmt}' /></span>
+									<span class='comma' id='DTLCALCAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmt}' /></span>
 									<input type='hidden' class='price1' id='DTLCALCAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmt}' /> '/>
 								</td>
 								<!-- 구입가 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLPAYAMTSPAN${list.IDX}'>${list.DTLPAYAMT }</span>
+									<span class='comma' id='DTLPAYAMTSPAN${list.IDX}'>${list.DTLPAYAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '4');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLPAYAMTIMG1${list.IDX}'>
 									</a>
@@ -211,12 +211,12 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 마진 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLINCOMMAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmtP}' /></span>
+									<span class='comma' id='DTLINCOMMAMTSPAN${list.IDX}'><fmt:formatNumber type='number' pattern='##################' value='${totAmtP}' /></span>
 									<input type='hidden' class='price1' id='DTLINCOMMAMT${list.IDX}' value='<fmt:formatNumber type='number' pattern='##################' value='${totAmtP}' /> '/>
 								</td>
 								<!-- 최저가 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='DTLLOWAMTSPAN${list.IDX}'>${list.DTLLOWAMT }</span>
+									<span class='comma'  id='DTLLOWAMTSPAN${list.IDX}'>${list.DTLLOWAMT }</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '5');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '20px' height = '20px' id='DTLLOWAMTIMG1${list.IDX}'>
 									</a>
@@ -444,41 +444,45 @@ input::-webkit-inner-spin-button {
   	// 삭제 호출
 	function removeButton_onclickData(inkeyNum){
   		debugger;
-  		
-		// form 변수 초기화
-		var $form = $("#ProductDtlLst");
-		
-		// 수정 값체크
-		var $IDX 				= inkeyNum;
-		var $SHOPIDX 			= $("#SHOPIDX"+inkeyNum).val();
-		var $OLDSHOPIDX 		= $("#OLDSHOPIDX"+inkeyNum).val();
-		var $PRODUCTIDX 		= $("#PRODUCTIDX"+inkeyNum).val();
-		var $DTLNOMALAMT 		= checkNumber($("#DTLNOMALAMT"+inkeyNum).val());
-		var $DTLSHIPAMT 		= checkNumber($("#DTLSHIPAMT"+inkeyNum).val());
-		var $DTLCOMMITIONAMT 	= $("#DTLCOMMITIONAMT"+inkeyNum).val();
-		var $DTLCALCAMT 		= checkNumber($("#DTLCALCAMT"+inkeyNum).val());
-		var $DTLPAYAMT 			= checkNumber($("#DTLPAYAMT"+inkeyNum).val());
-		var $DTLINCOMMAMT 		= checkNumber($("#DTLINCOMMAMT"+inkeyNum).val());
-		var $DTLLOWAMT 			= checkNumber($("#DTLLOWAMT"+inkeyNum).val());
-		var $DTLPRODUCTLINK 	= $("#DTLPRODUCTLINK"+inkeyNum).val();
-		
-		// form 값 초기화
-		$("#IDX").val($IDX);
-		$("#SHOPIDX").val($SHOPIDX);
-		$("#OLDSHOPIDX").val($OLDSHOPIDX);
-		$('#ProductDtlLst [name="PRODUCTIDX"]').val($PRODUCTIDX);
-		$("#DTLNOMALAMT").val($DTLNOMALAMT);
-		$("#DTLSHIPAMT").val($DTLSHIPAMT);
-		$("#DTLCOMMITIONAMT").val($DTLCOMMITIONAMT);
-		$("#DTLCALCAMT").val($DTLCALCAMT);
-		$("#DTLPAYAMT").val($DTLPAYAMT);
-		$("#DTLINCOMMAMT").val($DTLINCOMMAMT);
-		$("#DTLLOWAMT").val($DTLLOWAMT);
-		$("#DTLPRODUCTLINK").val($DTLPRODUCTLINK);
-		$("#GB").val("D");
-		
-		// 변경 호출
-		procProductDtlList();
+
+  	    if (!confirm("삭제 하시겠습니까?\n확인(예) 또는 취소(아니오)를 선택해주세요.")) {
+   	       return false;
+   	    } else {
+			// form 변수 초기화
+			var $form = $("#ProductDtlLst");
+			
+			// 수정 값체크
+			var $IDX 				= inkeyNum;
+			var $SHOPIDX 			= $("#SHOPIDX"+inkeyNum).val();
+			var $OLDSHOPIDX 		= $("#OLDSHOPIDX"+inkeyNum).val();
+			var $PRODUCTIDX 		= $("#PRODUCTIDX"+inkeyNum).val();
+			var $DTLNOMALAMT 		= checkNumber($("#DTLNOMALAMT"+inkeyNum).val());
+			var $DTLSHIPAMT 		= checkNumber($("#DTLSHIPAMT"+inkeyNum).val());
+			var $DTLCOMMITIONAMT 	= $("#DTLCOMMITIONAMT"+inkeyNum).val();
+			var $DTLCALCAMT 		= checkNumber($("#DTLCALCAMT"+inkeyNum).val());
+			var $DTLPAYAMT 			= checkNumber($("#DTLPAYAMT"+inkeyNum).val());
+			var $DTLINCOMMAMT 		= checkNumber($("#DTLINCOMMAMT"+inkeyNum).val());
+			var $DTLLOWAMT 			= checkNumber($("#DTLLOWAMT"+inkeyNum).val());
+			var $DTLPRODUCTLINK 	= $("#DTLPRODUCTLINK"+inkeyNum).val();
+			
+			// form 값 초기화
+			$("#IDX").val($IDX);
+			$("#SHOPIDX").val($SHOPIDX);
+			$("#OLDSHOPIDX").val($OLDSHOPIDX);
+			$('#ProductDtlLst [name="PRODUCTIDX"]').val($PRODUCTIDX);
+			$("#DTLNOMALAMT").val($DTLNOMALAMT);
+			$("#DTLSHIPAMT").val($DTLSHIPAMT);
+			$("#DTLCOMMITIONAMT").val($DTLCOMMITIONAMT);
+			$("#DTLCALCAMT").val($DTLCALCAMT);
+			$("#DTLPAYAMT").val($DTLPAYAMT);
+			$("#DTLINCOMMAMT").val($DTLINCOMMAMT);
+			$("#DTLLOWAMT").val($DTLLOWAMT);
+			$("#DTLPRODUCTLINK").val($DTLPRODUCTLINK);
+			$("#GB").val("D");
+			
+			// 변경 호출
+			procProductDtlList();
+   	    }
 	}
 
   	// 수정 호출
@@ -692,5 +696,7 @@ input::-webkit-inner-spin-button {
 		$("#DTLINCOMMAMTSPAN"+inkeyNum).text(totAmtP);
 	}
   </script>
+  
+<script src='/resources/js/common.js'></script>
 </body>
 </html>

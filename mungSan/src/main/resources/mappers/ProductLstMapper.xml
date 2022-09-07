@@ -80,6 +80,16 @@
 					  <if test="IDX != null and IDX != ''" >
 					  AND pl.IDX = #{IDX}
 					  </if>
+				    <if test='PRODUCTNMDESC.equals("a")'>
+				    ORDER BY pl.PRODUCTNM ASC
+				    </if>
+				    <if test='PRODUCTNMDESC.equals("b")'>
+				    ORDER BY pl.PRODUCTNM DESC
+				    </if>
+				    <if test='PRODUCTNMDESC.equals("c")'>
+				    ORDER BY pl.AUDITDTM DESC
+				    </if>
+		  			limit  100
 					) pl
 		    ON pdl.PRODUCTIDX = pl.IDX 
 		where (pdl.productidx, pdl.DTLPAYAMT) in (
@@ -92,16 +102,6 @@
 			GROUP BY a.PRODUCTIDX
 			)
 		  and pdl.USEYN = 'Y'
-		  <if test='PRODUCTNMDESC.equals("a")'>
-		  ORDER BY pl.PRODUCTNM ASC
-		  </if>
-		  <if test='PRODUCTNMDESC.equals("b")'>
-		  ORDER BY pl.PRODUCTNM DESC
-		  </if>
-		  <if test='PRODUCTNMDESC.equals("c")'>
-		  ORDER BY pl.AUDITDTM DESC
-		  </if>
-		  limit  1000
 	</select>
 	
     <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
