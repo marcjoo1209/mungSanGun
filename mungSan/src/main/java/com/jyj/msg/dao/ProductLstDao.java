@@ -64,4 +64,11 @@ public class ProductLstDao {
         mybatis.update("ProductLstMapper.removeProductLst", inDto);
     return outDto;
   }
+
+  // 대상 조회
+  public String getMaxNum() {
+    String outDto =
+        mybatis.selectOne("ProductLstMapper.getMaxNum");
+    return outDto;
+  }
 }

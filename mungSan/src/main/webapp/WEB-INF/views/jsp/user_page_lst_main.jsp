@@ -113,6 +113,9 @@ input::-webkit-inner-spin-button {
 								<c:if test="${orderNum  eq 'b'}">
 									<a href="javascript:searchItemList('a')">오름차순</a>
 								</c:if>
+								<c:if test="${orderNum  eq 'c'}">
+									<a href="javascript:searchItemList('a')">오름차순</a>
+								</c:if>
 								<c:if test="${orderNum  eq 'a'}">
 									<a href="javascript:searchItemList('b')">내림차순</a>
 								</c:if>
@@ -163,22 +166,41 @@ input::-webkit-inner-spin-button {
 	
 	<!-- modify Modal -->
 	<div class="modal fade" id="listModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
+				<!-- 
 				<div class="modal-header">상품 상세 리스트</div>
 				<div class="modal-body">
+				    <div class="col-lg">
+				      <button type="button" class="btn btn-secondary" id='createProductDtlButton' onclick="createProductDtlButton_onclick()" style="font-size: 20px">추가</button>
+				    </div>
 				</div>
-				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
-					
+				 -->
+				<div class="modal-body" id="listModalBody" style="max-width: 100%; width: auto !important; display: inline-block; ">
+					<iframe id='adminPageListSubIframe'
+							name='adminPageListSubIframe'
+							title='상품상세관리 페이지'
+							width = '100%' 
+							height = '1000px'
+							style='border:none'
+					src="">
+					    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+					</iframe>
 				</div>
+					<!-- 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
 				</div>
+				 -->
 			</div>
 		</div>
 	</div>
+	
+	<form id="ProductDtlLstPop" method="post" action="/user-page-lst-sub-pop" target='adminPageListSubIframe'>
+		<input type='hidden' id="PRODUCTIDX" name="PRODUCTIDX" value=''>
+	</form>
 	
 	<form id="SearchLst" method="post" action="/product-lst">
 		<input type='hidden' id="SEARCHPRODUCTNM" name="SEARCHPRODUCTNM" value=''>
@@ -253,95 +275,16 @@ input::-webkit-inner-spin-button {
   	// 상품 상세 리스트 조회
   	function searchProductList(idx){
   		debugger;
-  		/*
-		// form 변수 초기화
-		var $form = $("#ProductDtlLst");
+		var $form = $("#ProductDtlLstPop");
 		
 		// form 값 초기화
-		$('#ProductDtlLst [name="PRODUCTIDX"]').val(idx);
+		$('#ProductDtlLstPop [name="PRODUCTIDX"]').val(idx);
 
 		// 조회 호출
 		$form.submit()
-  		*/
 		
-		let data =JSON.stringify({"productidx":idx});
-		
-		//let data ={PRODUCTIDX : idx};
-		$.ajax({
-			url : '/get-list-product-dtl-lst',
-			method : 'POST',
-			data 		: data,
-			contentType:'application/json',
-			dataType:'json',
-			// beforeSend: function (request){request.setRequestHeader('AJAX', 'true');}, 
-			success : function(obj){
-				var data = JSON.stringify(obj);
-				var json = JSON.parse(data);
-				debugger;
-			  	// 모달 텍스트 출력
-  				let $modalBody  = $("#listModalBody");
-			  	let htmlTxt = "";
-			  	
-			  	htmlTxt = htmlTxt
-					  		+"<table class='table table-bordered table-responsive-sm' id='productDtlListTbl' style='font-size: 20px; text-align:center; vertical-align:middle'>"
-							+"	<thead>                                         "
-							+"	<tr>                                            "
-							+"		<th>순서</th>                               "
-							+"		<th>쇼핑몰명(구매처)</th>                             "
-							+"		<th>구입가 </th>                            "
-							+"		<th>링크 </th>                            "
-							/*
-							+"		<th>수정</th>                               "
-							+"		<th>삭제</th>                               "
-							*/
-							+"	</tr>                                           "
-							+"</thead>                                          "
-							+"<tbody valign='bottom'>							"
-			  	;
-			  		
-			  	for(let i = 0; i<json.length; i++){
-			  		htmlTxt = htmlTxt
-					  		+"	<tr>"
-					  		+"		<td>"
-					  		// 순서
-					  		+			json[i].idx
-					  		+"		</td>"
-					  		+"		<td>"
-					  		;
-					  		// 쇼핑몰명(구매처)
-							for(let j = 0;j<shopCnt;j++){
-								if(json[i].shopidx == prmshoidx[j]){
-									htmlTxt = htmlTxt + prmshonm[j];
-								}
-							}
-					  	htmlTxt = htmlTxt
-					  		+"		</td>"
-					  		+"		<td>"
-					  		// 구입가
-					  		+ 			json[i].dtlpayamt
-					  		+"		</td>"
-					  		+"		<td>"
-					  		// 링크
-							+"		<a href='"+json[i].dtlproductlink+"' target='_blank'>"
-							+"			<span id='PRODUCTLINKSPAN"+json[i].idx+"'>링크</span>"
-							+"		</a>"
-					  		+"		</td>"
-					  		+"	</tr>"
-				  		;
-			  	}
-			  	
-			  	htmlTxt = htmlTxt
-			  		+"</table>";
-	 	   			
-		 	   	$modalBody.html(htmlTxt);
-
-		 	   	// modal 활성화
-		 	   	$('#listModal').modal('show');
-			},
-			 error:function(request,status,error){				    
-				    return;
-			}
-		}) ;
+ 	   	// modal 활성화
+ 	   	$('#listModal').modal('show');
 		
   	}
 

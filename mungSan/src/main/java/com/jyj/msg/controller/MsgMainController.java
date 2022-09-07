@@ -67,7 +67,7 @@ public class MsgMainController {
   public String adminPageLstMain(Model model, HttpServletRequest request) throws Exception {
     String orderNum = "";
     if(request.getParameter("ORDERNUM") == null) {
-      orderNum = "a";
+      orderNum = "c";
     } else {
       orderNum = request.getParameter("ORDERNUM");
     }
@@ -95,7 +95,7 @@ public class MsgMainController {
   public String productPageLstMain(Model model, HttpServletRequest request) throws Exception {
     String orderNum = "";
     if(request.getParameter("ORDERNUM") == null) {
-      orderNum = "a";
+      orderNum = "c";
     } else {
       orderNum = request.getParameter("ORDERNUM");
     }
@@ -184,6 +184,38 @@ public class MsgMainController {
     model.addAttribute("prmproductidx", productIdx);
     
     return "jsp/admin_page_lst_sub_pop";
+  }
+
+  // 상품 상세 관리 페이지
+  @RequestMapping(value = "/user-page-lst-sub-pop")
+  public String userPageLstSubPop(Model model, HttpServletRequest request) throws Exception {
+    
+    ProductSearchDto inDto = new ProductSearchDto();
+    inDto.setPRODUCTIDX(request.getParameter("PRODUCTIDX"));
+    String productIdx = request.getParameter("PRODUCTIDX");
+    if(request.getParameter("PRODUCTIDX") == null || "".equals(request.getParameter("PRODUCTIDX"))) {
+      inDto.setPRODUCTIDX("1");
+      productIdx = "1";
+      
+    }
+    
+    ProductLstInDto productInDto = new ProductLstInDto();
+    
+    List<ProductDtlLstOutDto> outDto = productDtlLstService.getListProductDtlLst(inDto);
+    List<ProductLstOutDto> productOutDto = productLstService.getListProductLst(productInDto);
+    List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
+    
+    int listCnt = outDto.size();
+    
+    model.addAttribute("outDto", outDto);
+    model.addAttribute("shopOutDto", shopOutDto);
+    model.addAttribute("productOutDto", productOutDto);
+    model.addAttribute("listCnt", listCnt);
+    model.addAttribute("shopCnt", shopOutDto.size());
+    model.addAttribute("headGb", "2");
+    model.addAttribute("prmproductidx", productIdx);
+    
+    return "jsp/user_page_lst_sub_pop";
   }
   
   // 상품 코드 관리 페이지

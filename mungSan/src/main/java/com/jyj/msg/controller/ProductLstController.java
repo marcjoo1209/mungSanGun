@@ -61,12 +61,15 @@ public class ProductLstController {
     System.out.println(inDto.getSHIPAMT());
     
     int outDto = productLstService.createProductLst(inDto);
-
+    
     ProductDtlLstInDto inDtlDto = new ProductDtlLstInDto();
       for(int i = 1; i<=12; i++) {
         inDtlDto = new ProductDtlLstInDto();
-        inDtlDto.setPRODUCTIDX(checkDataIsNull(data.get("IDX")));
+        inDtlDto.setPRODUCTIDX(productLstService.getMaxNum());
         inDtlDto.setSHOPIDX(String.valueOf(i));
+        if(i == 1) {
+          inDtlDto.setDTLPAYAMT("1");
+        }
         
         productDtlLstService.createProductDtlLst(inDtlDto);
       }

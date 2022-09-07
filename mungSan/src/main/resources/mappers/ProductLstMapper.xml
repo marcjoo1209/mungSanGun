@@ -98,6 +98,10 @@
 		  <if test='PRODUCTNMDESC.equals("b")'>
 		  ORDER BY pl.PRODUCTNM DESC
 		  </if>
+		  <if test='PRODUCTNMDESC.equals("c")'>
+		  ORDER BY pl.AUDITDTM DESC
+		  </if>
+		  limit  1000
 	</select>
 	
     <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
@@ -222,4 +226,16 @@
         DELETE from product_lst
           WHERE IDX			= #{IDX}
 	</update>
+	
+	<select id="getMaxNum" resultType="string">
+		select 
+			(IFNULL(
+		    	(SELECT 
+		    		MAX(CAST(cl.IDX AS INTEGER))
+				  FROM product_lst cl
+				 WHERE 1 = 1
+				) , 0
+			) ) maxnum
+		from dual
+	</select>
 </mapper>

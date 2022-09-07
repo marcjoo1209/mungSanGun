@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang='ko'>
 <head>
@@ -159,6 +160,9 @@ input::-webkit-inner-spin-button {
 								<c:if test="${orderNum  eq 'b'}">
 									<a href="javascript:searchItemList('a')">오름차순</a>
 								</c:if>
+								<c:if test="${orderNum  eq 'c'}">
+									<a href="javascript:searchItemList('a')">오름차순</a>
+								</c:if>
 								<c:if test="${orderNum  eq 'a'}">
 									<a href="javascript:searchItemList('b')">내림차순</a>
 								</c:if>
@@ -213,7 +217,7 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 상품명 -->
 								<td style='font-size: 20px; text-align:center; vertical-align:middle'>
-									<span id='PRODUCTNMSPAN${list.IDX}'>${list.PRODUCTNM }</span>
+									<span id='PRODUCTNMSPAN${list.IDX}'>${fn:substring(list.PRODUCTNM, 0, 50) } ...</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '1');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='PRODUCTNMIMG1${list.IDX}'>
 									</a>

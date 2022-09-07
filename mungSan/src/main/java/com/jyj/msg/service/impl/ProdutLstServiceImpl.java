@@ -47,4 +47,8 @@ public class ProdutLstServiceImpl implements ProductLstService{
     return productLstMapper.removeProductLst(inDto);
   }
 
+  public String getMaxNum() {
+    return productLstMapper.getMaxNum();
+  }
+
 }

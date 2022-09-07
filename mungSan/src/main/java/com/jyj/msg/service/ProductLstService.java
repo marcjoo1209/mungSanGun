@@ -26,5 +26,7 @@ public interface ProductLstService {
   Integer modifyProductLst(ProductLstInDto inDto);
   
   Integer removeProductLst(ProductLstInDto inDto);
+  
+  String getMaxNum();
 
 }
