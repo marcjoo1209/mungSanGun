@@ -42,68 +42,70 @@
 	</select>
 
     <select id="getListProductLstLowPrice" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
-    <![CDATA[
-		select 
+		select 	
 			pl.IDX,
 			pl.PRODUCTNM,
 			pl.IMGURL,
-			IFNULL(pdl.DTLNOMALAMT, 0) as NOMALAMT,
-			IFNULL(pdl.DTLSHIPAMT, 0) as SHIPAMT,
-			IFNULL(pdl.DTLCOMMITIONAMT, 0) as COMMITIONAMT,
-			IFNULL(pdl.DTLCALCAMT, 0) as CALCAMT,
-			IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as PAYAMT,
-			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
-			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
-			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK,
 			pl.USEYN,
 			pl.CREATEDTM,
 			pl.AUDITDTM,
 			pl.AUDITID,
 			pl.MEMO,
-			pl.LEADAMT
-		from product_dtl_lst pdl
+			pl.LEADAMT,
+			IFNULL(pdl.DTLNOMALAMT, 0) as NOMALAMT,
+			IFNULL(pdl.DTLSHIPAMT, 0) as SHIPAMT,
+			IFNULL(pdl.DTLCOMMITIONAMT, 0) as COMMITIONAMT,
+			IFNULL(pdl.DTLCALCAMT, 0) as CALCAMT,
+    <![CDATA[
+			IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as PAYAMT,
 		]]>
-		right OUTER JOIN (
-			        SELECT
-			        	pl.IDX,
-						pl.PRODUCTNM,
-						pl.IMGURL,
-						pl.USEYN,
-						pl.CREATEDTM,
-						pl.AUDITDTM,
-						pl.AUDITID,
-						pl.MEMO,
-						pl.LEADAMT
-			        FROM product_lst pl
-			        where pl.useyn = 'Y'
-					  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
-					  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
-					  </if>
-					  <if test="IDX != null and IDX != ''" >
-					  AND pl.IDX = #{IDX}
-					  </if>
-				    <if test='PRODUCTNMDESC.equals("a")'>
-				    ORDER BY pl.PRODUCTNM ASC
-				    </if>
-				    <if test='PRODUCTNMDESC.equals("b")'>
-				    ORDER BY pl.PRODUCTNM DESC
-				    </if>
-				    <if test='PRODUCTNMDESC.equals("c")'>
-				    ORDER BY pl.AUDITDTM DESC
-				    </if>
-		  			limit  100
-					) pl
-		    ON pdl.PRODUCTIDX = pl.IDX 
-		where (pdl.productidx, pdl.DTLPAYAMT) in (
-			SELECT 
-				a.PRODUCTIDX 
-				, MIN(CAST(a.DTLPAYAMT as unsigned))
-			FROM product_dtl_lst a
-			where useyn = 'Y' 
-			  and CAST(IFNULL(a.DTLPAYAMT, '99999999999') as unsigned) != 0
-			GROUP BY a.PRODUCTIDX
-			)
-		  and pdl.USEYN = 'Y'
+			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
+			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
+			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK
+		from 
+			(
+			select 
+				PRODUCTIDX
+				, min(pdl.DTLPAYAMT) dtlpayamt
+			from product_dtl_lst pdl 
+			where 1=1
+			  and CAST(IFNULL(pdl.DTLPAYAMT, '99999999999') as unsigned) != 0
+			group by PRODUCTIDX 
+			) minpdl
+			, product_dtl_lst pdl
+			, (
+				SELECT
+					pl.IDX,
+					pl.PRODUCTNM,
+					pl.IMGURL,
+					pl.USEYN,
+					pl.CREATEDTM,
+					pl.AUDITDTM,
+					pl.AUDITID,
+					pl.MEMO,
+					pl.LEADAMT
+				FROM product_lst pl
+				where pl.useyn = 'Y'
+				  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+				  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+				  </if>
+				  <if test="IDX != null and IDX != ''" >
+				  AND pl.IDX = #{IDX}
+				  </if>
+				<if test='PRODUCTNMDESC.equals("a")'>
+				ORDER BY pl.PRODUCTNM ASC
+				</if>
+				<if test='PRODUCTNMDESC.equals("b")'>
+				ORDER BY pl.PRODUCTNM DESC
+				</if>
+				<if test='PRODUCTNMDESC.equals("c")'>
+				ORDER BY pl.AUDITDTM DESC
+				</if>
+				limit  100
+				) pl
+		where pdl.PRODUCTIDX  = minpdl.PRODUCTIDX
+		  and pdl.dtlpayamt  = minpdl.dtlpayamt
+		  and pl.IDX = pdl.PRODUCTIDX
 	</select>
 	
     <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
