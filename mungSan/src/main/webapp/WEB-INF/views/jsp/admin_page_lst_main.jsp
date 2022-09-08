@@ -210,7 +210,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '0');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='IMGURLIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='longstr' id='IMGURL${list.IDX}' value='${list.IMGURL }'/>
+									<input type='hidden' class='longstr' id='IMGURL${list.IDX}' value='${list.IMGURL }' onkeyup="modifyProductDoneEnter(${list.IDX}, '0')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '0');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='IMGURLIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -221,7 +221,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '1');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='PRODUCTNMIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='longstr' id='PRODUCTNM${list.IDX}' value='${list.PRODUCTNM }'/>
+									<input type='hidden' class='longstr' id='PRODUCTNM${list.IDX}' value='${list.PRODUCTNM }' onkeyup="modifyProductDoneEnter(${list.IDX}, '1')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '1');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='PRODUCTNMIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -232,7 +232,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '10');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='LEADAMTIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='price1' id='LEADAMT${list.IDX}' value='${list.LEADAMT}'/>
+									<input type='hidden' class='price1' id='LEADAMT${list.IDX}' value='${list.LEADAMT}' onkeyup="modifyProductDoneEnter(${list.IDX}, '10')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '10');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='LEADAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -328,7 +328,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '11');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='MEMOIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='price1' id='MEMO${list.IDX}' value='${list.MEMO } '/>
+									<input type='hidden' class='price1' id='MEMO${list.IDX}' value='${list.MEMO }' onkeyup="modifyProductDoneEnter(${list.IDX}, '11')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '11');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='MEMOIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -1164,7 +1164,15 @@ function test(){
   			$("#MEMOIMG2"+inkeyNum).css('visibility', 'visible'); 
   		}
   	}
-  	
+
+	// 수정 엔터 이벤트
+  	function modifyProductDoneEnter(inkeyNum, gb){
+  		debugger;
+  		if (window.event.keyCode == 13) {
+  			modifyButton_onclickData(inkeyNum);
+  		}
+  	}
+
 	// 수정버튼 클릭
   	function modifyProductDone(inkeyNum, gb){
   		debugger;

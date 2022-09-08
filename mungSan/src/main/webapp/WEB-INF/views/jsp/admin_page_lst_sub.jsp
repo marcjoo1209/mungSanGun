@@ -225,7 +225,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '5');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLLOWAMTIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='price1' id='DTLLOWAMT${list.IDX}' value='${list.DTLLOWAMT}'/>
+									<input type='hidden' class='price1' id='DTLLOWAMT${list.IDX}' value='${list.DTLLOWAMT}' onkeyup="modifyProductDoneEnter(${list.IDX}, '5')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '5');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLLOWAMTIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -236,7 +236,7 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
 									</a>
-									<input type='hidden' class='longstr' id='DTLPRODUCTLINK${list.IDX}' value='${list.DTLPRODUCTLINK}'/>
+									<input type='hidden' class='longstr' id='DTLPRODUCTLINK${list.IDX}' value='${list.DTLPRODUCTLINK}' onkeyup="modifyProductDoneEnter(${list.IDX}, '6')"/>
 									<a href="javascript:modifyProductDone(${list.IDX}, '6');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
@@ -640,7 +640,15 @@ input::-webkit-inner-spin-button {
   			$("#DTLPRODUCTLINKIMG2"+inkeyNum).css('visibility', 'visible'); 
   		}
   	}
-  	
+
+	// 수정 엔터 이벤트
+  	function modifyProductDoneEnter(inkeyNum, gb){
+  		debugger;
+  		if (window.event.keyCode == 13) {
+  			modifyButton_onclickData(inkeyNum);
+  		}
+  	}
+
 	// 수정버튼 클릭
   	function modifyProductDone(inkeyNum, gb){
   		debugger;
@@ -687,23 +695,30 @@ input::-webkit-inner-spin-button {
 	// 금액 계산
 	function calcAmt(inkeyNum){
 		debugger;
-		// 판매가
-		let nomalamt = $("#DTLNOMALAMT"+inkeyNum).val();
-		// 수수료
-		let commamt = $("#DTLCOMMITIONAMT"+inkeyNum).val();
-		// 배송비
-		let shipamt = $("#DTLSHIPAMT"+inkeyNum).val();
-		// 구입가
-		let payamt = $("#DTLPAYAMT"+inkeyNum).val();
-		// 정산가 계산 (판매가 * 수수료 + 배송비 *0.967)
-		let totAmt = Math.floor((nomalamt*commamt)+(shipamt*0.967));
-		// 마진 계산 (정산가 - 오픈마켓가격)
-		let totAmtP = Math.floor(totAmt-payamt);
-		
-		$("#DTLCALCAMT"+inkeyNum).val(totAmt);
-		$("#DTLCALCAMTSPAN"+inkeyNum).text(totAmt);
-		$("#DTLINCOMMAMT"+inkeyNum).val(totAmtP);
-		$("#DTLINCOMMAMTSPAN"+inkeyNum).text(totAmtP);
+
+  		if (window.event.keyCode == 13) {
+  			modifyButton_onclickData(inkeyNum);
+  		}
+  		else
+  		{
+			// 판매가
+			let nomalamt = $("#DTLNOMALAMT"+inkeyNum).val();
+			// 수수료
+			let commamt = $("#DTLCOMMITIONAMT"+inkeyNum).val();
+			// 배송비
+			let shipamt = $("#DTLSHIPAMT"+inkeyNum).val();
+			// 구입가
+			let payamt = $("#DTLPAYAMT"+inkeyNum).val();
+			// 정산가 계산 (판매가 * 수수료 + 배송비 *0.967)
+			let totAmt = Math.floor((nomalamt*commamt)+(shipamt*0.967));
+			// 마진 계산 (정산가 - 오픈마켓가격)
+			let totAmtP = Math.floor(totAmt-payamt);
+			
+			$("#DTLCALCAMT"+inkeyNum).val(totAmt);
+			$("#DTLCALCAMTSPAN"+inkeyNum).text(totAmt);
+			$("#DTLINCOMMAMT"+inkeyNum).val(totAmtP);
+			$("#DTLINCOMMAMTSPAN"+inkeyNum).text(totAmtP);
+  		}
 	}
   </script>
   
