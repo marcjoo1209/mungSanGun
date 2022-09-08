@@ -42,6 +42,7 @@
 	</select>
 
     <select id="getListProductLstLowPrice" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+    <![CDATA[
 		select 
 			pl.IDX,
 			pl.PRODUCTNM,
@@ -50,7 +51,7 @@
 			IFNULL(pdl.DTLSHIPAMT, 0) as SHIPAMT,
 			IFNULL(pdl.DTLCOMMITIONAMT, 0) as COMMITIONAMT,
 			IFNULL(pdl.DTLCALCAMT, 0) as CALCAMT,
-			IFNULL(pdl.DTLPAYAMT, 0) as PAYAMT,
+			IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as PAYAMT,
 			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
 			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
 			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK,
@@ -61,6 +62,7 @@
 			pl.MEMO,
 			pl.LEADAMT
 		from product_dtl_lst pdl
+		]]>
 		right OUTER JOIN (
 			        SELECT
 			        	pl.IDX,
