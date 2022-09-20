@@ -64,13 +64,41 @@
 			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK
 		from 
 			(
-			select 
-				PRODUCTIDX
-				, min(pdl.DTLPAYAMT) dtlpayamt
-			from product_dtl_lst pdl 
-			where 1=1
-			  and CAST(IFNULL(pdl.DTLPAYAMT, '99999999999') as unsigned) != 0
-			group by PRODUCTIDX 
+			select
+				ttb.productidx as productidx
+				, ttb.shopidx as shopidx
+				, ttb.dtlpayamt as dtlpayamt
+				, ttb.idx as idx
+			from (
+				select 
+					idx
+					, productidx
+					, shopidx
+					, dtlpayamt
+				  	, @RANK := IF(@BF_USER_SAL = pdl.productidx, @RANK, @RANK+@SAME_SAL_CNT) AS DENSE_RANK
+				  	, @SAME_SAL_CNT  := IF(@BF_USER_SAL = pdl.productidx, @SAME_SAL_CNT+1,1)  AS RCNT
+				  	, @BF_USER_SAL AS BF_USER_SAL
+				  	, @BF_USER_SAL := pdl.productidx as testcnt
+				  	, @ROWNUM:= @ROWNUM + 1 AS ROWNUMBER 
+				  	/**/
+				from 
+				(
+					select 
+						CAST(idx as unsigned) 				as idx
+						, CAST(productidx as unsigned) 		as productidx 
+						, CAST(shopidx as unsigned) 		as shopidx
+						, min(CAST(dtlpayamt as unsigned))	as dtlpayamt 
+					from product_dtl_lst pdl
+    <![CDATA[
+					where 1=1 /* CAST(IFNULL(IF(pdl.DTLPAYAMT < 0,1,pdl.DTLPAYAMT), '99999999999') as unsigned) != 0 */
+					]]>
+					group by CAST(productidx as unsigned), CAST(shopidx as unsigned)
+					order by CAST(productidx as unsigned),
+						if(CAST(dtlpayamt as unsigned), 0, 99999999999999)
+				) pdl
+				, (SELECT @RANK:=0, @BF_USER_SAL:=0, @SAME_SAL_CNT:=1, @ROWNUM:=0) B
+			) ttb
+			where ttb.RCNT = 1
 			) minpdl
 			, product_dtl_lst pdl
 			, (
@@ -104,7 +132,8 @@
 				limit  100
 				) pl
 		where pdl.PRODUCTIDX  = minpdl.PRODUCTIDX
-		  and pdl.dtlpayamt  = minpdl.dtlpayamt
+		  and pdl.idx  		= minpdl.idx
+		  and pdl.shopidx  = minpdl.shopidx
 		  and pl.IDX = pdl.PRODUCTIDX
 	</select>
 	

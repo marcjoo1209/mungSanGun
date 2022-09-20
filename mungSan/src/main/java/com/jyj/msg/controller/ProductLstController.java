@@ -68,7 +68,7 @@ public class ProductLstController {
         inDtlDto.setPRODUCTIDX(productLstService.getMaxNum());
         inDtlDto.setSHOPIDX(String.valueOf(i));
         if(i == 1) {
-          inDtlDto.setDTLPAYAMT("-1");
+          //inDtlDto.setDTLPAYAMT("-1");
         }
         
         productDtlLstService.createProductDtlLst(inDtlDto);

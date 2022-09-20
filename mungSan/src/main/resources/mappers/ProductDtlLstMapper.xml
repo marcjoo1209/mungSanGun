@@ -10,7 +10,9 @@
 		    	, pdl.DTLSHIPAMT
 		    	, pdl.DTLCOMMITIONAMT
 		    	, pdl.DTLCALCAMT
-		    	, pdl.DTLPAYAMT
+			    <![CDATA[
+						, IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as DTLPAYAMT
+					]]>
 		    	, pdl.DTLINCOMMAMT
 		    	, pdl.DTLLOWAMT
 		    	, pdl.USEYN
@@ -56,7 +58,9 @@
 		    	, pdl.DTLSHIPAMT
 		    	, pdl.DTLCOMMITIONAMT
 		    	, pdl.DTLCALCAMT
-		    	, pdl.DTLPAYAMT
+			    <![CDATA[
+						, IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as DTLPAYAMT
+					]]>
 		    	, pdl.DTLINCOMMAMT
 		    	, pdl.DTLLOWAMT
 		    	, pdl.USEYN

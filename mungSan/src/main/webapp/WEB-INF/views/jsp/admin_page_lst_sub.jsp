@@ -126,6 +126,7 @@ input::-webkit-inner-spin-button {
 							<th>마진 </th>
 							<th>최저가 </th>
 							<th>링크 </th>
+							<th>수정일 </th>
 						</tr>
 					</thead>
 					<tbody valign='bottom'>
@@ -232,7 +233,11 @@ input::-webkit-inner-spin-button {
 								</td>
 								<!-- 링크 -->
 								<td style='font-size: 20px; text-align:left; vertical-align:middle; width:200px;'>
-									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>${fn:substring(list.DTLPRODUCTLINK, 0, 100) } ... </span>
+									<span id='DTLPRODUCTLINKSPAN${list.IDX}'>
+										<a href='${list.DTLPRODUCTLINK }' target="_blank">
+										링크
+										</a>
+									</span>
 									<a href="javascript:modifyProduct(${list.IDX}, '6');" >
 										<img src='https://en.pimg.jp/053/138/158/1/53138158.jpg' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG1${list.IDX}'>
 									</a>
@@ -240,6 +245,12 @@ input::-webkit-inner-spin-button {
 									<a href="javascript:modifyProductDone(${list.IDX}, '6');" >
 										<img src='https://cdn.pixabay.com/photo/2016/03/31/19/14/check-box-1294836_960_720.png' width = '15px' height = '15px' id='DTLPRODUCTLINKIMG2${list.IDX}' style='visibility:hidden;'>
 									</a>
+								</td>
+								<!-- 수정일 -->
+								<td style='font-size: 20px; text-align:left; vertical-align:middle; width:200px;'>
+									<span id='AUDITDTM${list.IDX}'>
+										${list.AUDITDTM }
+									</span>
 								</td>
 							</tr>
 									<input type='hidden' id='PRODUCTIDX${list.IDX}' value='${list.PRODUCTIDX}'/>
