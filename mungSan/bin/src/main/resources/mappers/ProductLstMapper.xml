@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductLstMapper">
+
+    <select id="getListProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+		  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+		  AND PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+		  </if>
+		  <if test="IDX != null and IDX != ''" >
+		  AND IDX = #{IDX}
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'ASC'">
+		  ORDER BY PRODUCTNMDESC ASC
+		  </if>
+		  <if test="PRODUCTNMDESC eq 'DESC'">
+		  ORDER BY PRODUCTNMDESC DESC
+		  </if>
+		  <if test="PRODUCTNMDESC == null or PRODUCTNMDESC.equals('')" >
+		  ORDER BY CAST(IDX as unsigned)
+		  </if>
+	</select>
+
+    <select id="getListProductLstLowPrice" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+		select 	
+			pl.IDX,
+			pl.PRODUCTNM,
+			pl.IMGURL,
+			pl.USEYN,
+			pl.CREATEDTM,
+			pl.AUDITDTM,
+			pl.AUDITID,
+			pl.MEMO,
+			pl.LEADAMT,
+			IFNULL(pdl.DTLNOMALAMT, 0) as NOMALAMT,
+			IFNULL(pdl.DTLSHIPAMT, 0) as SHIPAMT,
+			IFNULL(pdl.DTLCOMMITIONAMT, 0) as COMMITIONAMT,
+			IFNULL(pdl.DTLCALCAMT, 0) as CALCAMT,
+    <![CDATA[
+			IFNULL(IF(pdl.DTLPAYAMT<=0,0,pdl.DTLPAYAMT), 0) as PAYAMT,
+		]]>
+			IFNULL(pdl.DTLINCOMMAMT, 0) as INCOMMAMT,
+			IFNULL(pdl.DTLLOWAMT, 0) as LOWAMT,
+			IFNULL(pdl.DTLPRODUCTLINK, 0) as PRODUCTLINK
+		from 
+			(
+			select
+				ttb.productidx as productidx
+				, ttb.shopidx as shopidx
+				, ttb.dtlpayamt as dtlpayamt
+				, ttb.idx as idx
+			from (
+				select 
+					idx
+					, productidx
+					, shopidx
+					, dtlpayamt
+				  	, @RANK := IF(@BF_USER_SAL = pdl.productidx, @RANK, @RANK+@SAME_SAL_CNT) AS DENSE_RANK
+				  	, @SAME_SAL_CNT  := IF(@BF_USER_SAL = pdl.productidx, @SAME_SAL_CNT+1,1)  AS RCNT
+				  	, @BF_USER_SAL AS BF_USER_SAL
+				  	, @BF_USER_SAL := pdl.productidx as testcnt
+				  	, @ROWNUM:= @ROWNUM + 1 AS ROWNUMBER 
+				  	/**/
+				from 
+				(
+					select 
+						CAST(idx as unsigned) 				as idx
+						, CAST(productidx as unsigned) 		as productidx 
+						, CAST(shopidx as unsigned) 		as shopidx
+						, min(CAST(dtlpayamt as unsigned))	as dtlpayamt 
+					from product_dtl_lst pdl
+    <![CDATA[
+					where 1=1 /* CAST(IFNULL(IF(pdl.DTLPAYAMT < 0,1,pdl.DTLPAYAMT), '99999999999') as unsigned) != 0 */
+					]]>
+					group by CAST(productidx as unsigned), CAST(shopidx as unsigned)
+					order by CAST(productidx as unsigned),
+						if(CAST(dtlpayamt as unsigned), 0, 99999999999999)
+				) pdl
+				, (SELECT @RANK:=0, @BF_USER_SAL:=0, @SAME_SAL_CNT:=1, @ROWNUM:=0) B
+			) ttb
+			where ttb.RCNT = 1
+			) minpdl
+			, product_dtl_lst pdl
+			, (
+				SELECT
+					pl.IDX,
+					pl.PRODUCTNM,
+					pl.IMGURL,
+					pl.USEYN,
+					pl.CREATEDTM,
+					pl.AUDITDTM,
+					pl.AUDITID,
+					pl.MEMO,
+					pl.LEADAMT
+				FROM product_lst pl
+				where pl.useyn = 'Y'
+				  <if test="PRODUCTNM != null and PRODUCTNM != ''" >
+				  AND pl.PRODUCTNM LIKE CONCAT("%", #{PRODUCTNM}, "%")
+				  </if>
+				  <if test="IDX != null and IDX != ''" >
+				  AND pl.IDX = #{IDX}
+				  </if>
+				<if test='PRODUCTNMDESC.equals("a")'>
+				ORDER BY pl.PRODUCTNM ASC
+				</if>
+				<if test='PRODUCTNMDESC.equals("b")'>
+				ORDER BY pl.PRODUCTNM DESC
+				</if>
+				<if test='PRODUCTNMDESC.equals("c")'>
+				ORDER BY pl.AUDITDTM DESC
+				</if>
+				limit  100
+				) pl
+		where pdl.PRODUCTIDX  = minpdl.PRODUCTIDX
+		  and pdl.idx  		= minpdl.idx
+		  and pdl.shopidx  = minpdl.shopidx
+		  and pl.IDX = pdl.PRODUCTIDX
+	</select>
+	
+    <select id="getListProductLstByShop" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+	</select>
+
+    <select id="getProductLst" resultType="com.jyj.msg.controller.dto.ProductLstOutDto">
+        SELECT
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
+        FROM product_lst
+        WHERE 1 		= 1
+          AND USEYN 	= 'Y'
+          AND IDX		= #{IDX}
+	</select>
+
+    <insert id="createProductLst">
+        INSERT INTO product_lst
+        (
+        	IDX,
+			PRODUCTNM,
+			IMGURL,
+			NOMALAMT,
+			SHIPAMT,
+			COMMITIONAMT,
+			CALCAMT,
+			PAYAMT,
+			INCOMEAMT,
+			LOWAMT,
+			PRODUCTLINK,
+			USEYN,
+			CREATEDTM,
+			AUDITDTM,
+			AUDITID,
+			MEMO,
+			LEADAMT
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(cl.IDX AS INTEGER))
+        		  FROM product_lst cl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{PRODUCTNM}
+        	, #{IMGURL}
+        	, IFNULL(#{NOMALAMT}, '0')
+        	, IFNULL(#{SHIPAMT}, '0')
+        	, IFNULL(#{COMMITIONAMT}, '0')
+        	, IFNULL(#{CALCAMT}, '0')
+        	, IFNULL(#{PAYAMT}, '0')
+        	, IFNULL(#{INCOMEAMT}, '0')
+        	, IFNULL(#{LOWAMT}, '0')
+        	, #{PRODUCTLINK}
+        	, 'Y'
+        	, CURRENT_TIMESTAMP(6)
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        	, #{MEMO}
+        	, #{LEADAMT}
+        )
+	</insert>
+
+    <update id="modifyProductLst">
+        UPDATE product_lst
+        SET
+			PRODUCTNM 		= #{PRODUCTNM},
+			IMGURL 			= #{IMGURL},
+			NOMALAMT 		= #{NOMALAMT},
+			SHIPAMT 		= #{SHIPAMT},
+			COMMITIONAMT 	= #{COMMITIONAMT},
+			CALCAMT 		= #{CALCAMT},
+			PAYAMT 			= #{PAYAMT},
+			INCOMEAMT 		= #{INCOMEAMT},
+			LOWAMT 			= #{LOWAMT},
+			PRODUCTLINK 	= #{PRODUCTLINK},
+			AUDITDTM 		= CURRENT_TIMESTAMP(6),
+			AUDITID 		= 'cila10',
+        	MEMO			= #{MEMO},
+        	LEADAMT			= #{LEADAMT}
+          WHERE IDX			= #{IDX}
+	</update>
+
+    <update id="removeProductLst">
+        DELETE from product_lst
+          WHERE IDX			= #{IDX}
+	</update>
+	
+	<select id="getMaxNum" resultType="string">
+		select 
+			(IFNULL(
+		    	(SELECT 
+		    		MAX(CAST(cl.IDX AS INTEGER))
+				  FROM product_lst cl
+				 WHERE 1 = 1
+				) , 0
+			) ) maxnum
+		from dual
+	</select>
+</mapper>

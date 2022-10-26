@@ -25,97 +25,70 @@ import io.swagger.annotations.ApiOperation;
 /**
  * @create 2022. 7. 14.
  * @author 주영주
-**/
+ **/
 @RestController
 @SessionAttributes("shoplist")
 public class ShopListController {
-  @Autowired
-  ShopLstService shopLstService;
+	@Autowired
+	ShopLstService shopLstService;
 
-  @RequestMapping(value="/create-shop-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
-  public int createProductLst(@RequestBody Map<String, Object> data) throws IOException {
-    System.out.println("/get-list-product-dtl-lst 호출 시작");
-    ShopLstInDto inDto = new ShopLstInDto();
+	@RequestMapping(value = "/create-shop-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "상품 대상 생성 호출", notes = "상품 대상 리스트 생성 호출")
+	public int createProductLst(@RequestBody Map<String, Object> data) throws IOException {
+		System.out.println("/get-list-product-dtl-lst 호출 시작");
+		ShopLstInDto inDto = new ShopLstInDto();
 
-    inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
-    inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
-    inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
-    inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
-    inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
-    inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
-    
-    System.out.println(inDto.getSHOPNM());
-    
-    int outDto = shopLstService.createShopLst(inDto);
+		inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
+		inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
+		inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
+		inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
+		inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
+		inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
 
-    return outDto;
-  }
-  
-  @RequestMapping(value="/modify-shop-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
-  public int modifyProductLst(@RequestBody Map<String, Object> data) throws IOException {
-    System.out.println("/get-list-product-dtl-lst 호출 시작");
-    ShopLstInDto inDto = new ShopLstInDto();
-    
-    inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
-    inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
-    inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
-    inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
-    inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
-    inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
-    
-    System.out.println(inDto.getSHOPNM());
-    
-    int outDto = shopLstService.modifyShopLst(inDto);
-    
-    return outDto;
-  }
-  
-  @RequestMapping(value="/remove-shop-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
-  public int removeProductLst(@RequestBody Map<String, Object> data) throws IOException {
-    System.out.println("/get-list-product-dtl-lst 호출 시작");
-    ShopLstInDto inDto = new ShopLstInDto();
-    
-    inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
-    inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
-    inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
-    inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
-    inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
-    inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
-    
-    System.out.println(inDto.getSHOPNM());
-    
-    int outDto = shopLstService.removeShopLst(inDto);
-    
-    return outDto;
-  }
-/*
-  @RequestMapping(value="/getListShopLst", method=RequestMethod.POST)
-  @ApiOperation(value = "이커머스 리스트 조회", notes="상품 대상 리스트 조회")
-  public void getListShopLst() {
-    List<ShopLstOutDto> outDto = shopLstService.getListShopLst();
-    System.out.println(outDto);
-    
-  }
-  
-  @RequestMapping(value="/createShopLst", method=RequestMethod.POST)
-  @ApiOperation(value = "이커머스 리스트 생성", notes="상품 대상 리스트 생성")
-  public void createShopLst() {
-    ShopLstInDto inDto = new ShopLstInDto();
-    Integer outDto = shopLstService.createShopLst(inDto);
-    System.out.println(outDto);
-    
-  }
-  
-  @RequestMapping(value="/modifyShopLst", method=RequestMethod.POST)
-  @ApiOperation(value = "이커머스 리스트 수정", notes="상품 대상 리스트 수정")
-  public void modifyShopLst() {
-    ShopLstInDto inDto = new ShopLstInDto();
-    Integer outDto = shopLstService.modifyShopLst(inDto);
-    System.out.println(outDto);
-    
-  }
-  */
+		System.out.println(inDto.getSHOPNM());
+
+		int outDto = shopLstService.createShopLst(inDto);
+
+		return outDto;
+	}
+
+	@RequestMapping(value = "/modify-shop-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "상품 대상 생성 호출", notes = "상품 대상 리스트 생성 호출")
+	public int modifyProductLst(@RequestBody Map<String, Object> data) throws IOException {
+		System.out.println("/get-list-product-dtl-lst 호출 시작");
+		ShopLstInDto inDto = new ShopLstInDto();
+
+		inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
+		inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
+		inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
+		inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
+		inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
+		inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
+
+		System.out.println(inDto.getSHOPNM());
+
+		int outDto = shopLstService.modifyShopLst(inDto);
+
+		return outDto;
+	}
+
+	@RequestMapping(value = "/remove-shop-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "상품 대상 생성 호출", notes = "상품 대상 리스트 생성 호출")
+	public int removeProductLst(@RequestBody Map<String, Object> data) throws IOException {
+		System.out.println("/get-list-product-dtl-lst 호출 시작");
+		ShopLstInDto inDto = new ShopLstInDto();
+
+		inDto.setIDX(CommonUtil.checkDataIsNull(data.get("IDX")));
+		inDto.setSHOPNM(CommonUtil.checkDataIsNull(data.get("SHOPNM")));
+		inDto.setID(CommonUtil.checkDataIsNull(data.get("ID")));
+		inDto.setPWD(CommonUtil.checkDataIsNull(data.get("PWD")));
+		inDto.setTOKENID(CommonUtil.checkDataIsNull(data.get("TOKENID")));
+		inDto.setURL(CommonUtil.checkDataIsNull(data.get("URL")));
+
+		System.out.println(inDto.getSHOPNM());
+
+		int outDto = shopLstService.removeShopLst(inDto);
+
+		return outDto;
+	}
 }

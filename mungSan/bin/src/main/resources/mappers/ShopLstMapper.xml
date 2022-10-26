@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShopLstMapper">
+
+    <select id="getListShopLst" resultType="com.jyj.msg.controller.dto.ShopLstOutDto">
+        SELECT
+        	IDX
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        	, SHOPNM
+        	, ID
+        	, PWD
+        	, TOKENID
+        	, URL
+        FROM shop_lst
+        WHERE 1 = 1
+        ORDER BY CAST(IDX AS UNSIGNED) ASC
+	</select>
+
+    <insert id="createShopLst">
+        INSERT INTO shop_lst
+        (
+        	IDX
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        	, SHOPNM
+        	, ID
+        	, PWD
+        	, TOKENID
+        	, URL
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(sl.IDX AS INTEGER))
+        		  FROM shop_lst sl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, sysdate()
+        	, sysdate()
+        	, #{AUDITID}
+        	, #{SHOPNM}
+        	, #{ID}
+        	, #{PWD}
+        	, #{TOKENID}
+        	, #{URL}
+        )
+	</insert>
+
+    <update id="modifyShopLst">
+        UPDATE shop_lst
+        SET
+        	AUDITDTM		= sysdate()
+        	, AUDITID		= #{AUDITID}
+        	, SHOPNM		= #{SHOPNM}
+        	, ID			= #{ID}
+        	, PWD			= #{PWD}
+        	, TOKENID		= #{TOKENID}
+        	, URL			= #{URL}
+        WHERE IDX			= #{IDX}
+	</update>
+
+    <update id="removeShopLst">
+        DELETE FROM shop_lst
+        WHERE IDX			= #{IDX}
+	</update>
+
+</mapper>

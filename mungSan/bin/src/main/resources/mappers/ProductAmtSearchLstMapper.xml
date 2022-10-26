@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductAmtSearchLstMapper">
+
+    <select id="getProductAmtSearchLst" resultType="com.jyj.msg.controller.dto.ProductAmtSearchLstOutDto">
+        SELECT
+        	IDX
+        	, PRODUCTIDX
+        	, PRODUCTNM
+        	, SHOPIDX
+        	, PRODUCTURL
+        	, LOGINID
+        	, LOGINPWD
+        	, AMTGB
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        FROM product_amt_search_lst
+        WHERE 1 			= 1
+          AND IDX _wn		= #{IDX}
+          AND USEYN			= 'Y'
+	</select>
+
+    <select id="getListProductAmtSearchLst" resultType="com.jyj.msg.controller.dto.ProductAmtSearchLstOutDto">
+        SELECT
+        	IDX
+        	, PRODUCTIDX
+        	, PRODUCTNM
+        	, SHOPIDX
+        	, PRODUCTURL
+        	, LOGINID
+        	, LOGINPWD
+        	, AMTGB
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        FROM product_amt_search_lst
+        WHERE 1 			= 1
+          AND USEYN			= 'Y'
+	</select>
+
+    <select id="getListProductAmtSearchLstByShop" resultType="com.jyj.msg.controller.dto.ProductAmtSearchLstOutDto">
+        SELECT
+        	IDX
+        	, PRODUCTIDX
+        	, PRODUCTNM
+        	, SHOPIDX
+        	, PRODUCTURL
+        	, LOGINID
+        	, LOGINPWD
+        	, AMTGB
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        FROM product_amt_search_lst
+        WHERE 1 			= 1
+          AND USEYN			= 'Y'
+		  <if test="SHOPIDX != null and SHOPIDX != ''" >
+		  AND SHOPIDX = #{SHOPIDX}
+		  </if>
+	</select>
+
+    <insert id="createProductAmtSearchLst">
+        INSERT INTO product_amt_search_lst
+        (
+        	IDX
+        	, PRODUCTIDX
+        	, PRODUCTNM
+        	, SHOPIDX
+        	, PRODUCTURL
+        	, LOGINID
+        	, LOGINPWD
+        	, AMTGB
+        	, USEYN
+        	, CREATEDTM
+        	, AUDITDTM
+        	, AUDITID
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(pasl.IDX AS INTEGER))
+        		  FROM product_amt_search_lst pasl
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{PRODUCTIDX}
+        	, #{PRODUCTNM}
+        	, #{SHOPIDX}
+        	, #{PRODUCTURL}
+        	, #{LOGINID}
+        	, #{LOGINPWD}
+        	, #{AMTGB}
+        	, #{USEYN}
+        	, CURRENT_TIMESTAMP(6)
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        )
+	</insert>
+
+    <update id="modifyProductAmtSearchLst">
+        UPDATE product_amt_search_lst
+        SET
+        	PRODUCTIDX		= #{PRODUCTIDX}
+        	, PRODUCTNM		= #{PRODUCTNM}
+        	, SHOPIDX		= #{SHOPIDX}
+        	, PRODUCTURL	= #{PRODUCTURL}
+        	, LOGINID		= #{LOGINID}
+        	, LOGINPWD		= #{LOGINPWD}
+        	, AMTGB			= #{AMTGB}
+        	, USEYN			= #{USEYN}
+        	, AUDITDTM		= CURRENT_TIMESTAMP(6)
+        	, AUDITID		= #{AUDITID}
+        WHERE IDX			= #{IDX}
+	</update>
+
+    <update id="removeProductAmtSearchLst">
+        UPDATE product_amt_search_lst
+        SET
+        	USEYN			= 'N'
+        WHERE IDX			= #{IDX}
+	</update>
+
+</mapper>

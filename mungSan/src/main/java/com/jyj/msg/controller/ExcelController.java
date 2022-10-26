@@ -53,7 +53,9 @@ public class ExcelController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelController.class);
 	
-
+	/* 엑셀 다운로드 페이지 이동
+	 * 
+	 * */
 	@RequestMapping(method = RequestMethod.POST,value="/excelDownload")
 	public String excelDownload(HttpServletRequest request, Model model) {
 	   // log.debug("admin Page Lst");
@@ -73,6 +75,8 @@ public class ExcelController {
 		return "excel/excelDownload";
     }
 	
+	/* 엑셀 업로드 후 메인 페이지 이동
+	 * */
 	@RequestMapping(method = RequestMethod.POST,value="/excelUpload")
 	public String excelUpload(MultipartHttpServletRequest request, Model model) {
 	  LOGGER.debug("excelUpload");
@@ -89,6 +93,8 @@ public class ExcelController {
 	  return "redirect:/admin-page-lst";
 	}
 
+	/* 엑셀 업로드 후 메인 페이지 이동2
+	 * */
     @RequestMapping(method = RequestMethod.POST,value="/excelUploadMain")
     public String excelUploadMain(MultipartHttpServletRequest request, Model model) {
       LOGGER.debug("excelUploadMain");

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TelegramNotiUserLstMapper">
+
+    <select id="getListTelegramNotiUserLst" resultType="com.jyj.msg.controller.dto.TelegramNotiUserLstOutDto">
+        SELECT
+        	IDX
+        	, TOKEN
+        	, CHATID
+        	, USEYN
+        	, AUDITDTM
+        	, AUDITID
+        FROM telegram_noti_user_lst
+        WHERE 1 	= 1
+          AND USEYN = 'Y'
+	</select>
+
+    <select id="getTelegramNotiUserLst" resultType="com.jyj.msg.controller.dto.TelegramNotiUserLstOutDto">
+        SELECT
+        	IDX
+        	, TOKEN
+        	, CHATID
+        	, USEYN
+        	, AUDITDTM
+        	, AUDITID
+        FROM telegram_noti_user_lst
+        WHERE 1 	= 1
+          AND USEYN = 'Y'
+          AND IDX 	= #{IDX}
+	</select>
+
+    <insert id="createTelegramNotiUserLst">
+        INSERT INTO telegram_noti_user_lst
+        (
+        	IDX
+        	, TOKEN
+        	, CHATID
+        	, USEYN
+        	, AUDITDTM
+        	, AUDITID
+        )
+        VALUES
+        (
+        	(IFNULL(
+            	(SELECT 
+            		MAX(CAST(tnul.IDX AS INTEGER))
+        		  FROM telegram_noti_user_lst tnul
+        		 WHERE 1 = 1
+        		) , 0
+        	) +1)
+        	, #{TOKEN}
+        	, #{CHATID}
+        	, #{USEYN}
+        	, CURRENT_TIMESTAMP(6)
+        	, #{AUDITID}
+        )
+	</insert>
+
+    <update id="modifyTelegramNotiUserLst">
+        UPDATE telegram_noti_user_lst
+        SET
+        	TOKEN		= #{TOKEN}
+        	, CHATID	= #{CHATID}
+        	, USEYN		= #{USEYN}
+        	, AUDITID	= #{AUDITID}
+        	, AUDITDTM	= CURRENT_TIMESTAMP(6)
+        WHERE IDX		= #{IDX}
+	</update>
+
+</mapper>

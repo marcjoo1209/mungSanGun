@@ -22,57 +22,57 @@ import io.swagger.annotations.ApiOperation;
 /**
  * @create 2022. 7. 14.
  * @author 주영주
-**/
+ **/
 //@Slf4j
 @Controller
 @SessionAttributes("aptinfo")
-//@RequestMapping(value = "/api/v1/app/")
 public class TelegramNotiUserLstController {
-  @Autowired
-  TelegramNotiUserLstService telegramNotiUserLstService;
+	@Autowired
+	TelegramNotiUserLstService telegramNotiUserLstService;
 
-  @RequestMapping(value="/getlist-telegram-noti-user-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "알림 대상 리스트 조회 로컬 호출", notes="알림 대상 리스트 조회 로컬 호출")
-  public List<TelegramNotiUserLstOutDto> getListTelegramNotiUserLst() throws IOException {
-   // log.debug("/getlist-telegram-noti-user-lst 호출 시작");
-    List<TelegramNotiUserLstOutDto> outDto = telegramNotiUserLstService.getListTelegramNotiUserLst();
+	@RequestMapping(value = "/getlist-telegram-noti-user-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "알림 대상 리스트 조회 로컬 호출", notes = "알림 대상 리스트 조회 로컬 호출")
+	public List<TelegramNotiUserLstOutDto> getListTelegramNotiUserLst() throws IOException {
+		// log.debug("/getlist-telegram-noti-user-lst 호출 시작");
+		List<TelegramNotiUserLstOutDto> outDto = telegramNotiUserLstService.getListTelegramNotiUserLst();
 
-    return outDto;
-  }
-  
-  @RequestMapping(value="/get-telegram-noti-user-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "알림 대상 조회 호출", notes="알림 대상 리스트 조회 호출")
-  public TelegramNotiUserLstOutDto getTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
-   // log.debug("/get-telegram-noti-user-lst 호출 시작");
-    TelegramNotiUserLstOutDto outDto = telegramNotiUserLstService.getTelegramNotiUserLst(inDto);
-    
-    return outDto;
-  }
-  
-  @RequestMapping(value="/create-telegram-noti-user-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "알림 대상 생성 호출", notes="알림 대상 리스트 생성 호출")
-  public Integer createTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
-   // log.debug("/create-telegram-noti-user-lst 호출 시작");
-    Integer outDto = telegramNotiUserLstService.createTelegramNotiUserLst(inDto);
-    
-    return outDto;
-  }
-  
-  @RequestMapping(value="/modify-telegram-noti-user-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "알림 대상 수정 호출", notes="알림 대상 리스트 수정 호출")
-  public Integer modifyTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
-   // log.debug("/modify-telegram-noti-user-lst 호출 시작");
-    Integer outDto = telegramNotiUserLstService.modifyTelegramNotiUserLst(inDto);
-    
-    return outDto;
-  }
-  
-  @RequestMapping(value="/remove-telegram-noti-user-lst", method=RequestMethod.POST)
-  @ApiOperation(value = "알림 대상 수정 호출", notes="알림 대상 리스트 수정 호출")
-  public Integer removeTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
-   // log.debug("/remove-telegram-noti-user-lst 호출 시작");
-    Integer outDto = telegramNotiUserLstService.removeTelegramNotiUserLst(inDto);
-    
-    return outDto;
-  }
+		return outDto;
+	}
+
+	@RequestMapping(value = "/get-telegram-noti-user-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "알림 대상 조회 호출", notes = "알림 대상 리스트 조회 호출")
+	public TelegramNotiUserLstOutDto getTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto)
+			throws IOException {
+		// log.debug("/get-telegram-noti-user-lst 호출 시작");
+		TelegramNotiUserLstOutDto outDto = telegramNotiUserLstService.getTelegramNotiUserLst(inDto);
+
+		return outDto;
+	}
+
+	@RequestMapping(value = "/create-telegram-noti-user-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "알림 대상 생성 호출", notes = "알림 대상 리스트 생성 호출")
+	public Integer createTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
+		// log.debug("/create-telegram-noti-user-lst 호출 시작");
+		Integer outDto = telegramNotiUserLstService.createTelegramNotiUserLst(inDto);
+
+		return outDto;
+	}
+
+	@RequestMapping(value = "/modify-telegram-noti-user-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "알림 대상 수정 호출", notes = "알림 대상 리스트 수정 호출")
+	public Integer modifyTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
+		// log.debug("/modify-telegram-noti-user-lst 호출 시작");
+		Integer outDto = telegramNotiUserLstService.modifyTelegramNotiUserLst(inDto);
+
+		return outDto;
+	}
+
+	@RequestMapping(value = "/remove-telegram-noti-user-lst", method = RequestMethod.POST)
+	@ApiOperation(value = "알림 대상 수정 호출", notes = "알림 대상 리스트 수정 호출")
+	public Integer removeTelegramNotiUserLst(@RequestBody TelegramNotiUserLstInDto inDto) throws IOException {
+		// log.debug("/remove-telegram-noti-user-lst 호출 시작");
+		Integer outDto = telegramNotiUserLstService.removeTelegramNotiUserLst(inDto);
+
+		return outDto;
+	}
 }
