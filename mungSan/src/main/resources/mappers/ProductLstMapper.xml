@@ -332,7 +332,9 @@
 		from dual
 	</select>
 	
-	<insert id="callRankProductDtl">
-		CALL RANKPRODUCTDTL(#{IDX})
+	<insert id="callRankProductDtl" parameterType="int">
+		CALL RANKPRODUCTDTL(
+		#{IDX}
+		)
 	</insert>
 </mapper>

@@ -75,6 +75,7 @@ input::-webkit-inner-spin-button {
 				<img src='https://www.nicepng.com/png/detail/208-2087007_excel-icon-png-upload-csv-icon.png' width='50px' height='35px' data-toggle='modal' data-target='#excelModal' alt='엑셀 업로드'/>
  				-->
 		    </div>
+		    <!--
 		    <div class="col-md">
 				<select class='form-control' id='selProductIdx' onchange="selectOnchange(this)">
 					<option value=''>-- 상품 선택 --</option>	
@@ -83,6 +84,7 @@ input::-webkit-inner-spin-button {
 		        	</c:forEach>
 		        </select>
 		    </div>
+		    -->
 		    <!-- 
 		    <div class="col-md" align='right'>
 			  	<div class="row">
