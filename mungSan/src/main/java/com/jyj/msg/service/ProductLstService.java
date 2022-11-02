@@ -29,4 +29,6 @@ public interface ProductLstService {
   
   String getMaxNum();
 
+  int callRankProductDtl(int IDX);
+
 }

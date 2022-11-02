@@ -8,21 +8,21 @@ package com.jyj.msg.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.jyj.msg.common.CommonUtil;
 import com.jyj.msg.controller.dto.ProductDtlLstInDto;
 import com.jyj.msg.controller.dto.ProductDtlLstOutDto;
-import com.jyj.msg.controller.dto.ProductLstInDto;
 import com.jyj.msg.controller.dto.ProductSearchDto;
 import com.jyj.msg.service.ProductDtlLstService;
+import com.jyj.msg.service.ProductLstService;
+
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -35,6 +35,8 @@ import io.swagger.annotations.ApiOperation;
 public class ProductDtlLstController {
 	@Autowired
 	ProductDtlLstService productDtlLstService;
+	@Autowired
+	ProductLstService productLstService;
 
 	@RequestMapping(value = "/create-product-dtl-lst", method = RequestMethod.POST)
 	@ApiOperation(value = "상품 대상 생성 호출", notes = "상품 대상 리스트 생성 호출")
@@ -58,7 +60,14 @@ public class ProductDtlLstController {
 		System.out.println(inDto.getDTLSHIPAMT());
 
 		int outDto = productDtlLstService.createProductDtlLst(inDto);
+		
+		System.out.println("outDto = [" + outDto + "]");
+		
+		// 정렬 프로시저 호출
+		int dOutDto = productLstService.callRankProductDtl(Integer.parseInt(inDto.getPRODUCTIDX()));
 
+		System.out.println("dOutDto = [" + dOutDto + "]");
+		
 		return outDto;
 	}
 
@@ -109,6 +118,11 @@ public class ProductDtlLstController {
 		System.out.println(inDto.getDTLSHIPAMT());
 		Integer outDto = productDtlLstService.modifyProductDtlLst(inDto);
 
+		// 정렬 프로시저 호출
+		int dOutDto = productLstService.callRankProductDtl(Integer.parseInt(inDto.getPRODUCTIDX()));
+
+		System.out.println("dOutDto = [" + dOutDto + "]");
+		
 		return outDto;
 	}
 

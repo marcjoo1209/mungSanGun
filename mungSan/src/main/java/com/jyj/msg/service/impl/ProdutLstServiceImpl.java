@@ -51,4 +51,8 @@ public class ProdutLstServiceImpl implements ProductLstService{
     return productLstMapper.getMaxNum();
   }
 
+  public int callRankProductDtl(int IDX) {
+    return productLstMapper.callRankProductDtl(IDX);
+  }
+
 }

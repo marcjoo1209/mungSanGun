@@ -71,8 +71,14 @@ public class ProductLstController {
 			}
 
 			productDtlLstService.createProductDtlLst(inDtlDto);
+			
 		}
 
+		// 정렬 프로시저 호출
+		int dOutDto = productLstService.callRankProductDtl(Integer.parseInt(inDto.getIDX()));
+
+		System.out.println("dOutDto = [" + dOutDto + "]");
+		
 		return outDto;
 	}
 

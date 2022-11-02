@@ -71,4 +71,11 @@ public class ProductLstDao {
         mybatis.selectOne("ProductLstMapper.getMaxNum");
     return outDto;
   }
+
+  // 정렬 프로시저 호출
+  public int callRankProductDtl(int IDX) {
+    int outDto =
+        mybatis.insert("ProductLstMapper.callRankProductDtl", IDX);
+    return outDto;
+  }
 }
