@@ -92,10 +92,11 @@ input::-webkit-inner-spin-button {
 		    <div class="col-lg">
 		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 20px">추가</button>
 		      
-			 	<!-- 엑셀 다운로드 -->
+			 	<!-- 엑셀 다운로드 
 				<a href="javascript:excelDown()">
 					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmvsaMXmv3CVtqCY5Mq2eoZpWSH2AQ7TyfQNIGklhRc3qMd05pll0fS7tA5uqeVVgO24&usqp=CAU' width='55px' height='35px' alt='엑셀 다운로드'/>
 				</a>
+				-->
 				<!-- 엑셀 업로드 -->
 				<img src='https://www.nicepng.com/png/detail/208-2087007_excel-icon-png-upload-csv-icon.png' width='50px' height='35px' data-toggle='modal' data-target='#excelModal' alt='엑셀 업로드'/>
 		    
