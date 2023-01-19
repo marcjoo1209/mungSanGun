@@ -1,7 +1,5 @@
 package com.jyj.msg.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,15 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.jyj.msg.common.CommonUtil;
 import com.jyj.msg.controller.dto.CodeLstOutDto;
-import com.jyj.msg.controller.dto.ExcelLstOutDto;
+import com.jyj.msg.controller.dto.FileDto;
 import com.jyj.msg.controller.dto.MngShopProductTmpTblInDto;
 import com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto;
-import com.jyj.msg.controller.dto.ProductDtlLstInDto;
-import com.jyj.msg.controller.dto.ProductLstInDto;
 import com.jyj.msg.controller.dto.ShopLstOutDto;
 import com.jyj.msg.service.CodeLstService;
 import com.jyj.msg.service.ExcelService;
+import com.jyj.msg.service.FileService;
 import com.jyj.msg.service.MngShopProductTmpTblService;
 import com.jyj.msg.service.ProductAmtSearchLogService;
 import com.jyj.msg.service.ProductAmtSearchLstService;
@@ -50,6 +49,8 @@ public class ExcelController {
   MngShopProductTmpTblService mngShopProductTmpTblService;
   @Autowired
   ExcelService excelService;
+  @Autowired
+  FileService fileService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -94,7 +95,7 @@ public class ExcelController {
 	}
 
 	/* 엑셀 업로드 후 메인 페이지 이동2
-	 * */
+	 * 
     @RequestMapping(method = RequestMethod.POST,value="/excelUploadMain")
     public String excelUploadMain(MultipartHttpServletRequest request, Model model) {
       LOGGER.debug("excelUploadMain");
@@ -353,5 +354,40 @@ public class ExcelController {
 
       }
       return "redirect:/admin-page-lst-main";
+    }
+    */
+
+	/* 엑셀 업로드 후 메인 페이지 이동2
+	 * 
+	 */
+    @RequestMapping(method = RequestMethod.POST,value="/excelUploadMain")
+    public String excelUploadMain(MultipartFile myFile, MultipartHttpServletRequest request, Model model) {
+    	LOGGER.info("===================== orgFile =====================[" + myFile.getOriginalFilename() + "]");
+    	FileDto fd = new FileDto();
+    	FileDto targetFd = new FileDto();
+    	
+    	fd.setORGFILENAME(myFile.getOriginalFilename());
+    	String newFileName = "";
+    	try {
+    		newFileName = CommonUtil.saveFile(request, myFile);
+    		fd.setFILENAME(newFileName);
+    		
+    		/* 기존 파일 삭제 후 입력 한다. */
+    		fileService.modifyDelFile();
+    		fileService.createFile(fd);
+
+    		// update
+    		fileService.modifyStandByFile();
+    		// search
+    		targetFd = fileService.getOneFile();
+    		// excel file insert proc
+    		targetFd.getFILENAME();
+    		// 1000Row check
+    	} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return "redirect:/admin-page-lst-main";
     }
 }

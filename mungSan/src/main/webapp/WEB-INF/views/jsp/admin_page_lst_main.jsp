@@ -97,9 +97,9 @@ input::-webkit-inner-spin-button {
 					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmvsaMXmv3CVtqCY5Mq2eoZpWSH2AQ7TyfQNIGklhRc3qMd05pll0fS7tA5uqeVVgO24&usqp=CAU' width='55px' height='35px' alt='엑셀 다운로드'/>
 				</a>
 				-->
-				<!-- 엑셀 업로드 -->
+				<!-- 엑셀 업로드 
 				<img src='https://www.nicepng.com/png/detail/208-2087007_excel-icon-png-upload-csv-icon.png' width='50px' height='35px' data-toggle='modal' data-target='#excelModal' alt='엑셀 업로드'/>
-		    
+		    -->
 		    </div>
 		    <div class="col-md">
 		    </div>
@@ -557,7 +557,7 @@ input::-webkit-inner-spin-button {
 				<div class="modal-header">엑셀 업로드</div>
 				<div class="modal-body" id="modalBody" style="max-width: 100%; width: auto !important; display: inline-block;">
 					<form id="excelForm" name="excelForm" method="post" enctype="multipart/form-data" action="/excelUploadMain">
-    					<input type="file" id="excelFileInput" name="excelFileInput"/>
+    					<input type="file" id="myFile" name="myFile"/>
     				</form>
 				</div>
 				<div class="modal-footer">
@@ -1190,10 +1190,23 @@ function test(){
   	}
 
   	function excelUp(){
+  		let myFile = $("#myFile").val();
+  		console.log(myFile);
+  		let fileName = myFile.split('\\').pop().toLowerCase();
   		debugger;
   	    if (!confirm("엑셀업로드를 진행 합니다.\n확인(예) 또는 취소(아니오)를 선택해주세요.")) {
    	       return false;
    	    } else {
+   	    	if (fileName == "" || fileName == null) {
+   	    	    //파일이 선택되지 않은 경우
+   	    	    alert("파일이 선택 되지 않았습니다.");
+   	    	    return false;
+   	    	} else if (!checkFileType(fileName)) {
+   	    	    //checkFileType 에서 excel 확장자가 아닌경우 
+   	    	    alert("엑셀파일 확장자가 아닙니다.");
+   	    	    return false;
+   	    	}
+   	    	
   			$("#excelForm").submit();
 
 	 	   	// excel modal non 활성화
@@ -1217,6 +1230,16 @@ function test(){
   	    reader.readAsBinaryString(input.files[0]);
   	    */
   	}
+  	
+  	function checkFileType(filePath) {
+        var fileFormat = filePath.split(".");
+        console.log(fileFormat);
+        if (fileFormat.indexOf("xlsx") || fileFormat.indexOf("xls") > -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
   	function s2ab(s) { 
   	    var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer

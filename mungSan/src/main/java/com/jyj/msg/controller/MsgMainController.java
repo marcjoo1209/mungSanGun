@@ -170,14 +170,14 @@ public class MsgMainController {
     ProductLstInDto productInDto = new ProductLstInDto();
     
     List<ProductDtlLstOutDto> outDto = productDtlLstService.getListProductDtlLst(inDto);
-    List<ProductLstOutDto> productOutDto = productLstService.getListProductLst(productInDto);
+    //List<ProductLstOutDto> productOutDto = productLstService.getListProductLst(productInDto);
     List<ShopLstOutDto> shopOutDto = shopLstService.getListShopLst();
     
     int listCnt = outDto.size();
     
     model.addAttribute("outDto", outDto);
     model.addAttribute("shopOutDto", shopOutDto);
-    model.addAttribute("productOutDto", productOutDto);
+    //model.addAttribute("productOutDto", productOutDto);
     model.addAttribute("listCnt", listCnt);
     model.addAttribute("shopCnt", shopOutDto.size());
     model.addAttribute("headGb", "2");

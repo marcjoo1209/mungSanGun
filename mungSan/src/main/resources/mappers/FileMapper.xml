@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FileMapper">
+
+    <select id="getFile" resultType="com.jyj.msg.controller.dto.FileDto">
+        select 
+			IDX
+			, FILENAME
+			, CREATEDTM
+			, DELYN
+			, ORGFILENAME
+		FROM file_upload_mgmt_tbl
+		WHERE IDX = #{IDX}
+		  AND DELYN = 'N'
+	</select>
+	
+    <select id="getOneFile" resultType="com.jyj.msg.controller.dto.FileDto">
+        select 
+			IDX
+			, FILENAME
+			, CREATEDTM
+			, DELYN
+			, ORGFILENAME
+		FROM file_upload_mgmt_tbl
+		WHERE 1=1
+		  AND DELYN = 'N'
+	</select>
+	
+    <select id="getListFile" resultType="com.jyj.msg.controller.dto.FileDto">
+        select 
+			IDX
+			, FILENAME
+			, CREATEDTM
+			, DELYN
+			, ORGFILENAME
+		FROM file_upload_mgmt_tbl
+		WHERE 1=1
+		  AND DELYN = 'N'
+	</select>
+	
+	<insert id='createFile'>
+        INSERT INTO file_upload_mgmt_tbl
+        (
+			IDX
+			, FILENAME
+			, CREATEDTM
+			, DELYN
+			, ORGFILENAME
+        )
+        VALUES
+        (
+        	IFNULL(#{IDX},
+	        	(IFNULL(
+	            	(SELECT 
+	            		MAX(CAST(cl.IDX AS INTEGER))
+	        		  FROM file_upload_mgmt_tbl cl
+	        		 WHERE 1 = 1
+	        		) , 0
+	        	) +1)
+	        )
+			, #{FILENAME}
+			, now()
+			, 'N'
+			, #{ORGFILENAME}
+        )
+	</insert>
+	
+	<update id='modifyFile'>
+        UPDATE file_upload_mgmt_tbl
+        SET
+			FILENAME = #{FILENAME}
+        	, DELYN = #{DELYN}
+        	, ORGFILENAME = #{ORGFILENAME}
+        WHERE IDX = #{IDX}
+	</update>
+	
+	<update id='modifyDelFile'>
+        UPDATE file_upload_mgmt_tbl
+        SET
+			DELYN = 'Y'
+        WHERE 1 = 1
+          AND DELYN = 'N'
+	</update>
+	
+	<update id='modifyStandByFile'>
+        UPDATE file_upload_mgmt_tbl
+        SET
+			DELYN = 'R'
+        WHERE 1 = 1
+          AND DELYN = 'N'
+	</update>
+</mapper>

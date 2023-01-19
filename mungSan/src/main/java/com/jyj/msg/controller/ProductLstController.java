@@ -6,9 +6,15 @@
 package com.jyj.msg.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +43,8 @@ public class ProductLstController {
   @Autowired
   ProductDtlLstService productDtlLstService;
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(ExcelController.class);
+	
   @RequestMapping(value="/create-product-lst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
   public int createProductLst(@RequestBody Map<String, Object> data) throws IOException {
@@ -153,7 +161,59 @@ public class ProductLstController {
     
     return outDto;
   }
-  
+
+  @RequestMapping(value="/create-product-lst-bigdata", method=RequestMethod.POST)
+  @ApiOperation(value = "상품 대상 생성 호출", notes="상품 대상 리스트 생성 호출")
+  public String createProductLstBigData(@RequestBody Map<String, Object> data, HttpServletResponse response, HttpServletRequest request) throws IOException, SQLException {
+    response.setContentType("text/html; charset=utf-8");
+    response.setCharacterEncoding("utf-8");
+    request.setCharacterEncoding("utf-8");
+
+    System.out.println("/create-product-lst-bigdata 호출 시작");
+    ProductLstInDto inDto = new ProductLstInDto();
+    
+    inDto.setPRODUCTNM(checkDataIsNull(data.get("PRODUCTNM")));
+    LOGGER.info(inDto.getPRODUCTNM());
+    productLstService.createProductLst(inDto);
+    
+    String maxNum = productLstService.getMaxNum();
+    LOGGER.info(maxNum);
+    return maxNum;
+  }
+
+  @RequestMapping(value="/create-product-dtl-lst-bigdata", method=RequestMethod.POST)
+  @ApiOperation(value = "상품 상세 대상 생성 호출", notes="상품 상세 대상 생성 호출")
+  public String createProductDtlLstBigData(@RequestBody Map<String, Object> data) throws IOException, SQLException {
+	  System.out.println("/create-product-dtl-lst-bigdata 호출 시작");
+	  String resultMsg = "SUCCESS";
+	  ProductDtlLstInDto inDtlDto = new ProductDtlLstInDto();
+	  
+	  inDtlDto.setPRODUCTIDX(checkDataIsNull(data.get("PRODUCTIDX")));
+	  inDtlDto.setDTLPAYAMT(checkDataIsNull(data.get("DTLPAYAMT")));
+	  inDtlDto.setDTLPRODUCTLINK(checkDataIsNull(data.get("DTLPRODUCTLINK")));
+	  inDtlDto.setSHOPIDX(checkDataIsNull(data.get("SHOPIDX")));
+	  LOGGER.info(inDtlDto.getPRODUCTIDX());
+	  LOGGER.info(inDtlDto.getDTLPAYAMT());
+	  LOGGER.info(inDtlDto.getDTLPRODUCTLINK());
+	  LOGGER.info(inDtlDto.getSHOPIDX());
+	  
+	  productDtlLstService.createProductDtlLst(inDtlDto);
+
+      // 정렬 프로시저 호출
+      int IDX = 0;
+      try {
+    	  IDX = Integer.parseInt(checkDataIsNull(data.get("PRODUCTIDX")));
+      } catch (NumberFormatException e) {
+    	  resultMsg = "FAIL";
+    	  LOGGER.error("PRODUCTIDX = [" + data.get("PRODUCTIDX") + "] SHOP IDX = [" + data.get("SHOPIDX") + "] 입력 중 오류 발생 되었습니다.");
+			// TODO: handle exception
+	  }
+      
+      productLstService.callRankProductDtl(IDX);
+
+      return resultMsg;
+  }
+
 /*
   @RequestMapping(value="/getlist-product-lst", method=RequestMethod.POST)
   @ApiOperation(value = "상품 대상 리스트 조회 로컬 호출", notes="상품 대상 리스트 조회 로컬 호출")
