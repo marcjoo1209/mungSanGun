@@ -48,4 +48,10 @@ public class ShopLstDao {
         mybatis.delete("ShopLstMapper.removeShopLst", inDto);
     return outDto;
   }
+  // 대상 조회
+  public ShopLstOutDto getShopIdx(ShopLstInDto inDto) {
+    ShopLstOutDto outDto =
+        mybatis.selectOne("ShopLstMapper.getShopIdx", inDto);
+    return outDto;
+  }
 }

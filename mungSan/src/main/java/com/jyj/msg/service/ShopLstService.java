@@ -22,6 +22,7 @@ public interface ShopLstService {
   Integer modifyShopLst(ShopLstInDto inDto);
   
   Integer removeShopLst(ShopLstInDto inDto);
-  
+
+  ShopLstOutDto getShopIdx(ShopLstInDto inDto);
 
 }

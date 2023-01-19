@@ -38,6 +38,8 @@ public class ShopLstServicImpl  implements ShopLstService{
   public Integer removeShopLst(ShopLstInDto inDto){
     return shopLstMapper.removeShopLst(inDto);
   }
-  
 
+  public ShopLstOutDto getShopIdx(ShopLstInDto inDto){
+    return shopLstMapper.getShopIdx(inDto);
+  }
 }

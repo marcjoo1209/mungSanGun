@@ -91,7 +91,11 @@ input::-webkit-inner-spin-button {
 		  
 		    <div class="col-lg">
 		      <button type="button" class="btn btn-secondary" id='createButton' onclick="createButton_onclick()" style="font-size: 20px">추가</button>
-		      
+		      <!--  파일 다운로드 
+		      <a href="javascript:fileDown()">
+					<img src='http://daoda.co.kr/web/upload/NNEditor/20161205/download2.png' width='35px' height='35px' alt='엑셀프로그램 다운로드'/>
+				</a>
+				-->
 			 	<!-- 엑셀 다운로드 
 				<a href="javascript:excelDown()">
 					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCmvsaMXmv3CVtqCY5Mq2eoZpWSH2AQ7TyfQNIGklhRc3qMd05pll0fS7tA5uqeVVgO24&usqp=CAU' width='55px' height='35px' alt='엑셀 다운로드'/>
@@ -1952,6 +1956,27 @@ function test(){
 		}) ;
 
 	}
+  	
+  	function fileDown(){
+		debugger;
+		let data = "";
+		$.ajax({
+			url 		: '/python-file-download',
+			method 		: 'POST',
+			data 		: data,
+			contentType	: 'application/json',
+			dataType	: 'json',
+			success : function(obj){
+				var data = JSON.stringify(obj);
+				var json = JSON.parse(data);
+				debugger;
+			},
+			 error:function(request,status,error){				    
+				    return;
+			}
+		}) ;
+					
+  	}
   	
   </script>
   

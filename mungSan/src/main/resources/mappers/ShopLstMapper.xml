@@ -18,6 +18,14 @@
         ORDER BY CAST(IDX AS UNSIGNED) ASC
 	</select>
 
+    <select id="getShopIdx" resultType="com.jyj.msg.controller.dto.ShopLstOutDto">
+        SELECT
+        	sl.IDX
+        FROM shop_lst sl
+        WHERE 1 = 1
+          AND (sl.SHOPNM = #{IDX} OR sl.IDX =  #{IDX})
+	</select>
+
     <insert id="createShopLst">
         INSERT INTO shop_lst
         (

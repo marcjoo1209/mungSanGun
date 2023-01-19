@@ -7,7 +7,6 @@ package com.jyj.msg.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +23,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jyj.msg.controller.dto.ProductDtlLstInDto;
 import com.jyj.msg.controller.dto.ProductLstInDto;
+import com.jyj.msg.controller.dto.ShopLstInDto;
+import com.jyj.msg.controller.dto.ShopLstOutDto;
 import com.jyj.msg.service.ProductDtlLstService;
 import com.jyj.msg.service.ProductLstService;
+import com.jyj.msg.service.ShopLstService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -42,6 +44,8 @@ public class ProductLstController {
   ProductLstService productLstService;
   @Autowired
   ProductDtlLstService productDtlLstService;
+  @Autowired
+  ShopLstService shopLstService;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -187,6 +191,8 @@ public class ProductLstController {
 	  System.out.println("/create-product-dtl-lst-bigdata 호출 시작");
 	  String resultMsg = "SUCCESS";
 	  ProductDtlLstInDto inDtlDto = new ProductDtlLstInDto();
+	  ShopLstInDto inDto = new ShopLstInDto();
+	  ShopLstOutDto outDto = new ShopLstOutDto();
 	  
 	  inDtlDto.setPRODUCTIDX(checkDataIsNull(data.get("PRODUCTIDX")));
 	  inDtlDto.setDTLPAYAMT(checkDataIsNull(data.get("DTLPAYAMT")));
@@ -196,6 +202,16 @@ public class ProductLstController {
 	  LOGGER.info(inDtlDto.getDTLPAYAMT());
 	  LOGGER.info(inDtlDto.getDTLPRODUCTLINK());
 	  LOGGER.info(inDtlDto.getSHOPIDX());
+	  
+	  inDto.setIDX(checkDataIsNull(data.get("SHOPIDX")));
+	  
+	  outDto = shopLstService.getShopIdx(inDto);
+	  if(outDto == null) {
+		  inDtlDto.setSHOPIDX("1");
+	  } else {
+		  inDtlDto.setSHOPIDX(outDto.getIDX());
+		  
+	  }
 	  
 	  productDtlLstService.createProductDtlLst(inDtlDto);
 
