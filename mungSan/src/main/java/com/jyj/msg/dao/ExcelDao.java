@@ -6,17 +6,16 @@
 package com.jyj.msg.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.jyj.msg.controller.dto.ExcelLstOutDto;
+import com.jyj.msg.controller.dto.ProductDtlExcelLstDto;
 import com.jyj.msg.controller.dto.ProductDtlLstInDto;
+import com.jyj.msg.controller.dto.ProductExcelLstDto;
 import com.jyj.msg.controller.dto.ProductLstInDto;
-import com.jyj.msg.controller.dto.ProductSearchLstInDto;
-import com.jyj.msg.controller.dto.ProductSearchLstOutDto;
-import com.jyj.msg.controller.dto.ShopLstInDto;
-import com.jyj.msg.controller.dto.ShopLstOutDto;
 
 /**
  * @create 2022. 7. 14.
@@ -47,4 +46,20 @@ public class ExcelDao {
         mybatis.insert("ExcelMapper.createListExcelDtlListTbl", inDto);
     return outDto;
   }
+  
+  // 신규 엑셀 리스트 조회
+  public List<ProductExcelLstDto> getCountProductLst() {
+	  List<ProductExcelLstDto> outDto =
+	        mybatis.selectList("ExcelMapper.getCountProductLst");
+	    return outDto;
+	  }
+	  
+  // 신규 엑셀 상세 리스트 조회
+  public List<ProductDtlExcelLstDto> getCountProductDtlLst(String inDto) {
+	  List<ProductDtlExcelLstDto> outDto =
+	        mybatis.selectList("ExcelMapper.getCountProductDtlLst", inDto);
+	    return outDto;
+	  }
+	  
+  
 }

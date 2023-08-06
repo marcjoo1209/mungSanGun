@@ -1,7 +1,11 @@
 package com.jyj.msg.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -21,6 +27,8 @@ import com.jyj.msg.controller.dto.CodeLstOutDto;
 import com.jyj.msg.controller.dto.FileDto;
 import com.jyj.msg.controller.dto.MngShopProductTmpTblInDto;
 import com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto;
+import com.jyj.msg.controller.dto.ProductExcelLstDto;
+import com.jyj.msg.controller.dto.ReturnDto;
 import com.jyj.msg.controller.dto.ShopLstOutDto;
 import com.jyj.msg.service.CodeLstService;
 import com.jyj.msg.service.ExcelService;
@@ -30,6 +38,8 @@ import com.jyj.msg.service.ProductAmtSearchLogService;
 import com.jyj.msg.service.ProductAmtSearchLstService;
 import com.jyj.msg.service.ProductSearchLstService;
 import com.jyj.msg.service.ShopLstService;
+
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @SessionAttributes("aptinfo")
@@ -389,5 +399,50 @@ public class ExcelController {
 		}
     	
     	return "redirect:/admin-page-lst-main";
+    }
+    
+
+    @RequestMapping(value="/get-count-product-lst", method=RequestMethod.POST)
+    @ApiOperation(value = "전 상품 조회 후 json 데이터 리턴", notes="전 상품 조회 후 json 데이터 리턴")
+    @ResponseBody
+    public List<ProductExcelLstDto> getCountProductLst(@RequestBody Map<String, Object> data) throws IOException, SQLException {
+  	  System.out.println("/get-count-product-lst 호출 시작");
+
+  	  List<ProductExcelLstDto> outDto = excelService.getCountProductLst();
+
+  	  if(outDto == null) {
+  		  outDto = new ArrayList<>();
+  	  }
+
+  	  return outDto;
+    }
+
+    @RequestMapping(value="/get-count-product-lst-file", method=RequestMethod.POST)
+    @ApiOperation(value = "전 상품 조회 후 dat 파일 리턴", notes="전 상품 조회 후 dat 파일 리턴")
+    @ResponseBody
+    public ReturnDto getCountProductLstFile(@RequestBody Map<String, Object> data, HttpServletRequest request) throws IOException, SQLException {
+  	  System.out.println("/get-count-product-lst-file 호출 시작");
+
+  	  ReturnDto outDto = excelService.getCountProductLstFile(request);
+
+  	  if(outDto == null) {
+  		  outDto = new ReturnDto();
+  	  }
+
+  	  return outDto;
+    }
+
+    @RequestMapping(value="/get-search-file", method=RequestMethod.POST)
+    @ApiOperation(value = "생성된 dat 파일 다운로드", notes="생성된 dat 파일 다운로드")
+    public ReturnDto getSearchFile(@RequestBody Map<String, Object> data, HttpServletRequest request) throws IOException, SQLException {
+  	  System.out.println("/get-search-file 호출 시작");
+
+  	  ReturnDto outDto = excelService.getCountProductLstFile(request);
+
+  	  if(outDto == null) {
+  		  outDto = new ReturnDto();
+  	  }
+
+  	  return outDto;
     }
 }

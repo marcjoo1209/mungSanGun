@@ -53,6 +53,8 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
                     || request.getRequestURI().equals("/excelUploadMain")
                     || request.getRequestURI().equals("/create-product-lst-bigdata")
                     || request.getRequestURI().equals("/create-product-dtl-lst-bigdata")
+                    || request.getRequestURI().equals("/get-count-product-lst")
+                    || request.getRequestURI().equals("/get-count-product-lst-file")
 			   ) {
 				return true;
 			} 

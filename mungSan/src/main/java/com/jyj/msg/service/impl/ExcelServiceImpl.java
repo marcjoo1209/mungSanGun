@@ -5,39 +5,43 @@
 **/
 package com.jyj.msg.service.impl;
 
-import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.jyj.msg.common.CommonUtil;
 import com.jyj.msg.controller.dto.ExcelLstOutDto;
+import com.jyj.msg.controller.dto.FileDto;
 import com.jyj.msg.controller.dto.MngShopProductTmpTblOutDto;
 import com.jyj.msg.controller.dto.ProductDtlLstInDto;
+import com.jyj.msg.controller.dto.ProductExcelLstDto;
 import com.jyj.msg.controller.dto.ProductLstInDto;
-import com.jyj.msg.controller.dto.ProductLstOutDto;
+import com.jyj.msg.controller.dto.ReturnDto;
 import com.jyj.msg.dao.ExcelDao;
-import com.jyj.msg.dao.ProductLstDao;
+import com.jyj.msg.dao.FileDao;
 import com.jyj.msg.service.ExcelService;
-import io.swagger.annotations.ApiOperation;
 
 /**
  * @create 2022. 7. 14.
@@ -46,8 +50,15 @@ import io.swagger.annotations.ApiOperation;
 @Service
 public class ExcelServiceImpl implements ExcelService{
 
+	protected final static Logger logger = LoggerFactory.getLogger(CommonUtil.class);
+
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	
   @Autowired
   ExcelDao excelMapper;
+
+  @Autowired
+  FileDao fileMapper;
 
   public List<MngShopProductTmpTblOutDto> uploadExcelFile(MultipartFile excelFile) {
     // 참고
@@ -1100,4 +1111,338 @@ public class ExcelServiceImpl implements ExcelService{
   public int createListExcelDtlListTbl(ProductDtlLstInDto inDto) {
     return excelMapper.createListExcelDtlListTbl(inDto);
   } 
+  
+
+  public List<ProductExcelLstDto> getCountProductLst() {
+	  List<ProductExcelLstDto> outDto = excelMapper.getCountProductLst();
+
+    return outDto;
+  }
+  
+
+  public ReturnDto getCountProductLstFile(HttpServletRequest request) {
+	  ReturnDto outDto = new ReturnDto();
+	  outDto.setResultStr("SUCESS");
+	  List<ProductExcelLstDto> outListDto = excelMapper.getCountProductLst();
+	  
+	  FileOutputStream fileOutputStream = null;
+	  BufferedWriter bufferedWriter = null;
+	  
+	  try {
+		  // 당일 날짜로 이미지 저장 경로 포맷 셋팅
+		  SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd");
+		  Calendar time            = Calendar.getInstance();
+		  String format_time1      = format1.format(time.getTime());
+		  String fileName = "searchFile_" + System.currentTimeMillis() + ".dat";
+		  
+		  String saveFolder     = "";
+		  String saveFolderFile = "";
+		  if (isWindows()) {
+			  //저장 위치
+			  saveFolder     = "resources\\" + "searchfile" + "\\" + format_time1 + "\\" ;
+			  // 파일경로
+			  saveFolderFile = "resources\\" + "searchfile" + "\\" + format_time1 + "\\" + fileName ;
+		  } else {
+			  //저장 위치
+			  saveFolder     = "resources/" + "searchfile" + "/" + format_time1 + "/" ;
+			  // 파일경로
+			  saveFolderFile = "resources/" + "searchfile" + "/" + format_time1 + "/" + fileName ;
+		   
+		  } // 절대경로
+		  String filePath      	= request.getSession().getServletContext().getRealPath(saveFolderFile);
+		  String fileDirPath    = request.getSession().getServletContext().getRealPath(saveFolder);
+		  File   chkForderPath 	= new File(fileDirPath);
+		  Path directoryPath 	= Paths.get(fileDirPath);
+
+		  logger.info("===================== saveFolder =====================[" + saveFolder + "]");
+		  logger.info("===================== fileDirPath =====================[" + fileDirPath + "]");
+		  logger.info("===================== saveFolderFile =====================[" + saveFolderFile + "]");
+		  logger.info("===================== filePath =====================[" + filePath + "]");
+			
+		  // 폴더 없을경우 폴더 생성
+		  if(!chkForderPath.exists())
+		  {
+			logger.info("폴더 없을경우 폴더 생성");
+			// 디렉토리 생성
+		    Files.createDirectories(directoryPath);
+		  } else {
+			logger.info("이미 폴더가 있습니다.");
+		  }
+		    
+		  logger.info("파일 생성 시작");
+
+		  File outputfile = new File(filePath);
+		  
+		  // 중복 파일 있을경우 삭제 처리 한다.
+		  if(outputfile.exists()) {
+			  logger.info("같은 파일 있을경우 삭제");
+			  outputfile.delete();
+		  }
+
+		  fileOutputStream = new FileOutputStream(outputfile);
+		  bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
+		  
+		  FileDto fd = new FileDto();
+		  fd.setFILENAME(filePath);
+		  fd.setORGFILENAME("S");
+		  
+		  for(ProductExcelLstDto outOneDto : outListDto) {
+			  
+			  StringBuffer sb = new StringBuffer();
+			  
+			  sb.append(checkNullValue(outOneDto.getPIDX())+"|");
+			  sb.append(checkNullValue(outOneDto.getPRODUCTNM())+"|");
+			  sb.append(checkNullValue(outOneDto.getPDIDX1())+"|");
+			  
+			  sb.append(checkNullValue(outOneDto.getSHOP1())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP1NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP1PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP1LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP2())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP2NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP2PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP2LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP3())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP3NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP3PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP3LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP4())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP4NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP4PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP4LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP5())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP5NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP5PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP5LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP6())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP6NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP6PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP6LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP7())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP7NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP7PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP7LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP8())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP8NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP8PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP8LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP9())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP9NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP9PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP9LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP10())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP10NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP10PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP10LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP11())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP11NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP11PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP11LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP12())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP12NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP12PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP12LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP13())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP13NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP13PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP13LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP14())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP14NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP14PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP14LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP15())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP15NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP15PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP15LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP16())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP16NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP16PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP16LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP17())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP17NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP17PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP17LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP18())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP18NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP18PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP18LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP19())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP19NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP19PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP19LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP20())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP20NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP20PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP20LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP21())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP21NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP21PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP21LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP22())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP22NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP22PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP22LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP23())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP23NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP23PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP23LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP24())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP24NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP24PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP24LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP25())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP25NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP25PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP25LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP26())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP26NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP26PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP26LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP27())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP27NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP27PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP27LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP28())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP28NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP28PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP28LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP29())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP29NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP29PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP29LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP30())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP30NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP30PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP30LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP31())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP31NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP31PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP31LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP32())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP32NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP32PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP32LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP33())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP33NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP33PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP33LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP34())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP34NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP34PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP34LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP35())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP35NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP35PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP35LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP36())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP36NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP36PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP36LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP37())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP37NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP37PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP37LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP38())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP38NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP38PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP38LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP39())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP39NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP39PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP39LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP40())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP40NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP40PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP40LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP41())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP41NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP41PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP41LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP42())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP42NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP42PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP42LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP43())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP43NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP43PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP43LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP44())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP44NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP44PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP44LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP45())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP45NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP45PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP45LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP46())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP46NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP46PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP46LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP47())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP47NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP47PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP47LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP48())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP48NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP48PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP48LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP49())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP49NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP49PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP49LINK())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP50())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP50NM())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP50PRICE())+"|");
+			  sb.append(checkNullValue(outOneDto.getSHOP50LINK())+"|");
+
+			  //logger.info(sb.toString());
+			  
+			  bufferedWriter.write(sb.toString());
+			  bufferedWriter.newLine();
+
+		  }
+
+  		  /* 기존 파일 삭제 후 입력 한다. */
+		  fileMapper.modifyDelFile();
+		  //파일 생성 이력 생성
+		  fileMapper.createFile(fd);
+		
+	  } catch (Exception e) {
+		  e.printStackTrace();
+		  outDto.setResultStr("FAIL");
+	  } finally {
+		try {
+			if(bufferedWriter != null) {
+				bufferedWriter.close();
+			}
+			if(fileOutputStream != null) {
+				fileOutputStream.close();
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			outDto.setResultStr("FAIL");
+		}
+	}
+	  
+	logger.info("파일 생성 종료");
+
+    return outDto;
+  } 
+  
+
+	public static boolean isWindows() {  
+		  
+		return (OS.indexOf("win") >= 0);  
+	  
+	}  
+	
+	// null 체크 후 빈값 리턴
+	public static String checkNullValue(String targetStr) {
+		String resultStr = targetStr;
+		if(resultStr == null) {
+			resultStr = "";
+		}
+		
+		return resultStr;
+	}
 }
